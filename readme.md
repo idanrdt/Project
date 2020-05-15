@@ -18,4 +18,3 @@ This project created by:
 - [ ] Test the application
 - [ ] Create video about the Project
 - [ ] Submit the Project
-- [ ] ttt
