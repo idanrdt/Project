@@ -20,7 +20,8 @@ public class WelcomePanel extends JPanel {
 		JLabel welcomeTitle = new JLabel("Welcome to MHR");
 		welcomeTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeTitle.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		GridBagConstraints  comp = new GridBagConstraints();
+		GridBagConstraints comp = new GridBagConstraints();
+		comp.insets = new Insets(10, 0, 3, 0);
 		comp.fill = GridBagConstraints.HORIZONTAL;
 		comp.gridx = 0;
 		comp.gridy = 0;
