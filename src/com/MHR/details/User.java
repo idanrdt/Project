@@ -28,5 +28,38 @@ public class User extends Person{
 		
 	}
 	
+	public void setreportsystem(Boolean access) {
+		this.reportsystem=access;
+		
+	}
+	public boolean getreportsystem() {
+		return this.reportsystem;
+		
+	}
+	
+	
+	public void setmanagesupplieraccsess(Boolean access) {
+		this.managesupplieraccsess=access;
+		
+	}
+	public boolean getmanagesupplieraccsess() {
+		return this.managesupplieraccsess;
+		
+	}
+	
+	public void setordersystemaccsess(Boolean access) {
+		this.ordersystemaccsess=access;
+		
+	}
+	public boolean getordersystemaccsess() {
+		return this.ordersystemaccsess;
+		
+	}
+	
+	public void setusername(String name ) {
+		this.username=name;
+		
+	}
+	
 	
 }
