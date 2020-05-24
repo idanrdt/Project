@@ -1,4 +1,4 @@
-package com.project.hit.view;
+package com.project.hit.view.loginPage;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
@@ -60,14 +60,26 @@ public class LoginPanel extends JPanel {
 		add(loginButton, gbc_btnNewButton);
 	}
 	
+	/**
+	 * Set action listener to the button.
+	 * @param al - Action listener.
+	 */
 	public void addButtonListener(ActionListener al) {
 		loginButton.addActionListener(al);
 	}
 	
+	/**
+	 * Gets the User name inserted by the user.
+	 * @return String element that represent the user name.
+	 */
 	public String getUserName() {
 		return userNameField.getText();
 	}
 	
+	/**
+	 * Gets the User name inserted by the user.
+	 * @return char array element that represent the user password.
+	 */
 	public char[] getPassword() {
 		return passwordField.getPassword();
 	}

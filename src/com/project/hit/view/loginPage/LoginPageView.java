@@ -1,4 +1,4 @@
-package com.project.hit.view;
+package com.project.hit.view.loginPage;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
 
-import com.project.hit.controller.LoginController;
+import com.project.hit.controller.loginController.LoginController;
 import com.project.hit.model.InvalidCredentialsException;
 
 public class LoginPageView implements LoginView {
@@ -27,6 +27,9 @@ public class LoginPageView implements LoginView {
 		});
 	}
 	
+	/**
+	 * Showing the page.
+	 */
 	private void createAndShowGUI() {
         mainFrame = new JFrame("Login Page");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,15 +49,17 @@ public class LoginPageView implements LoginView {
 				loginController.authenticate(loginPanel.getUserName(), loginPanel.getPassword());
 				}
 				catch(InvalidCredentialsException ice) {
-					setLoginError(ice.getMessage());
+					showError(ice.getMessage());
 				}
 			}
         });
         
         mainFrame.pack();
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
 	}
 	
+	@Override
 	public void setController(LoginController controller) {
 		this.loginController = controller;
 	}
@@ -64,7 +69,11 @@ public class LoginPageView implements LoginView {
 		mainFrame.dispose();
 	}
 	
-	private void setLoginError(String msg) {
+	/**
+	 * Shows error to the user.
+	 * @param msg - The message that is shown.
+	 */
+	private void showError(String msg) {
 		JOptionPane.showMessageDialog(new JFrame(),msg,"Error",JOptionPane.ERROR_MESSAGE);
 	}
 

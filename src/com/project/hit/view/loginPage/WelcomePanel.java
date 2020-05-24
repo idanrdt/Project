@@ -1,4 +1,4 @@
-package com.project.hit.view;
+package com.project.hit.view.loginPage;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

@@ -1,9 +1,9 @@
 package main;
 
-import com.project.hit.controller.LoginController;
-import com.project.hit.controller.LoginPageController;
+import com.project.hit.controller.loginController.LoginController;
+import com.project.hit.controller.loginController.LoginPageController;
 import com.project.hit.model.AuthenticationSystem;
-import com.project.hit.view.LoginPageView;
+import com.project.hit.view.loginPage.LoginPageView;
 
 public class MainPage {
 
