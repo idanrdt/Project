@@ -1,4 +1,4 @@
-package com.yair.hit.fileManager;
+package com.project.hit.fileManager;
 
 import java.io.*;
 
@@ -12,9 +12,13 @@ public class FileManger {
     /**
      *
      * @param object The object you want to save
-     * @param select 0 for save user object
-     *               1 for save supplier object
-     *               2 for save order object
+     * @param select enum type from FileNameSelect enum class
+     *               USERFILE for save user object
+     *               SUPPLIERFILE for save supplier object
+     *               ORDERFILE for save order object
+     *               example: FileNameSelect.USERFILE
+     * @return return false if the file can`t open or true if open
+     * @exception throws Exception if the enum is not found
      */
     public Boolean saveToFile(Object object, FileNameSelect select) throws Exception {
 
@@ -31,12 +35,13 @@ public class FileManger {
 
     /**
      *
-     * @param select is a enum
-     *               0 for load user object
-     *               1 for load supplier object
-     *               2 for load order object
-     * @return
-     * @throws Exception
+     * @param  select enum type from FileNameSelect enum class
+     *         USERFILE for save user object
+     *         SUPPLIERFILE for save supplier object
+     *         ORDERFILE for save order object
+     *         example: FileNameSelect.USERFILE
+     * @return Object
+     * @throws throws Exception if the enum is not found
      */
     public Object loadFromFile(FileNameSelect select) throws Exception {
 
