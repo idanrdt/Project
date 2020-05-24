@@ -1,4 +1,4 @@
-package main;
+package com.project.hit.main;
 
 import com.project.hit.controller.loginController.LoginController;
 import com.project.hit.controller.loginController.LoginPageController;
