@@ -6,6 +6,7 @@ import com.project.hit.view.loginPage.LoginView;
 
 public class LoginPageController implements LoginController {
 	
+	
 	private LoginView view;
 	private AuthenticationSystem authSystem;
 	
@@ -19,6 +20,20 @@ public class LoginPageController implements LoginController {
 		this.authSystem = model;
 	}
 	
+	@Override
+	public void authenticate(String username, char[] password) throws InvalidCredentialsException {
+		if (authSystem.authenticate(username, password)) {
+			view.close();
+			openMainMenu();
+		}
+		
+		//Option B
+		/* User user = authSystem.athenticate(username, password);
+		 * view.close();
+		 * openMainMenu(user);
+		 * */
+	}
+	
 	/**
 	 * Opens the main menu dialog.
 	 */
@@ -26,11 +41,5 @@ public class LoginPageController implements LoginController {
 		//TODO: open the main window;
 	}
 	
-	@Override
-	public void authenticate(String username, char[] password) throws InvalidCredentialsException {
-		if (authSystem.authenticate(username, password)) {
-			view.close();
-			openMainMenu();
-		}
-	}
+
 }
