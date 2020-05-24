@@ -1,8 +1,7 @@
-package com.MHR.view;
+package com.project.hit.view;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
@@ -10,7 +9,6 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
-import java.awt.Color;
 
 public class LoginPanel extends JPanel {
 	

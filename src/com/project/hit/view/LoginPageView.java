@@ -1,4 +1,4 @@
-package com.MHR.view;
+package com.project.hit.view;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -8,15 +8,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
 
-import com.MHR.controller.*;
+import com.project.hit.controller.LoginController;
+import com.project.hit.model.InvalidCredentialsException;
 
-public class LoginPageView implements View {
+public class LoginPageView implements LoginView {
 	
 	private WelcomePanel welcomePanel;
 	private LoginPanel loginPanel;
 	private JFrame mainFrame;
-	private Controller controller;
-	
+	private LoginController loginController;
+
 	@Override
 	public void start() {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -30,7 +31,7 @@ public class LoginPageView implements View {
         mainFrame = new JFrame("Login Page");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        mainFrame.setPreferredSize(new DimensionUIResource(300, 250));
+        mainFrame.setPreferredSize(new DimensionUIResource(370, 250));
         
         loginPanel = new LoginPanel(this);
         welcomePanel = new WelcomePanel();
@@ -41,7 +42,12 @@ public class LoginPageView implements View {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				((LoginPageController)controller).loginButtonClicked(loginPanel.getUserName(), loginPanel.getPassword());
+				try {
+				loginController.authenticate(loginPanel.getUserName(), loginPanel.getPassword());
+				}
+				catch(InvalidCredentialsException ice) {
+					setLoginError(ice.getMessage());
+				}
 			}
         });
         
@@ -49,8 +55,8 @@ public class LoginPageView implements View {
         mainFrame.setVisible(true);
 	}
 	
-	public void setController(Controller controller) {
-		this.controller = controller;
+	public void setController(LoginController controller) {
+		this.loginController = controller;
 	}
 
 	@Override
@@ -58,8 +64,8 @@ public class LoginPageView implements View {
 		mainFrame.dispose();
 	}
 	
-	public void setLoginError(String msg) {
+	private void setLoginError(String msg) {
 		JOptionPane.showMessageDialog(new JFrame(),msg,"Error",JOptionPane.ERROR_MESSAGE);
-		}
+	}
 
 }

@@ -1,4 +1,4 @@
-package com.MHR.view;
+package com.project.hit.view;
 
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;

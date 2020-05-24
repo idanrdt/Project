@@ -1,4 +1,4 @@
-package authentication;
+package com.project.hit.model;
 
 public class InvalidCredentialsException extends Exception {
 	
