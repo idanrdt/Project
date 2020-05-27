@@ -1,12 +1,12 @@
 package com.MHR.details;
 
 public class User extends Person{
-	private String username;
+	private String userName;
 	private String password;
-	private Boolean ismanager=false;
-	private Boolean reportsystem=false;
-	private Boolean managesupplieraccsess=false;
-	private Boolean ordersystemaccsess=false;
+	private Boolean isManager=false;
+	private Boolean reportSystem=false;
+	private Boolean manageSupplierAccsess=false;
+	private Boolean orderSystemAccsess=false;
 	
 	
 	/**
@@ -17,11 +17,10 @@ public class User extends Person{
 	 * @param address-the users address
 	 * @param id-the users id
 	 */
-	public User(String username,String password,String name,String address,int id) {
-		this.id=id;
-		this.address=address;
-		this.name=name;
-	    this.username=username;
+	public User(String username,String password,String name,String address,String id)
+	{
+		super(id,name,address);
+	    this.userName=username;
 	    this.password=password;
 	}
 
@@ -30,7 +29,7 @@ public class User extends Person{
 	 * @param access-true for allow access and false for remove access
 	 */
 	public void setManagerAccess(Boolean access) {
-		this.ismanager=access;
+		this.isManager=access;
 		
 	}
 	
@@ -39,23 +38,23 @@ public class User extends Person{
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getManager() {
-		return this.ismanager;
+		return this.isManager;
 		
 	}
 	/**
 	 * set the access to the report system
 	 * @param access-true for allow access and false for remove access
 	 */
-	public void setreportsystem(Boolean access) {
-		this.reportsystem=access;
+	public void setReportSystem(Boolean access) {
+		this.reportSystem=access;
 		
 	}
 	/**
 	 *  check if there is an access to the report system
 	 * @return-true if there is  access and false if there is no access
 	 */
-	public boolean getreportsystem() {
-		return this.reportsystem;
+	public boolean getReportSystem() {
+		return this.reportSystem;
 		
 	}
 	
@@ -63,40 +62,40 @@ public class User extends Person{
 	 * set the access manage supplier
 	 * @param access-true for allow access and false for remove access
 	 */
-	public void setmanagesupplieraccsess(Boolean access) {
-		this.managesupplieraccsess=access;
+	public void setManageSupplierAccsess(Boolean access) {
+		this.manageSupplierAccsess=access;
 		
 	}
 	/**
 	 *  check if there is an access to the manager supplier
 	 * @return-true if there is  access and false if there is no access
 	 */
-	public boolean getmanagesupplieraccsess() {
-		return this.managesupplieraccsess;
+	public boolean getManageSupplierAccsess() {
+		return this.manageSupplierAccsess;
 		
 	}
 	/**
 	 * set the access order system
 	 * @param access-true for allow access and false for remove access
 	 */
-	public void setordersystemaccsess(Boolean access) {
-		this.ordersystemaccsess=access;
+	public void setOrderSysteMaccsess(Boolean access) {
+		this.orderSystemAccsess=access;
 		
 	}
 	/**
 	 * check if there is an access to the order system
 	 * @return-true if there is  access and false if there is no access
 	 */
-	public boolean getordersystemaccsess() {
-		return this.ordersystemaccsess;
+	public boolean getOrderSystemAccsess() {
+		return this.orderSystemAccsess;
 		
 	}
 	/**
 	 * set the users name
 	 * @param name-the user name
 	 */
-	public void setusername(String name ) {
-		this.username=name;
+	public void setUsername(String name ) {
+		this.userName=name;
 		
 	}
 	
