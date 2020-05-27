@@ -1,8 +1,10 @@
 package com.project.hit.fileManager;
 
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class FileManger {
+public class FileManger<T> {
 
     private final String SUPPLIER = "supplier_file";
     private final String USER = "user_file";
@@ -12,15 +14,11 @@ public class FileManger {
     /**
      *
      * @param object The object you want to save
-     * @param select enum type from FileNameSelect enum class
-     *               USERFILE for save user object
-     *               SUPPLIERFILE for save supplier object
-     *               ORDERFILE for save order object
-     *               example: FileNameSelect.USERFILE
-     * @return return false if the file can`t open or true if open
-     * @exception throws Exception if the enum is not found
+     * @param select 0 for save user object
+     *               1 for save supplier object
+     *               2 for save order object
      */
-    public Boolean saveToFile(Object object, FileNameSelect select) throws Exception {
+    public Boolean saveToFile(Set<T> object, FileNameSelect select) throws IOException {
 
         this.selectedFileName = selectedName(select);
 
@@ -35,28 +33,26 @@ public class FileManger {
 
     /**
      *
-     * @param  select enum type from FileNameSelect enum class
-     *         USERFILE for save user object
-     *         SUPPLIERFILE for save supplier object
-     *         ORDERFILE for save order object
-     *         example: FileNameSelect.USERFILE
-     * @return Object
-     * @throws throws Exception if the enum is not found
+     * @param select is a enum
+     *               0 for load user object
+     *               1 for load supplier object
+     *               2 for load order object
+     * @return
+     * @throws Exception
      */
-    public Object loadFromFile(FileNameSelect select) throws Exception {
+    public Set<T> loadFromFile(FileNameSelect select) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-        Object object=null;
+
         this.selectedFileName = selectedName(select);
-
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.selectedFileName))) {
-            object = ois.readObject();
-        }catch (IOException | ClassNotFoundException e){
-            e.printStackTrace();
+        if(!(new File(this.selectedFileName)).exists()){
+            return new HashSet<T>();
         }
-        return object;
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.selectedFileName))) {
+            return (Set<T>) ois.readObject();
+        }
     }
 
-    private String selectedName( FileNameSelect select) throws Exception {
+    private String selectedName( FileNameSelect select) throws IOException {
         String str;
         switch (select){
             case USERFILE:
@@ -69,7 +65,7 @@ public class FileManger {
                 str = this.ORDER;
                 break;
             default:
-                throw new Exception("the selected enum dos not exist");
+                throw new IOException("the selected enum dos not exist");
         }
         return str;
     }
