@@ -1,14 +1,17 @@
 package com.project.hit.model;
 
+import com.project.hit.fileManager.FileManger;
+
 //import java.util.Set;
 
 public class AuthenticationSystem {
 	
 	//private Set<User> userSet;
-	//private FileManager files;
+	private FileManger files;
 	
 	public AuthenticationSystem() {
 		//userSet = files.loadFromFile(FileNameSelect.USERFILE);
+		files = new FileManger();
 	}
 	
 	/**

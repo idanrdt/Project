@@ -11,7 +11,6 @@ public class MainPage {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		
 		LoginPageView view = new LoginPageView();
 		
 		AuthenticationSystem model = new AuthenticationSystem();
