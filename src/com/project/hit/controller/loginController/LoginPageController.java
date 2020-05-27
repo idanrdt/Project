@@ -4,6 +4,8 @@ import com.project.hit.fileManager.FileNotFoundException;
 import com.project.hit.model.AuthenticationSystem;
 import com.project.hit.model.InvalidCredentialsException;
 import com.project.hit.view.loginPage.LoginView;
+import com.project.hit.viewSwitcher.ViewSelect;
+import com.project.hit.viewSwitcher.ViewSwitcher;
 
 public class LoginPageController implements LoginController {
 	
@@ -39,6 +41,7 @@ public class LoginPageController implements LoginController {
 	 * Opens the main menu dialog.
 	 */
 	private void openMainMenu() {
+		ViewSwitcher.changeView(ViewSelect.MAIN_VIEW);
 	}
 	
 
