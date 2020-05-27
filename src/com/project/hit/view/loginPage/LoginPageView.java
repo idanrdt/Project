@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
 
 import com.project.hit.controller.loginController.LoginController;
+import com.project.hit.fileManager.FileNotFoundException;
 import com.project.hit.model.InvalidCredentialsException;
 
 public class LoginPageView implements LoginView {
@@ -50,6 +51,9 @@ public class LoginPageView implements LoginView {
 				}
 				catch(InvalidCredentialsException ice) {
 					showError(ice.getMessage());
+				}
+				catch(FileNotFoundException fnf) {
+					showError(fnf.getMessage()+" \nPlease Contect your Administrator!");
 				}
 			}
         });

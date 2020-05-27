@@ -1,6 +1,6 @@
 package com.project.hit.model;
 
-import com.project.hit.fileManager.FileManger;
+import com.project.hit.fileManager.*;
 
 //import java.util.Set;
 
@@ -10,7 +10,6 @@ public class AuthenticationSystem {
 	private FileManger files;
 	
 	public AuthenticationSystem() {
-		//userSet = files.loadFromFile(FileNameSelect.USERFILE);
 		files = new FileManger();
 	}
 	
@@ -21,11 +20,12 @@ public class AuthenticationSystem {
 	 * @return - True if authentication succeeded.
 	 * @throws InvalidCredentialsException if any detail is wrong or empty.
 	 */
-	public Boolean authenticate(String userName, char[] password) throws InvalidCredentialsException {
+	public Boolean authenticate(String userName, char[] password) throws InvalidCredentialsException, FileNotFoundException {
 		if(userName.isEmpty() || password.length == 0) {
 			throw new InvalidCredentialsException(CredentialType.EMPTY);
 		}
-		/* for(User user : userSet){
+		 /* userSet = files.loadFromFile(FileNameSelect.USERFILE);
+		 * for(User user : userSet){
 		 *  	if(user.getUsername().equals(userName)) {
 		 *  		if(Arrays.equals(user.getPassword(),password) {
 		 *  			return true;
@@ -35,10 +35,10 @@ public class AuthenticationSystem {
 		 *  		}
 		 *  	}
 		 *  }
+		 *  
 		 *  throw new InvalidCredentialsException(CredentialType.UserName);
 		 * 
 		 * TODO:
-		 * 1. Implement FileSystem.
 		 * 2. Implement User.
 		 * 3. Remove Comments.
 		 * 
@@ -47,11 +47,12 @@ public class AuthenticationSystem {
 	}
 	
 	//Option B - return User object
-	/*	public User authenticate(String userName, char[] password) throws InvalidCredentialsException {
+	/*	public User authenticate(String userName, char[] password) throws InvalidCredentialsException, FileNotFoundException {
 		if(userName.isEmpty() || password.length == 0) {
 			throw new InvalidCredentialsException(CredentialType.EMPTY);
 		}
-		/* for(User user : userSet){
+		 /* userSet = files.loadFromFile(FileNameSelect.USERFILE);
+		 * for(User user : userSet){
 		 *  	if(user.getUsername().equals(userName)) {
 		 *  		if(Arrays.equals(user.getPassword(),password) {
 		 *  			return user;
@@ -61,6 +62,7 @@ public class AuthenticationSystem {
 		 *  		}
 		 *  	}
 		 *  }
+		 *  
 		 *  throw new InvalidCredentialsException(CredentialType.UserName);
-	 	 * */
+		 *  */
 }

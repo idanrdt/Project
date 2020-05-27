@@ -20,17 +20,17 @@ public class FileManger {
      * @return return false if the file can`t open or true if open
      * @exception throws Exception if the enum is not found
      */
-    public Boolean saveToFile(Object object, FileNameSelect select) throws Exception {
+    public void/*Boolean*/ saveToFile(Object object, FileNameSelect select) throws FileNotFoundException/*Exception*/ {
 
         this.selectedFileName = selectedName(select);
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.selectedFileName))) {
             oos.writeObject(object);
         }catch (IOException e){
-            e.printStackTrace();
-            return false;
+            throw new FileNotFoundException(e.getMessage());
+            //return false;
         }
-        return true;
+        //return true;
     }
 
     /**
@@ -43,20 +43,27 @@ public class FileManger {
      * @return Object
      * @throws throws Exception if the enum is not found
      */
-    public Object loadFromFile(FileNameSelect select) throws Exception {
+    public Object loadFromFile(FileNameSelect select) throws FileNotFoundException/*Exception*/ {
 
-        Object object=null;
+        Object object = null;
         this.selectedFileName = selectedName(select);
 
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.selectedFileName))) {
             object = ois.readObject();
-        }catch (IOException | ClassNotFoundException e){
+        }/*catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
+        }
+        */
+        catch(IOException e) {
+        	throw new FileNotFoundException(e.getMessage());
+        }
+        catch(ClassNotFoundException e) {
+        	throw new FileNotFoundException(e.getMessage());
         }
         return object;
     }
 
-    private String selectedName( FileNameSelect select) throws Exception {
+    private String selectedName( FileNameSelect select) /*throws Exception*/ {
         String str;
         switch (select){
             case USERFILE:
@@ -69,7 +76,8 @@ public class FileManger {
                 str = this.ORDER;
                 break;
             default:
-                throw new Exception("the selected enum dos not exist");
+            	str = null;
+                //throw new Exception("the selected enum dos not exist");
         }
         return str;
     }
