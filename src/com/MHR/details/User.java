@@ -98,6 +98,15 @@ public class User extends Person{
 		this.userName=name;
 		
 	}
-	
+	/**
+	 * get the users password
+	 * @param password-users password
+	 * @return-users password
+	 */
+	public String getpassword(String password)
+	{
+		return this.password=password;
+		
+	}
 	
 }
