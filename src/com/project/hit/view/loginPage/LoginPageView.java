@@ -43,7 +43,7 @@ public class LoginPageView implements LoginView {
         mainFrame.getContentPane().add(loginPanel, BorderLayout.CENTER);
         
         loginPanel.addButtonListener(new ActionListener() {
-
+        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {

@@ -1,6 +1,6 @@
-package com.MHR.details;
+package com.project.hit.details;
 
-public abstract class Person{
+public abstract class Person {
 	protected String id;
 	protected String name;
 	protected String address;

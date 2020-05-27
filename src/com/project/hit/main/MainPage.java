@@ -9,7 +9,7 @@ import com.project.hit.view.loginPage.LoginView;
 public class MainPage {
 
 	/**
-	 * Launch the application.
+	 * Launch the application - main function.
 	 */
 	public static void main(String[] args) {
 		LoginView view = new LoginPageView();

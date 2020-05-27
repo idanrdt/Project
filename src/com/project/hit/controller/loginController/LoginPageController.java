@@ -1,12 +1,12 @@
 package com.project.hit.controller.loginController;
 
+import com.project.hit.details.User;
 import com.project.hit.fileManager.FileNotFoundException;
 import com.project.hit.model.AuthenticationSystem;
 import com.project.hit.model.InvalidCredentialsException;
 import com.project.hit.view.loginPage.LoginView;
 
 public class LoginPageController implements LoginController {
-	
 	
 	private LoginView view;
 	private AuthenticationSystem authSystem;
@@ -23,22 +23,18 @@ public class LoginPageController implements LoginController {
 	
 	@Override
 	public void authenticate(String username, char[] password) throws InvalidCredentialsException, FileNotFoundException {
-		if (authSystem.authenticate(username, password)) {
+		User user = authSystem.authenticate(username, password);
+		if (user != null) {
 			view.close();
-			openMainMenu();
+			openMainMenu(user);
 		}
-		
-		//Option B
-		/* User user = authSystem.athenticate(username, password);
-		 * view.close();
-		 * openMainMenu(user);
-		 * */
 	}
 	
 	/**
 	 * Opens the main menu dialog.
+	 * @param user - The {@link User} object that authorize to use the application.
 	 */
-	private void openMainMenu() {
+	private void openMainMenu(User user) {
 	}
 	
 
