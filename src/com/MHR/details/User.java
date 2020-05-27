@@ -15,7 +15,7 @@ public class User extends Person{
  	 * @param password-the users password
 	 * @param name- the users name
 	 * @param address-the users address
-	 * @param id-the use id
+	 * @param id-the users id
 	 */
 	public User(String username,String password,String name,String address,int id) {
 		this.id=id;
@@ -35,7 +35,7 @@ public class User extends Person{
 	}
 	
 	/**
-	 * to check if there is an access to manager
+	 *  check if there is an access to manager
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getManager() {
@@ -51,7 +51,7 @@ public class User extends Person{
 		
 	}
 	/**
-	 * to check if there is an access to the report system
+	 *  check if there is an access to the report system
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getreportsystem() {
@@ -68,7 +68,7 @@ public class User extends Person{
 		
 	}
 	/**
-	 * to check if there is an access to the manager supplier
+	 *  check if there is an access to the manager supplier
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getmanagesupplieraccsess() {
@@ -84,7 +84,7 @@ public class User extends Person{
 		
 	}
 	/**
-	 * to check if there is an access to the order system
+	 * check if there is an access to the order system
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getordersystemaccsess() {
