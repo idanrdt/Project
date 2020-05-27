@@ -100,12 +100,11 @@ public class User extends Person{
 	}
 	/**
 	 * get the users password
-	 * @param password-users password
 	 * @return-users password
 	 */
-	public String getpassword(String password)
+	public String getpassword()
 	{
-		return this.password=password;
+		return this.password;
 		
 	}
 	
