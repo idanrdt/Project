@@ -99,6 +99,16 @@ public class User extends Person{
 		
 	}
 	/**
+	 * get the user name
+	 * @return-the users user name
+	 */
+	public String getUserName()
+	{
+		return this.userName;
+	}
+	
+	
+	/**
 	 * get the users password
 	 * @return-users password
 	 */
