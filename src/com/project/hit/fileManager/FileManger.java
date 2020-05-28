@@ -1,84 +1,81 @@
 package com.project.hit.fileManager;
 
 import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
 
-public class FileManger {
+public class FileManger<T extends Serializable> {
 
-    private final String SUPPLIER = "supplier_file";
-    private final String USER = "user_file";
-    private final String ORDER = "order_file";
-    private String selectedFileName = null;
+    private String selectedFileName;
+
+    public FileManger() {
+        selectedFileName = null;
+    }
 
     /**
-     *
-     * @param object The object you want to save
-     * @param select enum type from FileNameSelect enum class
-     *               USERFILE for save user object
-     *               SUPPLIERFILE for save supplier object
-     *               ORDERFILE for save order object
-     *               example: FileNameSelect.USERFILE
-     * @return return false if the file can`t open or true if open
-     * @exception throws Exception if the enum is not found
+     * Generic function that save a collections set to file
+     * @param object is a Set<T>
+     * @param select is a enum object call FileNameSelect
+     *        USERFILE for save user object
+     *        SUPPLIERFILE for save supplier object
+     *        ORDERFILE for save order object
+     *        example: FileNameSelect.USERFILE
+     * @throws IOException if the file can't open
+     * @throws EnumNameNotFoundException if the enum param that not exists
      */
-    public void/*Boolean*/ saveToFile(Object object, FileNameSelect select) throws FileNotFoundException/*Exception*/ {
+    public void saveToFile(Set<T> object, FileNameSelect select) throws EnumNameNotFoundException,IOException {
 
         this.selectedFileName = selectedName(select);
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.selectedFileName))) {
             oos.writeObject(object);
-        }catch (IOException e){
-            throw new FileNotFoundException(e.getMessage());
-            //return false;
         }
-        //return true;
     }
 
     /**
-     *
-     * @param  select enum type from FileNameSelect enum class
-     *         USERFILE for save user object
-     *         SUPPLIERFILE for save supplier object
-     *         ORDERFILE for save order object
-     *         example: FileNameSelect.USERFILE
-     * @return Object
-     * @throws throws Exception if the enum is not found
+     * Generic function that load a collections set from file
+     * @param select is a enum object call FileNameSelect
+     *        USERFILE for save user object
+     *        SUPPLIERFILE for save supplier object
+     *        ORDERFILE for save order object
+     *        example: FileNameSelect.USERFILE
+     * @return new HashSet<T>() if no file exists
+     *         else return the saved set
+     * @throws EnumNameNotFoundException if the enum param that not exists
+     * @throws IOException if the file can't open
+     * @throws ClassNotFoundException if <T> an object does not exist
      */
-    public Object loadFromFile(FileNameSelect select) throws FileNotFoundException/*Exception*/ {
+    public Set<T> loadFromFile(FileNameSelect select) throws EnumNameNotFoundException, IOException, ClassNotFoundException {
 
-        Object object = null;
         this.selectedFileName = selectedName(select);
-
+        if(!(new File(this.selectedFileName)).exists()){
+            return new HashSet<>();
+        }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.selectedFileName))) {
-            object = ois.readObject();
-        }/*catch (IOException | ClassNotFoundException e){
-            e.printStackTrace();
+            return (Set<T>)ois.readObject();
         }
-        */
-        catch(IOException e) {
-        	throw new FileNotFoundException(e.getMessage());
-        }
-        catch(ClassNotFoundException e) {
-        	throw new FileNotFoundException(e.getMessage());
-        }
-        return object;
     }
 
-    private String selectedName( FileNameSelect select) /*throws Exception*/ {
+    private String selectedName( FileNameSelect select) throws EnumNameNotFoundException {
         String str;
+        String SUPPLIER = "supplier_file";
+        String USER = "user_file";
+        String ORDER = "order_file";
         switch (select){
             case USERFILE:
-                str = this.USER;
+                str = USER;
                 break;
             case SUPPLIERFILE:
-                str = this.SUPPLIER;
+                str = SUPPLIER;
                 break;
             case ORDERFILE:
-                str = this.ORDER;
+                str = ORDER;
                 break;
             default:
-            	str = null;
-                //throw new Exception("the selected enum dos not exist");
+                throw new EnumNameNotFoundException("the selected enum dos not exist");
         }
         return str;
     }
+
+
 }
