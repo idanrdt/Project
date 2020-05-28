@@ -23,15 +23,53 @@ public class MangeSupplier  {
 
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
-    public boolean searchSupplier(Supplier supplier){
-        return true;
+    public Supplier Findsupplier(int suppliernum){
+        for (Supplier i:this.suppliers){
+            if(i.getSupplierId()==suppliernum)
+                return i;
+        }
+        return null;
 
     }
 
-    public boolean editSupplier(Supplier supplier) {
-        supplier.getSupplier_Number();
+    public Supplier Findsupplier(String suppliername){
+        for (Supplier i:this.suppliers){
+            if(i.getCompanyName().equals(suppliername))
+                return i;
+        }
+        return null;
 
-        return true;
+    }
+
+    public void editSupplier(int suppliernumber) throws IOException, EnumNameNotFoundException {
+        Supplier supplier=Findsupplier(suppliernumber);
+        supplier.companyName();
+        supplier.supplierNumber();
+        supplier.supplierAddress();
+        supplier.supplierPhoneNumber();
+        supplier.supplierEmailAddress();
+        supplier.totalExpenses();
+        supplier.isDisable();
+        supplier.bankAccount();
+
+        suppliers.add(supplier);
+        fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
+
+    }
+
+    public void editSupplier(String suppliername) throws IOException, EnumNameNotFoundException {
+        Supplier supplier=Findsupplier(suppliername);
+        supplier.companyName();
+        supplier.supplierNumber();
+        supplier.supplierAddress();
+        supplier.supplierPhoneNumber();
+        supplier.supplierEmailAddress();
+        supplier.totalExpenses();
+        supplier.isDisable();
+        supplier.bankAccount();
+
+        suppliers.add(supplier);
+        fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
 
     }
     public boolean removeSupplier(Supplier supplier){
