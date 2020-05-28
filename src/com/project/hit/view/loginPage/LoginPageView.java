@@ -3,13 +3,13 @@ package com.project.hit.view.loginPage;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
 
 import com.project.hit.controller.loginController.LoginController;
-import com.project.hit.fileManager.FileNotFoundException;
 import com.project.hit.model.InvalidCredentialsException;
 
 public class LoginPageView implements LoginView {
@@ -52,8 +52,8 @@ public class LoginPageView implements LoginView {
 				catch(InvalidCredentialsException ice) {
 					showError(ice.getMessage());
 				}
-				catch(FileNotFoundException fnf) {
-					showError(fnf.getMessage()+" \nPlease Contect your Administrator!");
+				catch(ClassNotFoundException | IOException ex) {
+					showError(ex.getMessage()+"\nPlease Contect your Administrator!");
 				}
 			}
         });

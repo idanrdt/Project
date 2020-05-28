@@ -1,7 +1,8 @@
 package com.project.hit.controller.loginController;
 
+import java.io.IOException;
+
 import com.project.hit.details.User;
-import com.project.hit.fileManager.FileNotFoundException;
 import com.project.hit.model.AuthenticationSystem;
 import com.project.hit.model.InvalidCredentialsException;
 import com.project.hit.view.loginPage.LoginView;
@@ -22,7 +23,7 @@ public class LoginPageController implements LoginController {
 	}
 	
 	@Override
-	public void authenticate(String username, char[] password) throws InvalidCredentialsException, FileNotFoundException {
+	public void authenticate(String username, char[] password) throws InvalidCredentialsException, ClassNotFoundException, IOException {
 		User user = authSystem.authenticate(username, password);
 		if (user != null) {
 			view.close();
