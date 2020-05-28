@@ -14,12 +14,14 @@ public class WelcomePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public WelcomePanel() {
+		//Panel layout.
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
 		
 		JLabel welcomeTitle = new JLabel("Welcome to MHR");
 		welcomeTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeTitle.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		
 		GridBagConstraints comp = new GridBagConstraints();
 		comp.insets = new Insets(10, 0, 3, 0);
 		comp.fill = GridBagConstraints.HORIZONTAL;
@@ -32,7 +34,6 @@ public class WelcomePanel extends JPanel {
 		comp.gridx = 0;
 		comp.gridy = 1;
 		add(welcomeSubTitle, comp);
-
 	}
 
 }

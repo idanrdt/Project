@@ -1,68 +1,52 @@
 package com.project.hit.model;
 
+import com.project.hit.details.User;
 import com.project.hit.fileManager.*;
 
-//import java.util.Set;
+import java.io.IOException;
+import java.util.Set;
 
 public class AuthenticationSystem {
 	
-	//private Set<User> userSet;
-	private FileManger files;
-	
-	public AuthenticationSystem() {
-		files = new FileManger();
-	}
+	private Set<User> userSet;
+	private FileManger<User> files;
 	
 	/**
-	 * Check if the User details corresponding the Database.
-	 * @param userName - The user name.
-	 * @param password - The user password.
-	 * @return - True if authentication succeeded.
-	 * @throws InvalidCredentialsException if any detail is wrong or empty.
+	 * The {@link AuthenticationSystem} Constructor.
 	 */
-	public Boolean authenticate(String userName, char[] password) throws InvalidCredentialsException, FileNotFoundException {
-		if(userName.isEmpty() || password.length == 0) {
-			throw new InvalidCredentialsException(CredentialType.EMPTY);
-		}
-		 /* userSet = files.loadFromFile(FileNameSelect.USERFILE);
-		 * for(User user : userSet){
-		 *  	if(user.getUsername().equals(userName)) {
-		 *  		if(Arrays.equals(user.getPassword(),password) {
-		 *  			return true;
-		 *  		}
-		 *  		else {
-		 *  			throw new InvalidCredentialsException(CredentialType.Password);
-		 *  		}
-		 *  	}
-		 *  }
-		 *  
-		 *  throw new InvalidCredentialsException(CredentialType.UserName);
-		 * 
-		 * TODO:
-		 * 2. Implement User.
-		 * 3. Remove Comments.
-		 * 
-		 * */
-		return true;
+	public AuthenticationSystem() {
+		files = new FileManger<>();
 	}
-	
-	//Option B - return User object
-	/*	public User authenticate(String userName, char[] password) throws InvalidCredentialsException, FileNotFoundException {
+
+	/**
+	 * This functions verify that the user details are corresponding the database.
+	 * @param userName - the user UserName.
+	 * @param password - the user Password.
+	 * @return the {@link User} object if the authentication succeeded.
+	 * @throws InvalidCredentialsException If the credentials are wrong.
+	 * @throws IOException if the file can't open.
+	 * @throws ClassNotFoundException if the object does not exist.
+	 */
+	public User authenticate(String userName, char[] password) throws InvalidCredentialsException, ClassNotFoundException, IOException {
 		if(userName.isEmpty() || password.length == 0) {
 			throw new InvalidCredentialsException(CredentialType.EMPTY);
 		}
-		 /* userSet = files.loadFromFile(FileNameSelect.USERFILE);
-		 * for(User user : userSet){
-		 *  	if(user.getUsername().equals(userName)) {
-		 *  		if(Arrays.equals(user.getPassword(),password) {
-		 *  			return user;
-		 *  		}
-		 *  		else {
-		 *  			throw new InvalidCredentialsException(CredentialType.Password);
-		 *  		}
-		 *  	}
-		 *  }
-		 *  
-		 *  throw new InvalidCredentialsException(CredentialType.UserName);
-		 *  */
+		try {
+			userSet = files.loadFromFile(FileNameSelect.USERFILE);
+		}
+		catch(EnumNameNotFoundException enf) {
+			System.out.println("Enum selection is wrong");
+		}
+		for(User user : userSet) {
+			if(user.getUserName().equals(userName)) {
+				if(user.getpassword().equals(String.valueOf(password))) {
+					return user;
+				}
+				else {
+					throw new InvalidCredentialsException(CredentialType.PASSWORD);
+				}
+			}
+		}
+		throw new InvalidCredentialsException(CredentialType.USERNAME);
+	}
 }

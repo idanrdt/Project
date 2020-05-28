@@ -62,7 +62,7 @@ public class LoginPanel extends JPanel {
 	
 	/**
 	 * Set action listener to the button.
-	 * @param al - Action listener.
+	 * @param al - The Action listener.
 	 */
 	public void addButtonListener(ActionListener al) {
 		loginButton.addActionListener(al);
@@ -70,7 +70,7 @@ public class LoginPanel extends JPanel {
 	
 	/**
 	 * Gets the User name inserted by the user.
-	 * @return String element that represent the user name.
+	 * @return {@link String} element that represent the user name.
 	 */
 	public String getUserName() {
 		return userNameField.getText();
@@ -78,7 +78,7 @@ public class LoginPanel extends JPanel {
 	
 	/**
 	 * Gets the User name inserted by the user.
-	 * @return char array element that represent the user password.
+	 * @return {@link char} array element that represent the user password.
 	 */
 	public char[] getPassword() {
 		return passwordField.getPassword();

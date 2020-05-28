@@ -1,5 +1,8 @@
 package com.project.hit.model;
 
+/**
+ * Signals that the credentials specified are wrong.
+ */
 public class InvalidCredentialsException extends Exception {
 	
 	private String msg;

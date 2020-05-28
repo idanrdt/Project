@@ -6,7 +6,7 @@ import com.project.hit.viewSwitcher.ViewSwitcher;
 public class MainPage {
 
 	/**
-	 * Launch the application.
+	 * Launch the application - main function.
 	 */
 	public static void main(String[] args) {
 		
