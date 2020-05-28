@@ -11,11 +11,11 @@ public class Supplier implements Serializable {
     private String Supplier_Email_Address;
     private double Total_Expenses;
     private boolean Is_Disable;
-    private Bank_Account bankAccount;
+    private BankAccount bankAccount;
 
-    public Supplier (String company_Name,String supplier_Number,String supplier_Address
-            ,String supplier_Phone_Number,String supplier_Email_Address,double total_Expenses
-            ,boolean is_Disable,Bank_Account bankAccount){
+    public Supplier (String company_Name, String supplier_Number, String supplier_Address
+            , String supplier_Phone_Number, String supplier_Email_Address, double total_Expenses
+            , boolean is_Disable, BankAccount bankAccount){
         this.Company_Name=company_Name;
         this.Supplier_Number=supplier_Number;
         this.Supplier_Address=supplier_Address;
@@ -54,7 +54,7 @@ public class Supplier implements Serializable {
         return Is_Disable;
     }
 
-    public Bank_Account getBankAccount() {
+    public BankAccount getBankAccount() {
         return bankAccount;
     }
 
@@ -86,7 +86,7 @@ public class Supplier implements Serializable {
         Is_Disable = is_Disable;
     }
 
-    public void setBankAccount(Bank_Account bankAccount) {
+    public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
     }
 }

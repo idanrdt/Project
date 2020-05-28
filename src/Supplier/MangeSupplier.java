@@ -1,15 +1,16 @@
 package Supplier;
 
-public class Mange_Supplier  {
+public class MangeSupplier {
 
     private Supplier supplier;
 
-    public Mange_Supplier(Supplier supplier) {
+    public MangeSupplier(Supplier supplier) {
         this.supplier=supplier;
 
     }
 
     public boolean addSupplier(Supplier supplier) {
+        
         return true;
     }
     public boolean searchSupplier(Supplier supplier){

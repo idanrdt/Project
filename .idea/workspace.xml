@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd03f672-381b-4bd1-8c89-55da70f8d49c" name="Default Changelist" comment="" />
+    <list default="true" id="cd03f672-381b-4bd1-8c89-55da70f8d49c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Supplier/Bank_Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Supplier/BankAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Supplier/Mange_Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Supplier/MangeSupplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Supplier/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Supplier/Supplier.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +22,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1byzoOcrtQTkA4e3u1lixcKbFrZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,7 +35,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/New folder/Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../New folder/Project" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -50,6 +58,7 @@
       <workItem from="1590652985428" duration="200000" />
       <workItem from="1590653218949" duration="119000" />
       <workItem from="1590653565025" duration="17000" />
+      <workItem from="1590655253486" duration="342000" />
     </task>
     <servers />
   </component>
