@@ -1,4 +1,4 @@
-package Supplier;
+package com.project.hit.Supplier;
 
 public class BankAccount {
     private String bankNumber;

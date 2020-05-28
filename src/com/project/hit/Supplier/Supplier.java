@@ -1,8 +1,10 @@
-package Supplier;
+package com.project.hit.Supplier;
 
 import java.io.Serializable;
 
 public class Supplier implements Serializable {
+
+    private static int  SUPPLIER_ID = 1000;
 
     private String Company_Name;
     private String Supplier_Number;
@@ -24,6 +26,7 @@ public class Supplier implements Serializable {
         this.Total_Expenses=total_Expenses;
         this.Is_Disable=is_Disable;
         this.bankAccount=bankAccount;
+        ++SUPPLIER_ID;
     }
 
     public String getCompany_Name() {
@@ -88,5 +91,9 @@ public class Supplier implements Serializable {
 
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    public static int getSupplierId() {
+        return SUPPLIER_ID;
     }
 }
