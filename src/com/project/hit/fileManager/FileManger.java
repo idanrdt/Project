@@ -4,69 +4,78 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FileManger<T> {
+public class FileManger<T extends Serializable> {
 
-    private final String SUPPLIER = "supplier_file";
-    private final String USER = "user_file";
-    private final String ORDER = "order_file";
-    private String selectedFileName = null;
+    private String selectedFileName;
+
+    public FileManger() {
+        selectedFileName = null;
+    }
 
     /**
-     *
-     * @param object The object you want to save
-     * @param select 0 for save user object
-     *               1 for save supplier object
-     *               2 for save order object
+     * Generic function that save a collections set to file
+     * @param object is a Set<T>
+     * @param select is a enum object call FileNameSelect
+     *        USERFILE for save user object
+     *        SUPPLIERFILE for save supplier object
+     *        ORDERFILE for save order object
+     *        example: FileNameSelect.USERFILE
+     * @throws IOException if the file can't open
+     * @throws EnumNameNotFoundException if the enum param that not exists
      */
-    public Boolean saveToFile(Set<T> object, FileNameSelect select) throws IOException {
+    public void saveToFile(Set<T> object, FileNameSelect select) throws EnumNameNotFoundException,IOException {
 
         this.selectedFileName = selectedName(select);
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.selectedFileName))) {
             oos.writeObject(object);
-        }catch (IOException e){
-            e.printStackTrace();
-            return false;
         }
-        return true;
     }
 
     /**
-     *
-     * @param select is a enum
-     *               0 for load user object
-     *               1 for load supplier object
-     *               2 for load order object
-     * @return
-     * @throws Exception
+     * Generic function that load a collections set from file
+     * @param select is a enum object call FileNameSelect
+     *        USERFILE for save user object
+     *        SUPPLIERFILE for save supplier object
+     *        ORDERFILE for save order object
+     *        example: FileNameSelect.USERFILE
+     * @return new HashSet<T>() if no file exists
+     *         else return the saved set
+     * @throws EnumNameNotFoundException if the enum param that not exists
+     * @throws IOException if the file can't open
+     * @throws ClassNotFoundException if <T> an object does not exist
      */
-    public Set<T> loadFromFile(FileNameSelect select) throws FileNotFoundException, IOException, ClassNotFoundException {
-
+    public Set<T> loadFromFile(FileNameSelect select) throws EnumNameNotFoundException, IOException, ClassNotFoundException {
 
         this.selectedFileName = selectedName(select);
         if(!(new File(this.selectedFileName)).exists()){
-            return new HashSet<T>();
+            return new HashSet<>();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.selectedFileName))) {
-            return (Set<T>) ois.readObject();
+            return (Set<T>)ois.readObject();
         }
     }
 
-    private String selectedName( FileNameSelect select) throws IOException {
+    private String selectedName( FileNameSelect select) throws EnumNameNotFoundException {
         String str;
+        String SUPPLIER = "supplier_file";
+        String USER = "user_file";
+        String ORDER = "order_file";
         switch (select){
             case USERFILE:
-                str = this.USER;
+                str = USER;
                 break;
             case SUPPLIERFILE:
-                str = this.SUPPLIER;
+                str = SUPPLIER;
                 break;
             case ORDERFILE:
-                str = this.ORDER;
+                str = ORDER;
                 break;
             default:
-                throw new IOException("the selected enum dos not exist");
+                throw new EnumNameNotFoundException("the selected enum dos not exist");
         }
         return str;
     }
+
+
 }
