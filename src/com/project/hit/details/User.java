@@ -1,6 +1,8 @@
-package com.MHR.details;
+package com.project.hit.details;
 
-public class User extends Person{
+import java.io.Serializable;
+
+public class User extends Person implements Serializable{
 	private String userName;
 	private String password;
 	private Boolean isManager=false;

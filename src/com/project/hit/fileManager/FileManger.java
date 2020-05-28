@@ -13,17 +13,17 @@ public class FileManger<T extends Serializable> {
     }
 
     /**
-     * Generic function that save a collections set to file
-     * @param object is a Set<T>
-     * @param select is a enum object call FileNameSelect
-     *        USERFILE for save user object
-     *        SUPPLIERFILE for save supplier object
-     *        ORDERFILE for save order object
-     *        example: FileNameSelect.USERFILE
-     * @throws IOException if the file can't open
-     * @throws EnumNameNotFoundException if the enum param that not exists
+     * Generic function that save a collections set to file.
+     * @param object is a Set<T>.
+     * @param select is a {@link FileNameSelect} object that select file type:
+     *        <li>USERFILE for save user object.
+     *        <li>SUPPLIERFILE for save supplier object.
+     *        <li>ORDERFILE for save order object.<br>
+     *        example: FileNameSelect.USERFILE.
+     * @throws IOException if the file can't open.
+     * @throws EnumNameNotFoundException if the enum parameter not exists.
      */
-    public void saveToFile(Set<T> object, FileNameSelect select) throws EnumNameNotFoundException,IOException {
+    public void saveToFile(Set<T> object, FileNameSelect select) throws EnumNameNotFoundException, IOException {
 
         this.selectedFileName = selectedName(select);
 
@@ -33,17 +33,17 @@ public class FileManger<T extends Serializable> {
     }
 
     /**
-     * Generic function that load a collections set from file
-     * @param select is a enum object call FileNameSelect
-     *        USERFILE for save user object
-     *        SUPPLIERFILE for save supplier object
-     *        ORDERFILE for save order object
-     *        example: FileNameSelect.USERFILE
-     * @return new HashSet<T>() if no file exists
-     *         else return the saved set
-     * @throws EnumNameNotFoundException if the enum param that not exists
-     * @throws IOException if the file can't open
-     * @throws ClassNotFoundException if <T> an object does not exist
+     * Generic function that load a collections set from file.
+     * @param select is a {@link FileNameSelect} object that select file type:
+     *        <li>USERFILE for save user object.
+     *        <li>SUPPLIERFILE for save supplier object.
+     *        <li>ORDERFILE for save order object.<br>
+     *        example: FileNameSelect.USERFILE.
+     * @return new {@link HashSet} if no file exists.<br>
+     *         else return the saved set.
+     * @throws EnumNameNotFoundException if the enum parameter not exists.
+     * @throws IOException if the file can't open.
+     * @throws ClassNotFoundException if the object does not exist.
      */
     public Set<T> loadFromFile(FileNameSelect select) throws EnumNameNotFoundException, IOException, ClassNotFoundException {
 
@@ -55,7 +55,7 @@ public class FileManger<T extends Serializable> {
             return (Set<T>)ois.readObject();
         }
     }
-
+    
     private String selectedName( FileNameSelect select) throws EnumNameNotFoundException {
         String str;
         String SUPPLIER = "supplier_file";
@@ -76,6 +76,4 @@ public class FileManger<T extends Serializable> {
         }
         return str;
     }
-
-
 }
