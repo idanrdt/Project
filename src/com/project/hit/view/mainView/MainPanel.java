@@ -7,7 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
 
-public class MainUserPanel extends JPanel {
+public class MainPanel extends JPanel {
 
 	private JButton ordersButton;
 	private JButton supplierButton;
@@ -15,7 +15,7 @@ public class MainUserPanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MainUserPanel() {
+	public MainPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
 		

@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 import com.project.hit.controller.mainController.MainController;
 import com.project.hit.controller.mainController.NavigationFailedException;
 import com.project.hit.details.User;
@@ -18,7 +16,7 @@ public class MainPageView implements MainView{
 	private User user;
 	private JFrame mainFrame;
 	private MainController controller;
-	private MainUserPanel userPanel;
+	private MainPanel panel;
 	private MainManagerPanel managerPanel;
 	private MessagePanel msgPanel;
 	
@@ -54,16 +52,37 @@ public class MainPageView implements MainView{
 	 */
 	private void createAndShowGUI() {
 		mainFrame = new JFrame("User: "+ user.getUserName());
-		userPanel = new MainUserPanel();
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		panel = new MainPanel();
 		msgPanel = new MessagePanel();
-		userPanel = addListenersToButtons(userPanel);
+		addListenersToButtons(panel);
+		setManagerAccess(mainFrame);
 		
 		mainFrame.add(msgPanel,BorderLayout.NORTH);
-		mainFrame.add(userPanel, BorderLayout.CENTER);
+		mainFrame.add(panel, BorderLayout.CENTER);
 		
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
+	}
+	
+	private void setManagerAccess(JFrame frame) {
+		if(user.getManager()) {
+			managerPanel = new MainManagerPanel();
+			managerPanel.addSettingsListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						controller.navigateTo(ViewSelect.SETTINGS_VIEW, user);
+					} catch (NavigationFailedException e1) {
+						setError(e1.getMessage());
+					}
+				}
+			});
+			frame.add(managerPanel,BorderLayout.SOUTH);
+		}
 	}
 	
 	/**
@@ -75,11 +94,10 @@ public class MainPageView implements MainView{
 	}
 	
 	/**
-	 * Sets the buttons listeners to {@link MainUserPanel}.
+	 * Sets the buttons listeners to {@link MainPanel}.
 	 * @param panel - The panel to set the Listeners to.
-	 * @return The {@link MainUserPanel} with Listeners set to it's buttons.
 	 */
-	private MainUserPanel addListenersToButtons(MainUserPanel panel) {
+	private void addListenersToButtons(MainPanel panel) {
 		
 		panel.addOrderListener(new ActionListener() {
 			
@@ -116,7 +134,6 @@ public class MainPageView implements MainView{
 				}
 			}
 		});
-		return panel;
 	}
 
 }

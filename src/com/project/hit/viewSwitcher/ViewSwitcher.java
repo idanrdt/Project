@@ -22,6 +22,11 @@ public class ViewSwitcher {
 	private ViewSwitcher() {
 	}
 	
+	/**
+	 * Change the view to the {@link LoginView}.
+	 * @param select - The requested {@link View} from the {@link ViewSelect}.
+	 * @throws NavigationFailedException if the navigation fails or the {@link LoginView} called more than once.
+	 */
 	public static void changeView(ViewSelect select) throws NavigationFailedException {
 		if(select == ViewSelect.LOGIN_VIEW) {
 			if(loginCounter == 0) {
@@ -37,6 +42,12 @@ public class ViewSwitcher {
 		}
 	}
 	
+	/**
+	 * Change the view to the requested {@link View}.
+	 * @param select - The requested {@link View} from the {@link ViewSelect}.
+	 * @param user - The {@link User} that logged in.
+	 * @throws NavigationFailedException if the navigation fails.
+	 */
 	public static void changeView(ViewSelect select, User user) throws NavigationFailedException {
 		switch(select) {
 		case MAIN_VIEW:
@@ -45,11 +56,15 @@ public class ViewSwitcher {
 		case ORDER_VIEW:
 		case SUPPLIER_VIEW:
 		case REPORT_VIEW:
+		case SETTINGS_VIEW:
 		default:
 			throw new NavigationFailedException("Failed to navigate to the requested page.");
 		}
 	}
 	
+	/**
+	 * Set and starts the {@link LoginView}.
+	 */
 	private static void startLogin() {
 		
 		LoginView view = new LoginPageView();
@@ -63,6 +78,10 @@ public class ViewSwitcher {
 		view.start();
 	}
 	
+	/**
+	 * Set and starts the {@link MainView}.
+	 * @param user - The {@link User} that logged in.
+	 */
 	private static void startMain(User user) {
 		
 		MainView view = new MainPageView(user);
