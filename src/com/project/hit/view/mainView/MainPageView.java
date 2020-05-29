@@ -1,15 +1,33 @@
 package com.project.hit.view.mainView;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import com.project.hit.controller.mainController.MainController;
+import com.project.hit.controller.mainController.NavigationFailedException;
+import com.project.hit.details.User;
+import com.project.hit.viewSwitcher.ViewSelect;
 
 public class MainPageView implements MainView{
 	
-	//private User user;
+	private User user;
+	private JFrame mainFrame;
+	private MainController controller;
+	private MainUserPanel userPanel;
+	private MainManagerPanel managerPanel;
+	private MessagePanel msgPanel;
 	
-	public MainPageView(/*User user*/) {
-		//this.user = user;
+	/**
+	 * Constructor for the panel.
+	 * @param user - {@link User} object that logged in.
+	 */
+	public MainPageView(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -23,22 +41,82 @@ public class MainPageView implements MainView{
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
-		
+		mainFrame.dispose();		
 	}
 
 	@Override
 	public void setController(MainController controller) {
-		// TODO Auto-generated method stub
-		
+		this.controller = controller;
 	}
 	
+	/**
+	 * Create and show the Window.
+	 */
 	private void createAndShowGUI() {
-		JFrame mainFrame = new JFrame("User: "/*,user.getUsername*/);
+		mainFrame = new JFrame("User: "+ user.getUserName());
+		userPanel = new MainUserPanel();
+		msgPanel = new MessagePanel();
+		userPanel = addListenersToButtons(userPanel);
+		
+		mainFrame.add(msgPanel,BorderLayout.NORTH);
+		mainFrame.add(userPanel, BorderLayout.CENTER);
 		
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
+	}
+	
+	/**
+	 * Creates and display an Error message to the user.
+	 * @param msg - {@link String} Message to display.
+	 */
+	private void setError(String msg) {
+		JOptionPane.showMessageDialog(new JFrame(),msg+"\nPlease contect your Administrator","Error",JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Sets the buttons listeners to {@link MainUserPanel}.
+	 * @param panel - The panel to set the Listeners to.
+	 * @return The {@link MainUserPanel} with Listeners set to it's buttons.
+	 */
+	private MainUserPanel addListenersToButtons(MainUserPanel panel) {
+		
+		panel.addOrderListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.navigateTo(ViewSelect.ORDER_VIEW, user);
+				} catch (NavigationFailedException e1) {
+					setError(e1.getMessage());
+				}
+			}				
+		});
+		
+		panel.addReportListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.navigateTo(ViewSelect.REPORT_VIEW, user);
+				} catch (NavigationFailedException e1) {
+					setError(e1.getMessage());
+				}
+			}				
+		});
+		
+		panel.addSupplierListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.navigateTo(ViewSelect.SUPPLIER_VIEW, user);
+				} catch (NavigationFailedException e1) {
+					setError(e1.getMessage());
+				}
+			}
+		});
+		return panel;
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.project.hit.details;
 
-public abstract class Person {
+import java.io.Serializable;
+
+public abstract class Person implements Serializable{
 	protected String id;
 	protected String name;
 	protected String address;

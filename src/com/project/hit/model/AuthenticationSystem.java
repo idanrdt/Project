@@ -31,12 +31,14 @@ public class AuthenticationSystem {
 		if(userName.isEmpty() || password.length == 0) {
 			throw new InvalidCredentialsException(CredentialType.EMPTY);
 		}
+		
 		try {
 			userSet = files.loadFromFile(FileNameSelect.USERFILE);
 		}
 		catch(EnumNameNotFoundException enf) {
 			System.out.println("Enum selection is wrong");
 		}
+		
 		for(User user : userSet) {
 			if(user.getUserName().equals(userName)) {
 				if(user.getpassword().equals(String.valueOf(password))) {
@@ -47,6 +49,7 @@ public class AuthenticationSystem {
 				}
 			}
 		}
+		
 		throw new InvalidCredentialsException(CredentialType.USERNAME);
 	}
 }
