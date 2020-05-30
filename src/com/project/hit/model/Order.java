@@ -1,21 +1,26 @@
 package com.project.hit.model;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
-public class Order {
+public class Order implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private static int orderNumberCount = 1000;
     private Supplier supplier;
+    private String details;
     private double price;
-    private Calendar date;
+    private Date date;
     private int orderNumber;
 
-    public Order(Supplier supplier, double price, Calendar date) {
+    public Order(Supplier supplier, double price, String details) {
         this.supplier = supplier;
         this.price = price;
-        this.date = date;
-        orderNumber = ++orderNumber;
+        this.details = details;
+        this.date = Calendar.getInstance().getTime();
+        this.orderNumber = orderNumberCount++;
     }
 
 
@@ -27,10 +32,6 @@ public class Order {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
     public double getPrice() {
         return price;
     }
@@ -39,12 +40,16 @@ public class Order {
         this.price = price;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     @Override
@@ -60,5 +65,13 @@ public class Order {
     @Override
     public int hashCode() {
         return Objects.hash(supplier, price, date);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "price=" + price +
+                ", orderNumber=" + orderNumber +
+                '}';
     }
 }

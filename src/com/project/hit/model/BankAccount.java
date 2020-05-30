@@ -1,7 +1,9 @@
 package com.project.hit.model;
 
-public class BankAccount {
+import java.io.Serializable;
 
+public class BankAccount implements Serializable {
+    private static final long serialVersionUID = 2L;
     private String accountNumber;
     private String bankNumber;
     private String bankBranchNumber;

@@ -4,31 +4,33 @@ import com.project.hit.controller.OrderSystem;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Report {
-    protected Calendar startDate;
-    protected Calendar endDate;
+    protected Date startDate;
+    protected Date endDate;
     protected int supplierId;
-    protected OrderSystem orderSystem;
 
-    public Report() throws IOException, ClassNotFoundException {
-        orderSystem = new OrderSystem();
+    public Report(){
+       this.startDate = Calendar.getInstance().getTime();
+       this.endDate = Calendar.getInstance().getTime();
     }
 
-    public Calendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Calendar startDate) {
-        this.startDate = startDate;
+    public void setStartDate(int day, int month, int year) {
+        this.startDate = new GregorianCalendar(year,month,day).getTime();
     }
 
-    public Calendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Calendar endDate) {
-        this.endDate = endDate;
+    public void setEndDate(int day, int month, int year) {
+        this.endDate = new GregorianCalendar(year,month,day).getTime();
     }
 
     public int getSupplierId() {

@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FileManger<T extends Serializable> {
+public class FileManger<T> {
 
     private String selectedFileName;
 
@@ -48,11 +48,12 @@ public class FileManger<T extends Serializable> {
     public Set<T> loadFromFile(FileNameSelect select) throws EnumNameNotFoundException, IOException, ClassNotFoundException {
 
         this.selectedFileName = selectedName(select);
-        if(!(new File(this.selectedFileName)).exists()){
+        if(!((new File(this.selectedFileName)).exists())){
             return new HashSet<>();
         }
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(this.selectedFileName))) {
-            return (Set<T>)ois.readObject();
+            Set<T> set = (Set<T>)ois.readObject();
+            return set;
         }
     }
 

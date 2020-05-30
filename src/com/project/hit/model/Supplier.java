@@ -1,7 +1,10 @@
 package com.project.hit.model;
 
-public class Supplier {
+import java.io.Serializable;
 
+public class Supplier implements Serializable {
+
+    private static final long serialVersionUID = 3L;
     private String companyName;
     private String supplierNumber;
     private String supplierAddress;
@@ -10,7 +13,12 @@ public class Supplier {
     private double totalExpenses;
     private BankAccount account;
     private boolean isDisable;
-    private static int supplierId = 5000;
+    private int supplierId;
+    private static int SUPPLIER_ID = 5000;
+
+    public int getSupplierId() {
+        return supplierId;
+    }
 
     public Supplier(String companyName, String supplierNumber, String supplierAddress, String supplierPhoneNumber, String supplierEmailNumber, BankAccount account) {
         this.companyName = companyName;
@@ -19,7 +27,7 @@ public class Supplier {
         this.supplierPhoneNumber = supplierPhoneNumber;
         this.supplierEmailNumber = supplierEmailNumber;
         this.account = account;
-        ++supplierId;
+        this.supplierId = SUPPLIER_ID++;
     }
 
     public String getCompanyName() {
