@@ -72,42 +72,47 @@ public class Supplier implements Serializable,BuilderUpdateSupplier{
     }
 
     @Override
-    public String companyName() {
-        return null;
+    public void companyName(String companyName) {
+        setCompanyName(companyName);
+
+    }
+
+
+    @Override
+    public void supplierNumber(String supplierNumber) {
+        setSupplierNumber(supplierNumber);
+
     }
 
     @Override
-    public String supplierNumber() {
-        return null;
+    public void supplierAddress(String supplierAddress) {
+        setSupplierAddress(supplierAddress);
+
     }
 
     @Override
-    public String supplierAddress() {
-        return null;
+    public void supplierPhoneNumber(String supplierPhoneNumber) {
+        setSupplierPhoneNumber(supplierPhoneNumber);
     }
 
     @Override
-    public String supplierPhoneNumber() {
-        return null;
+    public void supplierEmailAddress(String supplierEmailAddress) {
+        setSupplierEmailAddress(supplierEmailAddress);
     }
 
     @Override
-    public String supplierEmailAddress() {
-        return null;
+    public void totalExpenses(double totalExpenses) {
+        setTotalExpenses(totalExpenses);
+    }
+
+    public void isDisable(boolean isDisable)
+    {
+        setDisable(isDisable);
     }
 
     @Override
-    public double totalExpenses() {
-        return 0;
-    }
-
-    public boolean isDisable() {
-        return isDisable;
-    }
-
-    @Override
-    public BankAccount bankAccount() {
-        return null;
+    public void bankAccount(BankAccount bankAccount) {
+        setBankAccount(bankAccount);
     }
 
     public BankAccount getBankAccount() {

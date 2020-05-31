@@ -3,12 +3,12 @@ package com.project.hit.Supplier;
 public interface BuilderUpdateSupplier {
 
 
-    public String companyName ();
-    public String supplierNumber();
-    public String supplierAddress();
-    public String supplierPhoneNumber();
-    public String supplierEmailAddress();
-    public double totalExpenses();
-    public boolean isDisable();
-    public BankAccount bankAccount();
+    public void companyName (String cname);
+    public void supplierNumber(String snum);
+    public void supplierAddress(String saddres);
+    public void supplierPhoneNumber(String sphone);
+    public void supplierEmailAddress(String semail);
+    public void totalExpenses(double texpenses);
+    public void isDisable(boolean idisable);
+    public void bankAccount(BankAccount baccount);
 }
