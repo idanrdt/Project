@@ -15,7 +15,6 @@ public class OrderUpdate {
     private double oldPrice;
 
     public OrderUpdate(Order order, Set<Order> orders) {
-
         this.orders = orders;
         this.order = order;
     }

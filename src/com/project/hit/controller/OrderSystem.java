@@ -7,7 +7,6 @@ import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.fileManager.FileManger;
 import com.project.hit.fileManager.FileNameSelect;
 import com.project.hit.model.Order;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -19,12 +18,6 @@ public class OrderSystem implements OrderSystemRepository {
     private Set<Order> orders;
     private FileManger<Order> orderFileManger;
 
-    /**
-     * OrderSystem constructor
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * @throws EnumNameNotFoundException
-     */
     public OrderSystem() throws IOException, ClassNotFoundException, EnumNameNotFoundException {
         this.orderFileManger = new FileManger<>();
         this.orders = orderFileManger.loadFromFile(FileNameSelect.ORDERFILE);
@@ -34,11 +27,10 @@ public class OrderSystem implements OrderSystemRepository {
      * the function add a new order to a Set collection and automatic save
      * and update the supplier total expenses
      * @param order
-     * @return true if everything was successful
      * @throws Exception if there's a problem with the order object
      */
     @Override
-    public boolean createOrder(Order order) throws Exception {
+    public void createOrder(Order order) throws Exception {
         if (order == null) {
             throw new Exception("Order cannot be NULL");
         }
@@ -49,14 +41,14 @@ public class OrderSystem implements OrderSystemRepository {
 
         this.orders.add(order);
         this.orderFileManger.saveToFile(this.orders,FileNameSelect.ORDERFILE);
-        return true;
+
     }
 
     /**
      * the function is a Updater pattern design (like a Builder pattern)
      * @param orderNumber
      * @return OrderUpdate class
-     * @throws OrderNotFoundExcption
+     * @throws OrderNotFoundExcption if the order does not exist
      */
     @Override
     public OrderUpdate updateOrder(int orderNumber) throws OrderNotFoundExcption {
@@ -68,12 +60,12 @@ public class OrderSystem implements OrderSystemRepository {
      * the function delete order from the list and update the supplier total expenses
      * @param order object
      * @return true if everything was successful
-     * @throws OrderNotFoundExcption
-     * @throws IOException
-     * @throws EnumNameNotFoundException
+     * @throws OrderNotFoundExcption if the order does not exist
+     * @throws IOException if cant save the Set on file
+     * @throws EnumNameNotFoundException if Enum value does not exist
      */
     @Override
-    public boolean deleteOrder(Order order) throws OrderNotFoundExcption, IOException, EnumNameNotFoundException {
+    public void deleteOrder(Order order) throws OrderNotFoundExcption, IOException, EnumNameNotFoundException {
 
         if(this.orders.contains(order)) {
             this.orders.remove(order);
@@ -81,7 +73,6 @@ public class OrderSystem implements OrderSystemRepository {
             //***update supplier and save***//
 
             this.orderFileManger.saveToFile(this.orders, FileNameSelect.ORDERFILE);
-            return true;
         }
         throw new OrderNotFoundExcption("the order number: " + order.getOrderNumber() + " does not exist");
     }
@@ -116,6 +107,12 @@ public class OrderSystem implements OrderSystemRepository {
         throw new OrderNotFoundExcption("the order: " + orderName + " does not exist");
     }
 
+    /**
+     * the function create receipt pdf file from the sent object
+     * @param order
+     * @param Url path to save the file
+     * @throws FileNotFoundException if the order object does not exist
+     */
     @Override
     public void createPdf(Order order, String Url) throws FileNotFoundException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

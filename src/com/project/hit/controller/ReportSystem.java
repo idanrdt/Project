@@ -23,28 +23,64 @@ public class ReportSystem extends Report implements ReportSystemRepository {
         this.report = new HashSet<>();
     }
 
+    /**
+     * the function generate report the function is built like builder design pattern
+     * Generate the report dynamically.
+     * The related functions are: startDate, endDate, supplierId
+     * and for the generate the report the function createReport
+     * @return ReportSystem
+     */
     @Override
     public ReportSystem genarateReport() {
         return this;
     }
 
+    /**
+     * The function is related to genarateReport
+     * The function gets the start date you want to start to build the report (Optional)
+     * @param day
+     * @param month
+     * @param year
+     * @return ReportSystem
+     */
     public ReportSystem startDate(int day, int month, int year) {
         super.setStartDate(day, month, year);
         return this;
     }
 
-
+    /**
+     * The function is related to genarateReport
+     * The function gets the end date you want to build the report (Optional)
+     * @param day
+     * @param month
+     * @param year
+     * @return ReportSystem
+     */
     public ReportSystem endDate(int day, int month, int year) {
         super.setEndDate(day, month, year);
         return this;
     }
 
-
+    /**
+     * The function is related to genarateReport
+     * The function gets the supplier you want to build a report for him (Optional)
+     * @param supplierId
+     * @return
+     */
     public ReportSystem supplierId(int supplierId) {
         super.setSupplierId(supplierId);
         return this;
     }
 
+    /**
+     * The function is related to genarateReport
+     * To end the function genarateReport process, the function createReport must be activated (Required)
+     * @return
+     * @throws ReportEmptyExcption
+     * @throws EnumNameNotFoundException
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public Set<Order> createReport() throws ReportEmptyExcption, EnumNameNotFoundException, IOException, ClassNotFoundException {
         Set<Order> orders = new OrderSystem().getOrders();
 
@@ -66,6 +102,11 @@ public class ReportSystem extends Report implements ReportSystemRepository {
         return this.report;
     }
 
+    /**
+     * the function save a excel file from the report Set
+     * @param Url path to save the file
+     * @throws IOException If there is a problem opening the file
+     */
     @Override
     public void exportToExcel(String Url) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");

@@ -7,9 +7,9 @@ import java.util.Set;
 
 public interface OrderSystemRepository {
 
-    public boolean createOrder(Order order) throws Exception;
+    public void createOrder(Order order) throws Exception;
 
-    public boolean deleteOrder(Order order)throws Exception;
+    public void deleteOrder(Order order)throws Exception;
 
     public OrderUpdate updateOrder(int orderNumber) throws OrderNotFoundExcption;
 
