@@ -2,7 +2,7 @@ package com.project.hit.Supplier;
 
 import java.io.Serializable;
 
-public class Supplier implements Serializable,BuilderUpdateSupplier{
+public class Supplier implements Serializable{
 
     private static int  SUPPLIER_ID = 1000;
 
@@ -16,7 +16,7 @@ public class Supplier implements Serializable,BuilderUpdateSupplier{
     private BankAccount bankAccount;
     private int supplierId;
 
-    public Supplier (String company_Name, String supplier_Number, String supplier_Address
+   /* public Supplier (String company_Name, String supplier_Number, String supplier_Address
             , String supplier_Phone_Number, String supplier_Email_Address, double total_Expenses
             , boolean is_Disable, BankAccount bankAccount){
         this.companyName =company_Name;
@@ -28,9 +28,13 @@ public class Supplier implements Serializable,BuilderUpdateSupplier{
         this.isDisable =is_Disable;
         this.bankAccount=bankAccount;
         this.supplierId=SUPPLIER_ID++;
+    }*/
+
+    public Supplier() {
+        this.supplierId = SUPPLIER_ID++;
     }
 
-    public Supplier(Supplier s1){
+    /*public Supplier(Supplier s1){
         this.companyName =s1.companyName;
         this.supplierNumber =s1.supplierNumber;
         this.supplierAddress =s1.supplierAddress;
@@ -39,9 +43,13 @@ public class Supplier implements Serializable,BuilderUpdateSupplier{
         this.totalExpenses =s1.totalExpenses;
         this.isDisable =s1.isDisable;
         this.bankAccount=s1.bankAccount;
-        this.supplierId=SUPPLIER_ID++;
-    }
+        this.supplierId=SUPPLIER_ID++; //error
+    }*/
 
+    /////// Builder //////
+    public static SupplierBuilder builder(){
+        return new SupplierBuilder();
+    }
 
     public  int getSupplierId() {
         return supplierId;
@@ -71,7 +79,7 @@ public class Supplier implements Serializable,BuilderUpdateSupplier{
         return totalExpenses;
     }
 
-    @Override
+  /*  @Override
     public void companyName(String companyName) {
         setCompanyName(companyName);
 
@@ -113,7 +121,7 @@ public class Supplier implements Serializable,BuilderUpdateSupplier{
     @Override
     public void bankAccount(BankAccount bankAccount) {
         setBankAccount(bankAccount);
-    }
+    }*/
 
     public BankAccount getBankAccount() {
         return bankAccount;

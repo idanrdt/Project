@@ -23,25 +23,29 @@ public class MangeSupplier  {
 
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
-    public Supplier Findsupplier(int suppliernum){
+    public Supplier findSupplier(int supplierNum){
         for (Supplier i:this.suppliers){
-            if(i.getSupplierId()==suppliernum)
+            if(i.getSupplierId()==supplierNum)
                 return i;
         }
         return null;
 
     }
 
-    public Supplier Findsupplier(String suppliername){
+    public Supplier findSupplier(String supplierName){
         for (Supplier i:this.suppliers){
-            if(i.getCompanyName().equals(suppliername))
+            if(i.getCompanyName().equals(supplierName))
                 return i;
         }
         return null;
 
     }
 
-    public void editSupplier(int suppliernumber) throws IOException, EnumNameNotFoundException {
+    public SupplierUpdater updater(int supplierNumber){
+        return new SupplierUpdater(findSupplier(supplierNumber), this.suppliers);
+    }
+
+    /*public void editSupplier(int suppliernumber) throws IOException, EnumNameNotFoundException {
         Supplier supplier=Findsupplier(suppliernumber);
         supplier.companyName();
         supplier.supplierNumber();
@@ -71,10 +75,16 @@ public class MangeSupplier  {
         suppliers.add(supplier);
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
 
-    }
-    public boolean removeSupplier(Supplier supplier){
-        return true;
+    }*/
 
+    public boolean removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
+        if (this.suppliers.contains(supplier)) {
+            this.suppliers.remove(supplier);
+            fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
+
+            return true;
+        }
+        return false;
     }
 
 }
