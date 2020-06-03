@@ -62,11 +62,7 @@ public abstract class Person implements Serializable{
 	 */
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	
-	
-	
+	}	
 }
 
 
