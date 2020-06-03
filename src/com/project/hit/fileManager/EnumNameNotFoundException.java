@@ -1,5 +1,9 @@
 package com.project.hit.fileManager;
 
+/**
+ * Signals that the {@link FileNameSelect} parameter not exist.
+ *
+ */
 public class EnumNameNotFoundException extends Exception {
 
     private String msg;
