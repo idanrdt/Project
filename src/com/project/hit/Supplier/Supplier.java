@@ -3,7 +3,7 @@ package com.project.hit.Supplier;
 import java.io.Serializable;
 
 public class Supplier implements Serializable{
-
+    private static final long serialVersionUID=1L;
     private static int  SUPPLIER_ID = 1000;
 
     private String companyName;

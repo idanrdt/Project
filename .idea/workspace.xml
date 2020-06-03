@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd03f672-381b-4bd1-8c89-55da70f8d49c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/project/hit/Supplier/SupplierNotFoundException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/project/hit/Supplier/MangeSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/project/hit/Supplier/MangeSupplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/project/hit/Supplier/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/project/hit/Supplier/Supplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/project/hit/Supplier/SupplierBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/project/hit/Supplier/SupplierBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/project/hit/Supplier/SupplierUpdater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/project/hit/Supplier/SupplierUpdater.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +64,7 @@
       <workItem from="1590656675963" duration="8092000" />
       <workItem from="1590914220610" duration="1438000" />
       <workItem from="1591001753213" duration="2357000" />
-      <workItem from="1591013265611" duration="6097000" />
+      <workItem from="1591013265611" duration="8423000" />
     </task>
     <servers />
   </component>

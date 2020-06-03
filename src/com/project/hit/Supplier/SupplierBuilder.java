@@ -12,9 +12,9 @@ public class SupplierBuilder {
 
 
     /**
-     *
+     *Part of the builder that gets the company name
      * @param companyName string of company name
-     * @return
+     * @return SupplierBuilder
      */
     public SupplierBuilder CompanyName(String companyName) {
         this.companyName = companyName;
@@ -22,9 +22,9 @@ public class SupplierBuilder {
     }
 
     /**
-     *
-     * @param supplierNumber
-     * @return
+     *Part of the builder that gets the supplier number
+     * @param supplierNumber string of supplier number
+     * @return SupplierBuilder
      */
     public SupplierBuilder SupplierNumber(String supplierNumber) {
         this.supplierNumber = supplierNumber;
@@ -32,9 +32,9 @@ public class SupplierBuilder {
     }
 
     /**
-     *
-     * @param supplierAddress
-     * @return
+     *Part of the builder that gets the supplier address
+     * @param supplierAddress string of supplier address
+     * @return SupplierBuilder
      */
     public SupplierBuilder SupplierAddress(String supplierAddress) {
         this.supplierAddress = supplierAddress;
@@ -42,9 +42,9 @@ public class SupplierBuilder {
     }
 
     /**
-     *
-     * @param supplierPhoneNumber
-     * @return
+     *Part of the builder that gets the supplier phone number
+     * @param supplierPhoneNumber string of supplier phone number
+     * @return SupplierBuilder
      */
     public SupplierBuilder SupplierPhoneNumber(String supplierPhoneNumber) {
         this.supplierPhoneNumber = supplierPhoneNumber;
@@ -52,9 +52,9 @@ public class SupplierBuilder {
     }
 
     /**
-     *
-     * @param supplierEmailAddress
-     * @return
+     *Part of the builder that gets the supplier email address
+     * @param supplierEmailAddress string of supplier email address
+     * @return SupplierBuilder
      */
     public SupplierBuilder SupplierEmailAddress(String supplierEmailAddress) {
         this.supplierEmailAddress = supplierEmailAddress;
@@ -63,9 +63,9 @@ public class SupplierBuilder {
 
 
     /**
-     *
-     * @param disable
-     * @return
+     *Part of the builder that said if it disable
+     * @param disable boolean if this disable
+     * @return SupplierBuilder
      */
     public SupplierBuilder Disable(boolean disable) {
         isDisable = disable;
@@ -73,9 +73,9 @@ public class SupplierBuilder {
     }
 
     /**
-     *
-     * @param bankAccount
-     * @return
+     *Part of the builder that gets the bank account
+     * @param bankAccount obj of Bank Account
+     * @return SupplierBuilder
      */
     public SupplierBuilder BankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
