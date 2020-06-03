@@ -18,65 +18,67 @@ public class MangeSupplier  {
 
     }
 
+    /**
+     *func to add supplier to the DB
+     * @param supplier obj of supplier
+     * @throws IOException if the file can't open
+     * @throws EnumNameNotFoundException if the enum param that not exists
+     */
+
     public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
         suppliers.add(supplier);
 
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
-    public Supplier findSupplier(int supplierNum){
+
+    /**
+     *func to find file of supplier by supplier number
+     * @param supplierNum id of supplier that help us to find him
+     * @return obj of supplier
+     * @throws SupplierNotFoundException if we can't find this supplier
+     */
+    public Supplier findSupplier(int supplierNum) throws SupplierNotFoundException {
         for (Supplier i:this.suppliers){
             if(i.getSupplierId()==supplierNum)
                 return i;
         }
-        return null;
+        throw new SupplierNotFoundException("");
+
 
     }
 
-    public Supplier findSupplier(String supplierName){
+    /**
+     *func to find file of supplier by supplier name
+     * @param supplierName string of company supplier name
+     * @return obj of supplier
+     * @throws SupplierNotFoundException if we can't find this supplier
+     */
+    public Supplier findSupplier(String supplierName) throws SupplierNotFoundException {
         for (Supplier i:this.suppliers){
             if(i.getCompanyName().equals(supplierName))
                 return i;
         }
-        return null;
 
+        throw new SupplierNotFoundException("");
     }
 
-    public SupplierUpdater updater(int supplierNumber){
+    /**
+     *func to enter the updater and make changes
+     * @param supplierNumber id of supplier that help us to find him
+     * @return obj of supplier update that we used in builder
+     * @throws SupplierNotFoundException if we can't find this supplier
+     */
+    public SupplierUpdater updater(int supplierNumber) throws SupplierNotFoundException {
         return new SupplierUpdater(findSupplier(supplierNumber), this.suppliers);
     }
 
-    /*public void editSupplier(int suppliernumber) throws IOException, EnumNameNotFoundException {
-        Supplier supplier=Findsupplier(suppliernumber);
-        supplier.companyName();
-        supplier.supplierNumber();
-        supplier.supplierAddress();
-        supplier.supplierPhoneNumber();
-        supplier.supplierEmailAddress();
-        supplier.totalExpenses();
-        supplier.isDisable();
-        supplier.bankAccount();
-
-        suppliers.add(supplier);
-        fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
-
-    }
-
-    public void editSupplier(String suppliername) throws IOException, EnumNameNotFoundException {
-        Supplier supplier=Findsupplier(suppliername);
-        supplier.companyName();
-        supplier.supplierNumber();
-        supplier.supplierAddress();
-        supplier.supplierPhoneNumber();
-        supplier.supplierEmailAddress();
-        supplier.totalExpenses();
-        supplier.isDisable();
-        supplier.bankAccount();
-
-        suppliers.add(supplier);
-        fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
-
-    }*/
-
+    /**
+     *func to remove file of supplier from the DB
+     * @param supplier obj of supplier to remove
+     * @return true if we succeed remove this supplier
+     * @throws IOException if the file can't open
+     * @throws EnumNameNotFoundException if the enum param that not exists
+     */
     public boolean removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
         if (this.suppliers.contains(supplier)) {
             this.suppliers.remove(supplier);
