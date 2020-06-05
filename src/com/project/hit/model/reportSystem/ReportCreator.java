@@ -63,7 +63,7 @@ public class ReportCreator extends Report {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public Set<Order> createReport() throws com.project.hit.controller.reportSystem.ReportEmptyExcption, EnumNameNotFoundException, IOException, ClassNotFoundException {
+    public Set<Order> createReport() throws ReportEmptyExcption, EnumNameNotFoundException, IOException, ClassNotFoundException {
         Set<Order> orders = new OrderSystem().getOrders();
 
         if(this.getSupplierId() == 0){
@@ -85,7 +85,7 @@ public class ReportCreator extends Report {
         }
 
         if(this.report.isEmpty())
-            throw new com.project.hit.controller.reportSystem.ReportEmptyExcption("No reports to display due to the data entered");
+            throw new ReportEmptyExcption("No reports to display due to the data entered");
         return this.report;
     }
 
