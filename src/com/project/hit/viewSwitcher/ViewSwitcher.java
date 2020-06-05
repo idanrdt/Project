@@ -108,9 +108,10 @@ public class ViewSwitcher {
 	private static void startSupplier(User user) throws NavigationFailedException {
 		
 		SupplierView view = new SupplierPageView(user);
+		MangeSupplier model = null;
 		
 		try {
-			MangeSupplier model = new MangeSupplier();
+			model = MangeSupplier.getMangeSupplierSinglton();
 		} catch (EnumNameNotFoundException | IOException e) {
 			throw new NavigationFailedException("Faild to navigate");
 			//TODO: add log.
@@ -118,7 +119,7 @@ public class ViewSwitcher {
 			throw new NavigationFailedException("File missing or corrupted");
 		}
 		
-		SupplierController controller = new SupplierPageController();
+		SupplierController controller = new SupplierPageController(view, model);
 		
 		view.setController(controller);
 		

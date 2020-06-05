@@ -1,5 +1,8 @@
 package com.project.hit.view.supplierView;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -9,6 +12,7 @@ import com.project.hit.model.managerSystem.details.User;
 public class SupplierPageView implements SupplierView {
 	
 	private SupplierController controller;
+	private EditSearchSupplierPanel editPanel;
 	private JFrame mainFrame;
 	private User user;
 	
@@ -40,10 +44,40 @@ public class SupplierPageView implements SupplierView {
 	private void createAndShowGUI() {
 		mainFrame = new JFrame("User: "+ user.getUserName());
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		editPanel = new EditSearchSupplierPanel();
+		mainFrame.add(editPanel);
+		addEditListeners(editPanel);
 		
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
+	}
+	
+	private void addEditListeners(EditSearchSupplierPanel edit) {
+		edit.addFindButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//edit.setTextToFileds(controller.findSupplier());
+			}
+		});
+		
+		edit.addSaveButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		edit.addResetButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				edit.resetFields();
+			}
+		});
 	}
 	
 	/**

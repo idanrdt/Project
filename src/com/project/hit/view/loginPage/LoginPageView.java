@@ -3,6 +3,8 @@ package com.project.hit.view.loginPage;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -46,17 +48,29 @@ public class LoginPageView implements LoginView {
         	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-				loginController.authenticate(loginPanel.getUserName(), loginPanel.getPassword());
-				}
-				catch(InvalidCredentialsException ice) {
-					showError(ice.getMessage());
-				}
-				catch(ClassNotFoundException | IOException ex) {
-					showError(ex.getMessage()+"\nPlease Contect your Administrator!");
-				}
+				submitLogin();
 			}
         });
+        
+        loginPanel.addLoginButtonKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					submitLogin();
+				}				
+			}
+		});
         
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
@@ -79,6 +93,21 @@ public class LoginPageView implements LoginView {
 	 */
 	private void showError(String msg) {
 		JOptionPane.showMessageDialog(new JFrame(),msg,"Error",JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Check validation of the user details.
+	 */
+	private void submitLogin() {
+		try {
+		loginController.authenticate(loginPanel.getUserName(), loginPanel.getPassword());
+		}
+		catch(InvalidCredentialsException ice) {
+			showError(ice.getMessage());
+		}
+		catch(ClassNotFoundException | IOException ex) {
+			showError(ex.getMessage()+"\nPlease Contect your Administrator!");
+		}
 	}
 
 }
