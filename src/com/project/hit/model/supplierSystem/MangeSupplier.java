@@ -1,4 +1,4 @@
-package com.project.hit.Supplier;
+package com.project.hit.model.supplierSystem;
 
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.fileManager.FileManger;
@@ -89,4 +89,7 @@ public class MangeSupplier  {
         return false;
     }
 
+    public Set<Supplier> getSuppliers() {
+        return suppliers;
+    }
 }

@@ -1,4 +1,4 @@
-package com.project.hit.model;
+package com.project.hit.model.authenticationSystem;
 
 /**
  * Signals that the credentials specified are wrong.
