@@ -1,4 +1,5 @@
-package com.project.hit.details;
+package com.project.hit.model.managerSystem.details;
+
 
 import java.io.Serializable;
 

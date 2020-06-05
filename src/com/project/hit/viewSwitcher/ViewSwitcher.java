@@ -5,17 +5,14 @@ import com.project.hit.controller.loginController.LoginPageController;
 import com.project.hit.controller.mainController.MainController;
 import com.project.hit.controller.mainController.MainPageController;
 import com.project.hit.controller.mainController.NavigationFailedException;
-import com.project.hit.controller.orderController.OrderController;
-import com.project.hit.controller.orderController.OrderPageController;
-import com.project.hit.details.User;
-import com.project.hit.model.AuthenticationSystem;
-import com.project.hit.model.OrderSystem;
+import com.project.hit.model.authenticationSystem.AuthenticationSystem;
+import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.view.loginPage.LoginPageView;
 import com.project.hit.view.loginPage.LoginView;
+import com.project.hit.view.*;
 import com.project.hit.view.mainView.MainPageView;
 import com.project.hit.view.mainView.MainView;
-import com.project.hit.view.orderView.OrderView;
-import com.project.hit.view.orderView.OrderPageView;
+
 
 public class ViewSwitcher {
 	
@@ -59,8 +56,6 @@ public class ViewSwitcher {
 			startMain(user);
 			break;
 		case ORDER_VIEW:
-			startOrder(user);
-			break;
 		case SUPPLIER_VIEW:
 		case REPORT_VIEW:
 		case SETTINGS_VIEW:
@@ -94,19 +89,6 @@ public class ViewSwitcher {
 		MainView view = new MainPageView(user);
 		
 		MainController controller = new MainPageController(view);
-		
-		view.setController(controller);
-		
-		view.start();
-	}
-	
-	private static void startOrder(User user) {
-		
-		OrderView view = new OrderPageView();
-		
-		OrderSystem model = new OrderSystem();
-		
-		OrderController controller = new OrderPageController(view, model);
 		
 		view.setController(controller);
 		

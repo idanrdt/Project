@@ -1,6 +1,6 @@
 package com.project.hit.controller.mainController;
 
-import com.project.hit.details.User;
+import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.viewSwitcher.ViewSelect;
 
 public interface MainController {

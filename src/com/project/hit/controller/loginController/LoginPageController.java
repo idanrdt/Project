@@ -3,9 +3,10 @@ package com.project.hit.controller.loginController;
 import java.io.IOException;
 
 import com.project.hit.controller.mainController.NavigationFailedException;
-import com.project.hit.details.User;
-import com.project.hit.model.AuthenticationSystem;
-import com.project.hit.model.InvalidCredentialsException;
+
+import com.project.hit.model.authenticationSystem.AuthenticationSystem;
+import com.project.hit.model.authenticationSystem.InvalidCredentialsException;
+import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.view.loginPage.LoginView;
 import com.project.hit.viewSwitcher.ViewSelect;
 import com.project.hit.viewSwitcher.ViewSwitcher;

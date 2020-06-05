@@ -3,7 +3,7 @@ package com.project.hit.controller.loginController;
 import java.io.IOException;
 
 import com.project.hit.fileManager.EnumNameNotFoundException;
-import com.project.hit.model.InvalidCredentialsException;
+import com.project.hit.model.authenticationSystem.InvalidCredentialsException;
 
 public interface LoginController {
 	
