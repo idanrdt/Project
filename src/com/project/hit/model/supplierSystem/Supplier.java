@@ -1,4 +1,4 @@
-package com.project.hit.Supplier;
+package com.project.hit.model.supplierSystem;
 
 import java.io.Serializable;
 

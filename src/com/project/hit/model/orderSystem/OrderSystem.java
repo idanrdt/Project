@@ -1,13 +1,16 @@
-package com.project.hit.controller;
+package com.project.hit.model.orderSystem;
 
-import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
-import com.project.hit.fileManager.EnumNameNotFoundException;
-import com.project.hit.fileManager.FileManger;
-import com.project.hit.fileManager.FileNameSelect;
-import com.project.hit.model.Order;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.project.hit.fileManager.*;
+import com.project.hit.model.supplierSystem.*;
+
+
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +41,13 @@ public class OrderSystem implements OrderSystemRepository {
             throw new Exception("Order number: " +order.getOrderNumber() +" Already exists!");
         }
         //***update supplier and save***//
+        double price = order.getPrice();
+
+        MangeSupplier mangeSupplier = new MangeSupplier();
+        for (Supplier supplier : mangeSupplier.getSuppliers()){
+            if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
+                mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price).update();
+        }
 
         this.orders.add(order);
         this.orderFileManger.saveToFile(this.orders,FileNameSelect.ORDERFILE);
@@ -65,12 +75,17 @@ public class OrderSystem implements OrderSystemRepository {
      * @throws EnumNameNotFoundException if Enum value does not exist
      */
     @Override
-    public void deleteOrder(Order order) throws OrderNotFoundExcption, IOException, EnumNameNotFoundException {
+    public void deleteOrder(Order order) throws OrderNotFoundExcption, IOException, EnumNameNotFoundException, ClassNotFoundException, SupplierNotFoundException {
 
         if(this.orders.contains(order)) {
             this.orders.remove(order);
 
-            //***update supplier and save***//
+            double price = order.getPrice();
+            MangeSupplier mangeSupplier = new MangeSupplier();
+            for (Supplier supplier : mangeSupplier.getSuppliers()){
+                if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
+                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(-price).update();
+            }
 
             this.orderFileManger.saveToFile(this.orders, FileNameSelect.ORDERFILE);
         }
@@ -114,24 +129,48 @@ public class OrderSystem implements OrderSystemRepository {
      * @throws FileNotFoundException if the order object does not exist
      */
     @Override
-    public void createPdf(Order order, String Url) throws FileNotFoundException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        PdfDocument pdf = new PdfDocument(new PdfWriter(Url + order.getOrderNumber() + ".pdf"));
-        Document document = new Document(pdf);
+    public void createPdf(Order order, String Url) throws IOException, DocumentException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy\nHH:mm:ss");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+        Document document = new Document();
+        Url = Url +"/" + order.getOrderNumber() +".pdf";
+        PdfWriter.getInstance(document, new FileOutputStream(Url));
+        document.open();
+
         String nowDate = sdf.format(new Date());
-        String title = "\t\tOrder number" + order.getOrderNumber();
-        String orderDate = "\t\tDate: " + sdf.format(order.getDate());
-        String supplier = "\n\tSupplier Details" +
+        String title = "Order number: " + order.getOrderNumber();
+        String orderDate = "\nDate: " + sdf2.format(order.getDate());
+        String supplier = "\n\nSupplier Details:" +
                 "\nSupplier name: " + order.getSupplier().getCompanyName() +
                 "\nSupplier ID: " + order.getSupplier().getSupplierId() +
                 "\nSupplier Address: " + order.getSupplier().getSupplierAddress() +
                 "\nSupplier Phone number: " + order.getSupplier().getSupplierPhoneNumber() +
-                "\nSupplier Email Address: " + order.getSupplier().getSupplierEmailNumber();
+                "\nSupplier Email Address: " + order.getSupplier().getSupplierEmailAddress();
         String price = "\nPrice: "+order.getPrice();
-        String details = "\nOrder description:\n" + order.getDetails();
-        String line = nowDate +title+ orderDate + supplier + price + details;
-        document.add(new Paragraph(line));
+        String details = "Order description: " + order.getDetails();
+
+        Font timeFont = new Font(Font.FontFamily.TIMES_ROMAN,11);
+        Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN,16);
+        Font font = new Font(Font.FontFamily.TIMES_ROMAN,12);
+
+        Paragraph time = new Paragraph(nowDate,timeFont);
+        document.add(time);
+
+        Paragraph pdfTitle = new Paragraph(title,titleFont);
+        pdfTitle.setAlignment(Element.ALIGN_CENTER);
+        document.add(pdfTitle);
+
+        Paragraph pdfSubTitle = new Paragraph(details+orderDate,font);
+        pdfSubTitle.setAlignment(Element.ALIGN_CENTER);
+        document.add(pdfSubTitle);
+
+        Paragraph pdfRest = new Paragraph(price + supplier,font);
+        document.add(pdfRest);
+
         document.close();
+        File file = new File(Url);
+        Desktop desktop = Desktop.getDesktop();
+        desktop.open(file);
     }
 
     @Override

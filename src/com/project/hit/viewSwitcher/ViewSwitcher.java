@@ -5,12 +5,14 @@ import com.project.hit.controller.loginController.LoginPageController;
 import com.project.hit.controller.mainController.MainController;
 import com.project.hit.controller.mainController.MainPageController;
 import com.project.hit.controller.mainController.NavigationFailedException;
-import com.project.hit.details.User;
-import com.project.hit.model.AuthenticationSystem;
+import com.project.hit.model.authenticationSystem.AuthenticationSystem;
+import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.view.loginPage.LoginPageView;
 import com.project.hit.view.loginPage.LoginView;
+import com.project.hit.view.*;
 import com.project.hit.view.mainView.MainPageView;
 import com.project.hit.view.mainView.MainView;
+
 
 public class ViewSwitcher {
 	

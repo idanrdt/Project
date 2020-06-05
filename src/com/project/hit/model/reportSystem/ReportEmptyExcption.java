@@ -1,4 +1,4 @@
-package com.project.hit.controller;
+package com.project.hit.model.reportSystem;
 
 public class ReportEmptyExcption extends Exception{
 

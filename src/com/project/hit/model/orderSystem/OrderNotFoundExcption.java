@@ -1,4 +1,4 @@
-package com.project.hit.controller;
+package com.project.hit.model.orderSystem;
 
 public class OrderNotFoundExcption extends Exception {
 

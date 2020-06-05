@@ -1,4 +1,7 @@
-package com.project.hit.model;
+package com.project.hit.model.orderSystem;
+
+
+import com.project.hit.model.supplierSystem.Supplier;
 
 import java.io.Serializable;
 import java.util.Calendar;

@@ -1,8 +1,9 @@
-package com.project.hit.controller;
+package com.project.hit.model.orderSystem;
 
-import com.project.hit.model.Order;
+import com.itextpdf.text.DocumentException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Set;
 
 public interface OrderSystemRepository {
@@ -17,7 +18,7 @@ public interface OrderSystemRepository {
 
     public Order findOrder(String orderName) throws OrderNotFoundExcption;
 
-    public void createPdf(Order order, String Url) throws FileNotFoundException;
+    public void createPdf(Order order, String Url) throws FileNotFoundException, IOException, DocumentException;
 
     public Set<Order> getOrders();
 }

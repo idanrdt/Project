@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import com.project.hit.controller.mainController.MainController;
 import com.project.hit.controller.mainController.NavigationFailedException;
-import com.project.hit.details.User;
+import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.viewSwitcher.ViewSelect;
 
 public class MainPageView implements MainView{

@@ -1,7 +1,7 @@
-package com.project.hit.model;
+package com.project.hit.model.authenticationSystem;
 
-import com.project.hit.details.User;
 import com.project.hit.fileManager.*;
+import com.project.hit.model.managerSystem.details.User;
 
 import java.io.IOException;
 import java.util.Set;

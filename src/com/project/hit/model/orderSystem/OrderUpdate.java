@@ -1,9 +1,11 @@
-package com.project.hit.controller;
+package com.project.hit.model.orderSystem;
+
+
 
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.fileManager.FileManger;
 import com.project.hit.fileManager.FileNameSelect;
-import com.project.hit.model.Order;
+import com.project.hit.model.supplierSystem.*;
 
 import java.io.IOException;
 import java.util.Set;
@@ -19,9 +21,15 @@ public class OrderUpdate {
         this.order = order;
     }
 
-    public OrderUpdate price(double price){
+    public OrderUpdate price(double price) throws EnumNameNotFoundException, IOException, ClassNotFoundException, SupplierNotFoundException {
         this.oldPrice = order.getPrice();
         order.setPrice(price);
+
+        MangeSupplier mangeSupplier = new MangeSupplier();
+        for (Supplier supplier : mangeSupplier.getSuppliers()){
+            if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
+                mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price- this.oldPrice).update();
+        }
         return this;
     }
 
@@ -33,7 +41,7 @@ public class OrderUpdate {
     public Order update() throws IOException, EnumNameNotFoundException {
         FileManger<Order> save = new FileManger<>();
 
-        /*update Supplier set*/
+
 
         save.saveToFile(this.orders, FileNameSelect.ORDERFILE);
         return this.order;

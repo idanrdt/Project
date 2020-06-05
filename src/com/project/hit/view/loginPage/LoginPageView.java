@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.DimensionUIResource;
 
 import com.project.hit.controller.loginController.LoginController;
-import com.project.hit.model.InvalidCredentialsException;
+import com.project.hit.model.authenticationSystem.InvalidCredentialsException;
 
 public class LoginPageView implements LoginView {
 	

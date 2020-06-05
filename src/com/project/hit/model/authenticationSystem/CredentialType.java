@@ -1,4 +1,4 @@
-package com.project.hit.model;
+package com.project.hit.model.authenticationSystem;
 
 public enum CredentialType {
 	EMPTY,
