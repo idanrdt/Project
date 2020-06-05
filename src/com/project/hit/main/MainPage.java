@@ -1,10 +1,8 @@
 package com.project.hit.main;
 
-import com.project.hit.controller.loginController.LoginController;
-import com.project.hit.controller.loginController.LoginPageController;
-import com.project.hit.model.AuthenticationSystem;
-import com.project.hit.view.loginPage.LoginPageView;
-import com.project.hit.view.loginPage.LoginView;
+import com.project.hit.controller.mainController.NavigationFailedException;
+import com.project.hit.viewSwitcher.ViewSelect;
+import com.project.hit.viewSwitcher.ViewSwitcher;
 
 public class MainPage {
 
@@ -12,14 +10,12 @@ public class MainPage {
 	 * Launch the application - main function.
 	 */
 	public static void main(String[] args) {
-		LoginView view = new LoginPageView();
 		
-		AuthenticationSystem model = new AuthenticationSystem();
-		
-		LoginController controller = new LoginPageController(view, model);
-		
-		view.setController(controller);
-
-		view.start();
+		try {
+			ViewSwitcher.changeView(ViewSelect.LOGIN_VIEW);
+		}
+		catch(NavigationFailedException n) {
+			System.out.println(n.getMessage());
+		}
 	}
 }

@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FileManger<T extends Serializable> {
-
-    private String selectedFileName;
+	
+	private String selectedFileName;
 
     public FileManger() {
         selectedFileName = null;

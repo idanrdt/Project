@@ -2,10 +2,13 @@ package com.project.hit.controller.loginController;
 
 import java.io.IOException;
 
+import com.project.hit.controller.mainController.NavigationFailedException;
 import com.project.hit.details.User;
 import com.project.hit.model.AuthenticationSystem;
 import com.project.hit.model.InvalidCredentialsException;
 import com.project.hit.view.loginPage.LoginView;
+import com.project.hit.viewSwitcher.ViewSelect;
+import com.project.hit.viewSwitcher.ViewSwitcher;
 
 public class LoginPageController implements LoginController {
 	
@@ -36,6 +39,11 @@ public class LoginPageController implements LoginController {
 	 * @param user - The {@link User} object that authorize to use the application.
 	 */
 	private void openMainMenu(User user) {
+		try {
+			ViewSwitcher.changeView(ViewSelect.MAIN_VIEW, user);
+		} catch (NavigationFailedException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 
