@@ -1,13 +1,16 @@
-package com.MHR.details;
+package com.project.hit.details;
 
-public class User extends Person{
+import java.io.Serializable;
+
+public class User extends Person implements Serializable {
+	
+	private static final long serialVersionUID = 2L;
 	private String userName;
 	private String password;
-	private Boolean isManager=false;
-	private Boolean reportSystem=false;
-	private Boolean manageSupplierAccsess=false;
-	private Boolean orderSystemAccsess=false;
-	
+	private Boolean isManager = false;
+	private Boolean reportSystem = false;
+	private Boolean manageSupplierAccsess = false;
+	private Boolean orderSystemAccsess = false;
 	
 	/**
 	 * Constructor
@@ -19,9 +22,9 @@ public class User extends Person{
 	 */
 	public User(String username,String password,String name,String address,String id)
 	{
-		super(id,name,address);
-	    this.userName=username;
-	    this.password=password;
+		super(id, name, address);
+	    this.userName = username;
+	    this.password = password;
 	}
 
 	/**
@@ -29,8 +32,7 @@ public class User extends Person{
 	 * @param access-true for allow access and false for remove access
 	 */
 	public void setManagerAccess(Boolean access) {
-		this.isManager=access;
-		
+		this.isManager = access;
 	}
 	
 	/**
@@ -42,20 +44,18 @@ public class User extends Person{
 		
 	}
 	/**
-	 * set the access to the report system
+	 * Sets the access to the report system
 	 * @param access-true for allow access and false for remove access
 	 */
 	public void setReportSystem(Boolean access) {
-		this.reportSystem=access;
-		
+		this.reportSystem = access;
 	}
 	/**
-	 *  check if there is an access to the report system
+	 * check if there is an access to the report system
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getReportSystem() {
-		return this.reportSystem;
-		
+		return this.reportSystem;	
 	}
 	
 	/**
@@ -63,11 +63,12 @@ public class User extends Person{
 	 * @param access-true for allow access and false for remove access
 	 */
 	public void setManageSupplierAccsess(Boolean access) {
-		this.manageSupplierAccsess=access;
+		this.manageSupplierAccsess = access;
 		
 	}
+	
 	/**
-	 *  check if there is an access to the manager supplier
+	 * check if there is an access to the manager supplier
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getManageSupplierAccsess() {
@@ -75,29 +76,29 @@ public class User extends Person{
 		
 	}
 	/**
-	 * set the access order system
+	 * Sets the access order system
 	 * @param access-true for allow access and false for remove access
 	 */
 	public void setOrderSysteMaccsess(Boolean access) {
-		this.orderSystemAccsess=access;
-		
+		this.orderSystemAccsess = access;
 	}
+	
 	/**
 	 * check if there is an access to the order system
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getOrderSystemAccsess() {
-		return this.orderSystemAccsess;
-		
+		return this.orderSystemAccsess;	
 	}
+	
 	/**
 	 * set the users name
 	 * @param name-the user name
 	 */
 	public void setUsername(String name ) {
-		this.userName=name;
-		
+		this.userName = name;	
 	}
+	
 	/**
 	 * get the user name
 	 * @return-the users user name
@@ -107,15 +108,12 @@ public class User extends Person{
 		return this.userName;
 	}
 	
-	
 	/**
 	 * get the users password
 	 * @return-users password
 	 */
-	public String getpassword()
+	public String getPassword()
 	{
 		return this.password;
-		
-	}
-	
+	}	
 }
