@@ -10,12 +10,18 @@ public class AuthenticationSystem {
 	
 	private Set<User> userSet;
 	private FileManger<User> files;
-	
+	static AuthenticationSystem authenticationSystem;
 	/**
 	 * The {@link AuthenticationSystem} Constructor.
 	 */
-	public AuthenticationSystem() {
+	private AuthenticationSystem() {
 		files = new FileManger<>();
+	}
+
+	public static AuthenticationSystem getAuthenticationSystem() {
+		if(authenticationSystem == null)
+			authenticationSystem = new AuthenticationSystem();
+		return authenticationSystem;
 	}
 
 	/**

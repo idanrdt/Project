@@ -10,10 +10,17 @@ public class ManagerProperties implements ManagerPropertiesRepository {
 
     private Set<User> users;
     private FileManger<User> userFileManger;
+    static ManagerProperties managerProperties;
 
-    public ManagerProperties() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
+    private ManagerProperties() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
         this.userFileManger = new FileManger<>();
         this.users = this.userFileManger.loadFromFile( FileNameSelect.USERFILE);
+    }
+
+    public static ManagerProperties getManagerProperties() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
+        if(managerProperties == null)
+            managerProperties = new ManagerProperties();
+        return managerProperties;
     }
 
     @Override
