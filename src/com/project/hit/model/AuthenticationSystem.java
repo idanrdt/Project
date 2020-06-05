@@ -41,7 +41,7 @@ public class AuthenticationSystem {
 		
 		for(User user : userSet) {
 			if(user.getUserName().equals(userName)) {
-				if(user.getpassword().equals(String.valueOf(password))) {
+				if(user.getPassword().equals(String.valueOf(password))) {
 					return user;
 				}
 				else {
