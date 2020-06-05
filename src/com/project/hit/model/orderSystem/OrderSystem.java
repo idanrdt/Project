@@ -20,10 +20,17 @@ public class OrderSystem implements OrderSystemRepository {
 
     private Set<Order> orders;
     private FileManger<Order> orderFileManger;
+    static OrderSystem orderSystem;
 
-    public OrderSystem() throws IOException, ClassNotFoundException, EnumNameNotFoundException {
+    private OrderSystem() throws IOException, ClassNotFoundException, EnumNameNotFoundException {
         this.orderFileManger = new FileManger<>();
         this.orders = orderFileManger.loadFromFile(FileNameSelect.ORDERFILE);
+    }
+
+    public static OrderSystem getOrderSystem() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
+        if (orderSystem == null)
+            orderSystem = new OrderSystem();
+        return orderSystem;
     }
 
     /**
@@ -43,7 +50,7 @@ public class OrderSystem implements OrderSystemRepository {
         //***update supplier and save***//
         double price = order.getPrice();
 
-        MangeSupplier mangeSupplier = new MangeSupplier();
+        MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
         for (Supplier supplier : mangeSupplier.getSuppliers()){
             if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
                 mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price).update();
@@ -81,7 +88,7 @@ public class OrderSystem implements OrderSystemRepository {
             this.orders.remove(order);
 
             double price = order.getPrice();
-            MangeSupplier mangeSupplier = new MangeSupplier();
+            MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
             for (Supplier supplier : mangeSupplier.getSuppliers()){
                 if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
                     mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(-price).update();

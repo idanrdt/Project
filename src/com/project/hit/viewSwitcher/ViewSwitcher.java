@@ -71,7 +71,7 @@ public class ViewSwitcher {
 		
 		LoginView view = new LoginPageView();
 		
-		AuthenticationSystem model = new AuthenticationSystem();
+		AuthenticationSystem model = AuthenticationSystem.getAuthenticationSystem();
 		
 		LoginController controller = new LoginPageController(view, model);
 		
