@@ -64,7 +64,7 @@ public class ReportCreator extends Report {
      * @throws ClassNotFoundException
      */
     public Set<Order> createReport() throws ReportEmptyExcption, EnumNameNotFoundException, IOException, ClassNotFoundException {
-        Set<Order> orders = new OrderSystem().getOrders();
+        Set<Order> orders = OrderSystem.getOrderSystem().getOrders();
 
         if(this.getSupplierId() == 0){
             this.report.addAll(orders);

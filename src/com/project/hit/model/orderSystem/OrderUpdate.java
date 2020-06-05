@@ -25,7 +25,7 @@ public class OrderUpdate {
         this.oldPrice = order.getPrice();
         order.setPrice(price);
 
-        MangeSupplier mangeSupplier = new MangeSupplier();
+        MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
         for (Supplier supplier : mangeSupplier.getSuppliers()){
             if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
                 mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price- this.oldPrice).update();

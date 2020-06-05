@@ -11,11 +11,19 @@ public class MangeSupplier  {
 
     private Set<Supplier> suppliers;
     private FileManger<Supplier> fileManger;
+    static MangeSupplier mangeSupplierSinglton;
 
-    public MangeSupplier() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
+    private MangeSupplier() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
         fileManger = new FileManger<Supplier>();
         suppliers = fileManger.loadFromFile(FileNameSelect.SUPPLIERFILE);
 
+    }
+
+    public static MangeSupplier getMangeSupplierSinglton() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
+        if (mangeSupplierSinglton == null){
+            mangeSupplierSinglton = new MangeSupplier();
+        }
+        return mangeSupplierSinglton;
     }
 
     /**
