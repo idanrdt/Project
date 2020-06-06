@@ -74,7 +74,7 @@ public class SupplierPageView implements SupplierView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controller.updateSupplier(edit.getUpdatedSupplier());
-				JOptionPane.showMessageDialog(new JFrame(),"Supplier updated!","Succsess",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(new JFrame(),"Supplier updated!","Succsess",JOptionPane.INFORMATION_MESSAGE);
 
 			}
 		});

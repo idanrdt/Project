@@ -24,6 +24,7 @@ public class SupplierPageController implements SupplierController {
 
 	@Override
 	public void updateSupplier(Supplier supplier) {
+		
 	}
 	
 }
