@@ -20,14 +20,13 @@ import javax.swing.text.DocumentFilter;
 
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class EditSearchSupplierPanel extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 20L;
-	private JTextField supplierNumberField;
+	private JTextField supplierIDField;
 	private JTextField companyField;
 	private JTextField addressField;
 	private JTextField phoneField;
@@ -36,44 +35,70 @@ public class EditSearchSupplierPanel extends JPanel {
 	private JTextField accoundnumberField;
 	private JTextField branchField;
 	private JTextField expencesField;
+	private DocumentFilter up8NumbersFilter;
 	
 	private JButton findButton;
 	private JButton saveButton;
 	private JButton resetButton;
+	private JLabel welcomeTitle;
+	private JLabel welcomeSubTitle;
 
 	/**
 	 * Create the panel.
 	 */
 	public EditSearchSupplierPanel() {
 		
+		up8NumbersFilter = new NumberFilter();
+		
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
 		
-		JLabel supplierNumberLabel = new JLabel("Supplier number:");
-		GridBagConstraints gbc_supplierNumberLabel = new GridBagConstraints();
-		gbc_supplierNumberLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_supplierNumberLabel.gridx = 0;
-		gbc_supplierNumberLabel.gridy = 0;
-		add(supplierNumberLabel, gbc_supplierNumberLabel);
+		welcomeTitle = new JLabel("Edit supplier details");
+		welcomeTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeTitle.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		GridBagConstraints gbc_welcomeTitle = new GridBagConstraints();
+		gbc_welcomeTitle.gridwidth = 3;
+		gbc_welcomeTitle.insets = new Insets(0, 0, 5, 0);
+		gbc_welcomeTitle.fill = GridBagConstraints.HORIZONTAL;
+		gbc_welcomeTitle.gridx = 0;
+		gbc_welcomeTitle.gridy = 0;
+		add(welcomeTitle, gbc_welcomeTitle);
+		
+		welcomeSubTitle = new JLabel("Please insert a valid supplier ID");
+		welcomeSubTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeSubTitle.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_welcomeSubTitle = new GridBagConstraints();
+		gbc_welcomeSubTitle.insets = new Insets(0, 5, 5, 5);
+		gbc_welcomeSubTitle.gridwidth = 3;
+		gbc_welcomeSubTitle.fill = GridBagConstraints.HORIZONTAL;
+		gbc_welcomeSubTitle.gridx = 0;
+		gbc_welcomeSubTitle.gridy = 1;
+		add(welcomeSubTitle, gbc_welcomeSubTitle);
+		
+		JLabel supplierIDLabel = new JLabel("Supplier ID:");
+		GridBagConstraints gbc_supplierIDLabel = new GridBagConstraints();
+		gbc_supplierIDLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_supplierIDLabel.gridx = 0;
+		gbc_supplierIDLabel.gridy = 2;
+		add(supplierIDLabel, gbc_supplierIDLabel);
 
-		supplierNumberField = new JTextField();
-		DocumentFilter onlyNumberFilter = new NumberFilter();
-		((AbstractDocument)supplierNumberField.getDocument()).setDocumentFilter(onlyNumberFilter);
-		GridBagConstraints gbc_supplierNumberField = new GridBagConstraints();
-		gbc_supplierNumberField.insets = new Insets(0, 0, 5, 5);
-		gbc_supplierNumberField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_supplierNumberField.gridx = 1;
-		gbc_supplierNumberField.gridy = 0;
-		add(supplierNumberField, gbc_supplierNumberField);
-		supplierNumberField.setColumns(10);
+		supplierIDField = new JTextField();
+		((AbstractDocument)supplierIDField.getDocument()).setDocumentFilter(up8NumbersFilter);
+		GridBagConstraints gbc_supplierIDField = new GridBagConstraints();
+		gbc_supplierIDField.insets = new Insets(0, 0, 5, 5);
+		gbc_supplierIDField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_supplierIDField.gridx = 1;
+		gbc_supplierIDField.gridy = 2;
+		add(supplierIDField, gbc_supplierIDField);
+		supplierIDField.setColumns(10);
 				
 		findButton = new JButton("Find");
 		GridBagConstraints gbc_findButton = new GridBagConstraints();
 		gbc_findButton.anchor = GridBagConstraints.EAST;
 		gbc_findButton.insets = new Insets(0, 0, 5, 0);
 		gbc_findButton.gridx = 2;
-		gbc_findButton.gridy = 0;
+		gbc_findButton.gridy = 2;
 		add(findButton, gbc_findButton);
 		
 		//<----------------------------------------------------->
@@ -86,7 +111,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		gbc_innerDetailsPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_innerDetailsPanel.fill = GridBagConstraints.BOTH;
 		gbc_innerDetailsPanel.gridx = 0;
-		gbc_innerDetailsPanel.gridy = 1;
+		gbc_innerDetailsPanel.gridy = 3;
 		add(innerDetailsPanel, gbc_innerDetailsPanel);
 		GridBagLayout gbl_innerDetailsPanel = new GridBagLayout();
 		gbl_innerDetailsPanel.columnWidths = new int[]{85, 0};
@@ -96,7 +121,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel companyLabel = new JLabel("Company Name:");
 		GridBagConstraints gbc_companyLabel = new GridBagConstraints();
 		gbc_companyLabel.anchor = GridBagConstraints.WEST;
-		gbc_companyLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_companyLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_companyLabel.gridx = 0;
 		gbc_companyLabel.gridy = 0;
 		innerDetailsPanel.add(companyLabel, gbc_companyLabel);
@@ -104,7 +129,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		companyField = new JTextField();
 		companyField.setEnabled(false);
 		GridBagConstraints gbc_companyField = new GridBagConstraints();
-		gbc_companyField.insets = new Insets(0, 0, 5, 0);
+		gbc_companyField.insets = new Insets(5, 0, 5, 5);
 		gbc_companyField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_companyField.gridx = 1;
 		gbc_companyField.gridy = 0;
@@ -114,7 +139,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel addressLabel = new JLabel("Address:");
 		GridBagConstraints gbc_addressLabel = new GridBagConstraints();
 		gbc_addressLabel.anchor = GridBagConstraints.ABOVE_BASELINE_LEADING;
-		gbc_addressLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_addressLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_addressLabel.gridx = 0;
 		gbc_addressLabel.gridy = 1;
 		innerDetailsPanel.add(addressLabel, gbc_addressLabel);
@@ -122,7 +147,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		addressField = new JTextField();
 		addressField.setEnabled(false);
 		GridBagConstraints gbc_addressField = new GridBagConstraints();
-		gbc_addressField.insets = new Insets(0, 0, 5, 0);
+		gbc_addressField.insets = new Insets(0, 0, 5, 5);
 		gbc_addressField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_addressField.gridx = 1;
 		gbc_addressField.gridy = 1;
@@ -132,7 +157,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel phoneLabel = new JLabel("Phone Number:");
 		GridBagConstraints gbc_phoneLabel = new GridBagConstraints();
 		gbc_phoneLabel.anchor = GridBagConstraints.WEST;
-		gbc_phoneLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_phoneLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_phoneLabel.gridx = 0;
 		gbc_phoneLabel.gridy = 2;
 		innerDetailsPanel.add(phoneLabel, gbc_phoneLabel);
@@ -140,7 +165,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		phoneField = new JTextField();
 		phoneField.setEnabled(false);
 		GridBagConstraints gbc_phoneField = new GridBagConstraints();
-		gbc_phoneField.insets = new Insets(0, 0, 5, 0);
+		gbc_phoneField.insets = new Insets(0, 0, 5, 5);
 		gbc_phoneField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_phoneField.gridx = 1;
 		gbc_phoneField.gridy = 2;
@@ -150,7 +175,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel emailLabel = new JLabel("Email:");
 		GridBagConstraints gbc_emailLabel = new GridBagConstraints();
 		gbc_emailLabel.anchor = GridBagConstraints.WEST;
-		gbc_emailLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_emailLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_emailLabel.gridx = 0;
 		gbc_emailLabel.gridy = 3;
 		innerDetailsPanel.add(emailLabel, gbc_emailLabel);
@@ -158,7 +183,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		emailField = new JTextField();
 		emailField.setEnabled(false);
 		GridBagConstraints gbc_emailField = new GridBagConstraints();
-		gbc_emailField.insets = new Insets(0, 0, 5, 0);
+		gbc_emailField.insets = new Insets(0, 0, 5, 5);
 		gbc_emailField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_emailField.gridx = 1;
 		gbc_emailField.gridy = 3;
@@ -168,7 +193,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel bankLabel = new JLabel("Bank Name:");
 		GridBagConstraints gbc_bankLabel = new GridBagConstraints();
 		gbc_bankLabel.anchor = GridBagConstraints.WEST;
-		gbc_bankLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_bankLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_bankLabel.gridx = 0;
 		gbc_bankLabel.gridy = 4;
 		innerDetailsPanel.add(bankLabel, gbc_bankLabel);
@@ -176,7 +201,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		bankField = new JTextField();
 		bankField.setEnabled(false);
 		GridBagConstraints gbc_bankField = new GridBagConstraints();
-		gbc_bankField.insets = new Insets(0, 0, 5, 0);
+		gbc_bankField.insets = new Insets(0, 0, 5, 5);
 		gbc_bankField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_bankField.gridx = 1;
 		gbc_bankField.gridy = 4;
@@ -186,7 +211,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel accountNumberLabel = new JLabel("Account Number:");
 		GridBagConstraints gbc_accountNumberLabel = new GridBagConstraints();
 		gbc_accountNumberLabel.anchor = GridBagConstraints.WEST;
-		gbc_accountNumberLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_accountNumberLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_accountNumberLabel.gridx = 0;
 		gbc_accountNumberLabel.gridy = 5;
 		innerDetailsPanel.add(accountNumberLabel, gbc_accountNumberLabel);
@@ -194,7 +219,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		accoundnumberField = new JTextField();
 		accoundnumberField.setEnabled(false);
 		GridBagConstraints gbc_accoundnumberField = new GridBagConstraints();
-		gbc_accoundnumberField.insets = new Insets(0, 0, 5, 0);
+		gbc_accoundnumberField.insets = new Insets(0, 0, 5, 5);
 		gbc_accoundnumberField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_accoundnumberField.gridx = 1;
 		gbc_accoundnumberField.gridy = 5;
@@ -204,7 +229,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel branchLabel = new JLabel("Branch Number:");
 		GridBagConstraints gbc_branchLabel = new GridBagConstraints();
 		gbc_branchLabel.anchor = GridBagConstraints.WEST;
-		gbc_branchLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_branchLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_branchLabel.gridx = 0;
 		gbc_branchLabel.gridy = 6;
 		innerDetailsPanel.add(branchLabel, gbc_branchLabel);
@@ -212,7 +237,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		branchField = new JTextField();
 		branchField.setEnabled(false);
 		GridBagConstraints gbc_branchField = new GridBagConstraints();
-		gbc_branchField.insets = new Insets(0, 0, 5, 0);
+		gbc_branchField.insets = new Insets(0, 0, 5, 5);
 		gbc_branchField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_branchField.gridx = 1;
 		gbc_branchField.gridy = 6;
@@ -222,7 +247,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		JLabel expensesLabel = new JLabel("Total Expenses:");
 		GridBagConstraints gbc_expensesLabel = new GridBagConstraints();
 		gbc_expensesLabel.anchor = GridBagConstraints.WEST;
-		gbc_expensesLabel.insets = new Insets(0, 0, 0, 5);
+		gbc_expensesLabel.insets = new Insets(0, 5, 0, 5);
 		gbc_expensesLabel.gridx = 0;
 		gbc_expensesLabel.gridy = 7;
 		innerDetailsPanel.add(expensesLabel, gbc_expensesLabel);
@@ -230,7 +255,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		expencesField = new JTextField();
 		expencesField.setEnabled(false);
 		GridBagConstraints gbc_expencesField = new GridBagConstraints();
-		gbc_expencesField.insets = new Insets(0, 0, 5, 0);
+		gbc_expencesField.insets = new Insets(0, 0, 5, 5);
 		gbc_expencesField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_expencesField.gridx = 1;
 		gbc_expencesField.gridy = 7;
@@ -241,18 +266,19 @@ public class EditSearchSupplierPanel extends JPanel {
 		//<----------------------------------------------------->
 		
 		saveButton = new JButton("Save");
+		saveButton.setEnabled(false);
 		GridBagConstraints gbc_saveButton = new GridBagConstraints();
 		gbc_saveButton.anchor = GridBagConstraints.WEST;
 		gbc_saveButton.insets = new Insets(0, 0, 0, 5);
 		gbc_saveButton.gridx = 0;
-		gbc_saveButton.gridy = 3;
+		gbc_saveButton.gridy = 5;
 		add(saveButton, gbc_saveButton);
 		
 		resetButton = new JButton("Reset");
 		GridBagConstraints gbc_resetButton = new GridBagConstraints();
 		gbc_resetButton.anchor = GridBagConstraints.EAST;
 		gbc_resetButton.gridx = 2;
-		gbc_resetButton.gridy = 3;
+		gbc_resetButton.gridy = 5;
 		add(resetButton, gbc_resetButton);
 	}
 	
@@ -269,7 +295,7 @@ public class EditSearchSupplierPanel extends JPanel {
 	}
 	
 	public void addSupplierNumberTextFieldKeyListener(KeyListener e) {
-		supplierNumberField.addKeyListener(e);
+		supplierIDField.addKeyListener(e);
 	}
 	
 	public void setTextToFileds(Supplier supplier) {
@@ -287,7 +313,7 @@ public class EditSearchSupplierPanel extends JPanel {
 	}
 	
 	public void resetFields() {
-		supplierNumberField.setText("");
+		supplierIDField.setText("");
 		companyField.setText("");
 		addressField.setText("");
 		phoneField.setText("");
@@ -296,11 +322,12 @@ public class EditSearchSupplierPanel extends JPanel {
 		accoundnumberField.setText("");
 		branchField.setText("");
 		expencesField.setText("");
+		saveButton.setEnabled(false);
 		setEditFieldPanelEnable(false);
 	}
 	
 	public String getSupplierNumberFromUser() {
-		return supplierNumberField.getText();
+		return supplierIDField.getText();
 	}
 	
 	public Supplier getUpdatedSupplier() {
@@ -319,5 +346,6 @@ public class EditSearchSupplierPanel extends JPanel {
 		bankField.setEnabled(enable);
 		accoundnumberField.setEnabled(enable);
 		branchField.setEnabled(enable);
+		saveButton.setEnabled(enable);
 	}
 }

@@ -34,7 +34,9 @@ public class MangeSupplier  {
      */
 
     public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
-        suppliers.add(supplier);
+        if(suppliers.add(supplier)) {
+        	throw new SupplierAlreadyExsistException();
+        }
 
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
@@ -78,6 +80,16 @@ public class MangeSupplier  {
      */
     public SupplierUpdater updater(int supplierNumber) throws SupplierNotFoundException {
         return new SupplierUpdater(findSupplier(supplierNumber), this.suppliers);
+    }
+    
+    public void UpdateSupplier(Supplier supplier) throws SupplierNotFoundException, IOException, EnumNameNotFoundException {
+    	SupplierUpdater updater = updater(supplier.getSupplierId());
+    	updater.bankAccount(supplier.getBankAccount())
+    	.supplierAddress(supplier.getSupplierAddress())
+    	.supplierEmailAddress(supplier.getSupplierEmailAddress())
+    	.supplierNumber(supplier.getSupplierNumber())
+    	.supplierPhoneNumber(supplier.getSupplierPhoneNumber())
+    	.update();
     }
 
     /**

@@ -1,8 +1,12 @@
 package com.project.hit.controller.supplierController;
 
+import java.io.IOException;
+
+import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.supplierSystem.MangeSupplier;
 import com.project.hit.model.supplierSystem.Supplier;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
+import com.project.hit.model.supplierSystem.SupplierUpdater;
 import com.project.hit.view.supplierView.SupplierView;
 
 public class SupplierPageController implements SupplierController {
@@ -23,8 +27,17 @@ public class SupplierPageController implements SupplierController {
 	}
 
 	@Override
-	public void updateSupplier(Supplier supplier) {
-		
+	public void updateSupplier(Supplier supplier) throws SupplierNotFoundException {
+		try {
+			model.UpdateSupplier(supplier);
+		} catch (IOException | EnumNameNotFoundException e) {
+			throw new SupplierNotFoundException("Cant save supplier.\nPlease contect your administrator!");
+		}
+	}
+
+	@Override
+	public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
+		model.addSupplier(supplier);
 	}
 	
 }

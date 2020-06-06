@@ -1,20 +1,28 @@
 package com.project.hit.view.supplierView;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
+
+import org.apache.commons.math3.exception.NullArgumentException;
 
 import com.project.hit.controller.supplierController.SupplierController;
+import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.managerSystem.details.User;
-import com.project.hit.model.supplierSystem.Supplier;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 
 public class SupplierPageView implements SupplierView {
 	
 	private SupplierController controller;
 	private EditSearchSupplierPanel editPanel;
+	private AddSupplierPanel addPanel;
 	private JFrame mainFrame;
 	private User user;
 	
@@ -46,15 +54,23 @@ public class SupplierPageView implements SupplierView {
 	private void createAndShowGUI() {
 		mainFrame = new JFrame("User: "+ user.getUserName());
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		editPanel = new EditSearchSupplierPanel();
-		mainFrame.add(editPanel);
-		addEditListeners(editPanel);
+        mainFrame.setPreferredSize(new DimensionUIResource(370, 450));
 		
+        addPanel = new AddSupplierPanel();
+		editPanel = new EditSearchSupplierPanel();
+		
+		addEditListeners(editPanel);
+		addAddSupplierListeners(addPanel);
+		JTabbedPane mainPanel = new JTabbedPane(JTabbedPane.TOP);
+		mainPanel.addTab("Edit Supplier", null, editPanel, null);
+		mainPanel.addTab("Add Supplier", null, addPanel, null);
+		
+		mainFrame.add(mainPanel);
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
-		mainFrame.setVisible(true);
-	}
-	
+		mainFrame.setVisible(true);		
+	}		
+
 	private void addEditListeners(EditSearchSupplierPanel edit) {
 		edit.addFindButtonListener(new ActionListener() {
 			
@@ -73,9 +89,12 @@ public class SupplierPageView implements SupplierView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.updateSupplier(edit.getUpdatedSupplier());
-				JOptionPane.showMessageDialog(new JFrame(),"Supplier updated!","Succsess",JOptionPane.INFORMATION_MESSAGE);
-
+				try {
+					controller.updateSupplier(edit.getUpdatedSupplier());
+					JOptionPane.showMessageDialog(new JFrame(),"Supplier updated!","Succsess",JOptionPane.INFORMATION_MESSAGE);
+				} catch (SupplierNotFoundException e1) {
+					setError(e1.getMessage());
+				} 
 			}
 		});
 		
@@ -84,6 +103,31 @@ public class SupplierPageView implements SupplierView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				edit.resetFields();
+			}
+		});
+	}
+	
+	private void addAddSupplierListeners(AddSupplierPanel add) {
+		add.addAddButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.addSupplier(add.getNewSupplier());
+					JOptionPane.showMessageDialog(new JFrame(),"Supplier Created!","Succsess",JOptionPane.INFORMATION_MESSAGE);
+				} catch (IOException | EnumNameNotFoundException e1) {
+					setError("There was a problem saving your supplier.\nPlease try again later.");
+				} catch (NullArgumentException e1) {
+					setError("One or more fields are empty.\nPlease fill all of the fields.");
+				}
+			}
+		});
+		
+		add.addResetButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				add.resetFields();
 			}
 		});
 	}
