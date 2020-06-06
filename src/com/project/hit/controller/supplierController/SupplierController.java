@@ -6,5 +6,7 @@ import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 public interface SupplierController {
 	
 	public Supplier findSupplier(int number) throws SupplierNotFoundException;
+	
+	public void updateSupplier(Supplier supplier);
 
 }

@@ -46,7 +46,7 @@ public class MangeSupplier  {
      * @throws SupplierNotFoundException if we can't find this supplier
      */
     public Supplier findSupplier(int supplierNum) throws SupplierNotFoundException {
-        for (Supplier i:this.suppliers){
+        for (Supplier i:this.suppliers) {
             if(i.getSupplierId()==supplierNum)
                 return i;
         }

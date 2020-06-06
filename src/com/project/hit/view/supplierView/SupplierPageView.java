@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 
 import com.project.hit.controller.supplierController.SupplierController;
 import com.project.hit.model.managerSystem.details.User;
+import com.project.hit.model.supplierSystem.Supplier;
+import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 
 public class SupplierPageView implements SupplierView {
 	
@@ -58,7 +60,12 @@ public class SupplierPageView implements SupplierView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//edit.setTextToFileds(controller.findSupplier());
+				try {
+					edit.setTextToFileds(controller.findSupplier(Integer.parseInt(edit.getSupplierNumberFromUser())));
+				}
+				catch(NumberFormatException | SupplierNotFoundException nfe) {
+					setError("Supplier not found.");
+				}
 			}
 		});
 		
@@ -66,8 +73,9 @@ public class SupplierPageView implements SupplierView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				controller.updateSupplier(edit.getUpdatedSupplier());
+				JOptionPane.showMessageDialog(new JFrame(),"Supplier updated!","Succsess",JOptionPane.ERROR_MESSAGE);
+
 			}
 		});
 		
@@ -85,6 +93,6 @@ public class SupplierPageView implements SupplierView {
 	 * @param msg - {@link String} Message to display.
 	 */
 	private void setError(String msg) {
-		JOptionPane.showMessageDialog(new JFrame(),msg+"\nPlease contect your Administrator","Error",JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(new JFrame(),msg,"Error",JOptionPane.ERROR_MESSAGE);
 	}
 }

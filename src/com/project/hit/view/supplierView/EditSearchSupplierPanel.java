@@ -6,18 +6,27 @@ import javax.swing.JTextField;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
+import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
+import com.project.hit.model.supplierSystem.BankAccount;
 import com.project.hit.model.supplierSystem.Supplier;
+import com.project.hit.model.supplierSystem.SupplierBuilder;
+
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
 
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 
 public class EditSearchSupplierPanel extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 20L;
 	private JTextField supplierNumberField;
 	private JTextField companyField;
 	private JTextField addressField;
@@ -36,6 +45,7 @@ public class EditSearchSupplierPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public EditSearchSupplierPanel() {
+		
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		setLayout(gridBagLayout);
@@ -46,8 +56,10 @@ public class EditSearchSupplierPanel extends JPanel {
 		gbc_supplierNumberLabel.gridx = 0;
 		gbc_supplierNumberLabel.gridy = 0;
 		add(supplierNumberLabel, gbc_supplierNumberLabel);
-		
+
 		supplierNumberField = new JTextField();
+		DocumentFilter onlyNumberFilter = new NumberFilter();
+		((AbstractDocument)supplierNumberField.getDocument()).setDocumentFilter(onlyNumberFilter);
 		GridBagConstraints gbc_supplierNumberField = new GridBagConstraints();
 		gbc_supplierNumberField.insets = new Insets(0, 0, 5, 5);
 		gbc_supplierNumberField.fill = GridBagConstraints.HORIZONTAL;
@@ -55,7 +67,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		gbc_supplierNumberField.gridy = 0;
 		add(supplierNumberField, gbc_supplierNumberField);
 		supplierNumberField.setColumns(10);
-		
+				
 		findButton = new JButton("Find");
 		GridBagConstraints gbc_findButton = new GridBagConstraints();
 		gbc_findButton.anchor = GridBagConstraints.EAST;
@@ -256,16 +268,22 @@ public class EditSearchSupplierPanel extends JPanel {
 		resetButton.addActionListener(al);
 	}
 	
+	public void addSupplierNumberTextFieldKeyListener(KeyListener e) {
+		supplierNumberField.addKeyListener(e);
+	}
+	
 	public void setTextToFileds(Supplier supplier) {
-		supplierNumberField.setText("");
-		companyField.setText("");
-		addressField.setText("");
-		phoneField.setText("");
-		emailField.setText("");
-		bankField.setText("");
-		accoundnumberField.setText("");
-		branchField.setText("");
-		expencesField.setText("");
+		if(supplier != null) {
+			companyField.setText(supplier.getCompanyName());
+			addressField.setText(supplier.getSupplierAddress());
+			phoneField.setText(supplier.getSupplierNumber());
+			emailField.setText(supplier.getSupplierEmailAddress());
+			bankField.setText(supplier.getBankAccount().getBankNumber());
+			accoundnumberField.setText(supplier.getBankAccount().getAccount());
+			branchField.setText(supplier.getBankAccount().getBankBranchNumber());
+			expencesField.setText(String.valueOf(supplier.getTotalExpenses()));
+			setEditFieldPanelEnable(true);
+		}
 	}
 	
 	public void resetFields() {
@@ -281,9 +299,17 @@ public class EditSearchSupplierPanel extends JPanel {
 		setEditFieldPanelEnable(false);
 	}
 	
-	public int getSupplierFromUser() {
-		//return supplierNumberField.getText().
-		return 0;
+	public String getSupplierNumberFromUser() {
+		return supplierNumberField.getText();
+	}
+	
+	public Supplier getUpdatedSupplier() {
+		return new SupplierBuilder()
+				.SupplierAddress(addressField.getText())
+				.SupplierNumber(phoneField.getText())
+				.SupplierEmailAddress(emailField.getText())
+				.BankAccount(new BankAccount(bankField.getText(), accoundnumberField.getText(), branchField.getText()))
+				.build();
 	}
 	
 	private void setEditFieldPanelEnable(Boolean enable) {

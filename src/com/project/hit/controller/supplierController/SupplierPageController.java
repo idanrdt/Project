@@ -21,5 +21,9 @@ public class SupplierPageController implements SupplierController {
 		supplier = model.findSupplier(number);
 		return supplier;
 	}
+
+	@Override
+	public void updateSupplier(Supplier supplier) {
+	}
 	
 }

@@ -1,7 +1,11 @@
 package com.project.hit.model.supplierSystem;
 
-public class BankAccount {
-    private String bankNumber;
+import java.io.Serializable;
+
+public class BankAccount implements Serializable{
+
+	private static final long serialVersionUID = 10L;
+	private String bankNumber;
     private String account;
     private String bankBranchNumber;
 
