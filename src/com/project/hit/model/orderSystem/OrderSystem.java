@@ -56,6 +56,7 @@ public class OrderSystem implements OrderSystemRepository {
                 mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price).update();
         }
 
+        order.setOrderNumber(this.orders.size()+1000);
         this.orders.add(order);
         this.orderFileManger.saveToFile(this.orders,FileNameSelect.ORDERFILE);
 
@@ -96,7 +97,8 @@ public class OrderSystem implements OrderSystemRepository {
 
             this.orderFileManger.saveToFile(this.orders, FileNameSelect.ORDERFILE);
         }
-        throw new OrderNotFoundExcption("the order number: " + order.getOrderNumber() + " does not exist");
+        else
+            throw new OrderNotFoundExcption("the order number: " + order.getOrderNumber() + " does not exist");
     }
 
     /**

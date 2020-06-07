@@ -1,6 +1,7 @@
 package com.project.hit.model.supplierSystem;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Supplier implements Serializable{
     private static final long serialVersionUID=1L;
@@ -87,5 +88,17 @@ public class Supplier implements Serializable{
         this.bankAccount = bankAccount;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Supplier supplier = (Supplier) o;
+        return Objects.equals(companyName, supplier.companyName) &&
+                Objects.equals(supplierNumber, supplier.supplierNumber);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(companyName, supplierNumber);
+    }
 }

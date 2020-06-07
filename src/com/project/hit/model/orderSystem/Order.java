@@ -11,7 +11,6 @@ import java.util.Objects;
 public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private static int orderNumberCount = 1000;
     private Supplier supplier;
     private String details;
     private double price;
@@ -23,7 +22,6 @@ public class Order implements Serializable {
         this.price = price;
         this.details = details;
         this.date = Calendar.getInstance().getTime();
-        this.orderNumber = orderNumberCount++;
     }
 
 
@@ -55,26 +53,20 @@ public class Order implements Serializable {
         this.details = details;
     }
 
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Double.compare(order.price, price) == 0 &&
-                Objects.equals(supplier, order.supplier) &&
-                Objects.equals(date, order.date);
+        return orderNumber == order.orderNumber;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(supplier, price, date);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "price=" + price +
-                ", orderNumber=" + orderNumber +
-                '}';
+        return Objects.hash(orderNumber);
     }
 }
