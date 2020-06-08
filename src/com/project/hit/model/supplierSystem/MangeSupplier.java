@@ -27,29 +27,22 @@ public class MangeSupplier  {
     }
 
     /**
-     *func to add supplier to the DB
-     * @param supplier obj of supplier
-     * @throws IOException if the file can't open
-     * @throws EnumNameNotFoundException if the enum param that not exists
+     * Adds {@link Supplier} to the DB.
+     * @param supplier the requested {@link Supplier} to add.
+     * @throws IOException if the file can't open.
+     * @throws EnumNameNotFoundException if the enum does not exists.
      */
 
     public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
-        if(suppliers.add(supplier)) {
-        	/*
-        	 * how verify supplier exist? which fields?
-        	 * if exist, need to tell the user
-        	 * throw new SupplierAlreadyExsitException();
-        	 */
-        }
-
+    	suppliers.add(supplier);
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
 
     /**
-     *func to find file of supplier by supplier number
-     * @param supplierNum id of supplier that help us to find him
-     * @return obj of supplier
-     * @throws SupplierNotFoundException if we can't find this supplier
+     * Finds the {@link Supplier} by id.
+     * @param supplierNum the id of the {@link Supplier} that related to it.
+     * @return the requested {@link Supplier}.
+     * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
      */
     public Supplier findSupplier(int supplierNum) throws SupplierNotFoundException {
         for (Supplier i:this.suppliers) {
@@ -57,15 +50,13 @@ public class MangeSupplier  {
                 return i;
         }
         throw new SupplierNotFoundException("");
-
-
     }
 
     /**
-     *func to find file of supplier by supplier name
-     * @param supplierName string of company supplier name
-     * @return obj of supplier
-     * @throws SupplierNotFoundException if we can't find this supplier
+     * Finds the {@link Supplier} by name.
+     * @param supplierName the company name of the {@link Supplier}.
+     * @return the requested {@link Supplier}.
+     * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
      */
     public Supplier findSupplier(String supplierName) throws SupplierNotFoundException {
         for (Supplier i:this.suppliers){
@@ -77,15 +68,22 @@ public class MangeSupplier  {
     }
 
     /**
-     *func to enter the updater and make changes
-     * @param supplierNumber id of supplier that help us to find him
-     * @return obj of supplier update that we used in builder
-     * @throws SupplierNotFoundException if we can't find this supplier
+     * Gets the relevant {@link SupplierUpdater} to update a {@link Supplier}.
+     * @param supplierNumber the  {@link Supplier} id that's related to it.
+     * @return the {@link SupplierUpdater} for updating.
+     * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
      */
     public SupplierUpdater updater(int supplierNumber) throws SupplierNotFoundException {
         return new SupplierUpdater(findSupplier(supplierNumber), this.suppliers);
     }
     
+    /**
+     * Update the requested {@link Supplier}.
+     * @param supplier the {@link Supplier} to update.
+     * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
+     * @throws IOException if the file can't open.
+     * @throws EnumNameNotFoundException if the enum does not exists.
+     */
     public void UpdateSupplier(Supplier supplier) throws SupplierNotFoundException, IOException, EnumNameNotFoundException {
     	SupplierUpdater updater = updater(supplier.getSupplierId());
     	updater.bankAccount(supplier.getBankAccount())
@@ -97,11 +95,11 @@ public class MangeSupplier  {
     }
 
     /**
-     *func to remove file of supplier from the DB
-     * @param supplier obj of supplier to remove
-     * @return true if we succeed remove this supplier
-     * @throws IOException if the file can't open
-     * @throws EnumNameNotFoundException if the enum param that not exists
+     * Removes the requested {@link Supplier} from the Database.
+     * @param the requested {@link Supplier} to remove.
+     * @return true if the {@link Supplier} deleted.
+     * @throws IOException if the file can't open.
+     * @throws EnumNameNotFoundException if the enum param that not exists.
      */
     public boolean removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
         if (this.suppliers.contains(supplier)) {
@@ -112,7 +110,11 @@ public class MangeSupplier  {
         }
         return false;
     }
-
+    
+    /**
+     * Gets the requested {@link Set} of {@link Supplier}.
+     * @return {@link Set} that contain multiple {@link Supplier}.
+     */
     public Set<Supplier> getSuppliers() {
         return suppliers;
     }

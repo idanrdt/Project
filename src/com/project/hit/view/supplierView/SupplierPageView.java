@@ -1,6 +1,5 @@
 package com.project.hit.view.supplierView;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -9,8 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.basic.BasicTabbedPaneUI.TabbedPaneLayout;
-
 import org.apache.commons.math3.exception.NullArgumentException;
 
 import com.project.hit.controller.supplierController.SupplierController;
@@ -27,6 +24,10 @@ public class SupplierPageView implements SupplierView {
 	private JFrame mainFrame;
 	private User user;
 	
+	/**
+	 * Constructor of the view.
+	 * @param user - the {@link User} that logged in.
+	 */
 	public SupplierPageView(User user) {
 		this.user = user;
 	}
@@ -74,7 +75,12 @@ public class SupplierPageView implements SupplierView {
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);		
-	}		
+	}
+	
+	/**
+	 * Adds {@link ActionListeners} to the {@link EditSearchSupplierPanel}.
+	 * @param edit - the panel.
+	 */
 	private void addEditListeners(EditSearchSupplierPanel edit) {
 		edit.addFindButtonListener(new ActionListener() {
 			
@@ -111,7 +117,10 @@ public class SupplierPageView implements SupplierView {
 		});
 	}
 	
-
+	/**
+	 * Adds {@link ActionListener} to the {@link AddSupplierPanel}.
+	 * @param add - the panel.
+	 */
 	private void addAddSupplierListeners(AddSupplierPanel add) {
 		add.addAddButtonListener(new ActionListener() {
 			
@@ -137,6 +146,10 @@ public class SupplierPageView implements SupplierView {
 		});
 	}
 	
+	/**
+	 * Adds {@link ActionListener} to the {@link DeleteSupplierPanel}.
+	 * @param delete - the panel.
+	 */
 	private void addDeleteSupplierListeners(DeleteSupplierPanel delete) {
 		delete.addRemoveActionListener(new ActionListener() {
 			
@@ -160,6 +173,7 @@ public class SupplierPageView implements SupplierView {
 			}
 		});
 	}
+	
 	/**
 	 * Creates and display an Error message to the user.
 	 * @param msg - {@link String} Message to display.

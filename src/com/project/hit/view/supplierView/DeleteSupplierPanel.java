@@ -18,10 +18,7 @@ import javax.swing.JButton;
 
 public class DeleteSupplierPanel extends JPanel {
 		 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 30L;
+	private static final long serialVersionUID = 101L;
 	private JButton removeButton;
 	private JTable table;
 	private Set<Supplier> set;
@@ -32,7 +29,9 @@ public class DeleteSupplierPanel extends JPanel {
 	private String[] columnNames = {"Company Name",
             						"Supplier Number",
 									"Supplier ID"};
-	
+	/**
+	 * Create the panel.
+	 */
     public DeleteSupplierPanel(Set<Supplier> set) {
  
     	setValues(set);
@@ -50,10 +49,8 @@ public class DeleteSupplierPanel extends JPanel {
         table.setDefaultEditor(Object.class, null);
         setLayout(new BorderLayout(0, 0));
  
-        //Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
  
-        //Add the scroll pane to this panel.
         add(scrollPane);
         
         JPanel panel = new JPanel();
@@ -67,14 +64,27 @@ public class DeleteSupplierPanel extends JPanel {
         panel.add(refreshButton, BorderLayout.EAST);
     }
     
+    /**
+	 * Adds new {@link ActionListener} to the remove button.
+	 * @param al- the {@link ActionListener}.
+	 */
     public void addRemoveActionListener(ActionListener al) {
     	removeButton.addActionListener(al);
     }
     
+    /**
+	 * Adds new {@link ActionListener} to the refresh button.
+	 * @param al- the {@link ActionListener}.
+	 */
     public void addRefreshActionListener(ActionListener al) {
     	refreshButton.addActionListener(al);
     }
     
+    /**
+     * Remove the selected row from the {@link JTable}
+     * @return the {@link Supplier} to remove.
+     * @throws SupplierNotFoundException if the {@link Supplier} not found.
+     */
     public Supplier removeSupplier() throws SupplierNotFoundException {
     	for(Supplier supplier : set) {
     		if(String.valueOf(supplier.getSupplierId()).equals(supData[table.getSelectedRow()][2])) {
@@ -84,6 +94,10 @@ public class DeleteSupplierPanel extends JPanel {
     	throw new SupplierNotFoundException("Delete not possiable");
     }
     
+    /**
+     * Reset the {@link JTable} to the received {@link Set}.
+     * @param set - the list of {@link Supplier}.
+     */
     public void setValues(Set<Supplier> set) {
     	this.set = set;
     	supData = new String[set.size()][3];
@@ -102,6 +116,9 @@ public class DeleteSupplierPanel extends JPanel {
         }
     }
     
+    /**
+     * Sets the cell data to the center.
+     */
     private void setTableCellToMiddle() {
         for(int i = 0;i<columnNames.length;i++) {
         	table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);

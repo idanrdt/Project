@@ -12,11 +12,9 @@ import com.project.hit.view.supplierView.SupplierView;
 
 public class SupplierPageController implements SupplierController {
 	
-	private SupplierView view;
 	private MangeSupplier model;
 	
-	public SupplierPageController(SupplierView view, MangeSupplier model ) {
-		this.view = view;
+	public SupplierPageController(MangeSupplier model) {
 		this.model = model;
 	}
 	

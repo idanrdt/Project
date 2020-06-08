@@ -105,6 +105,11 @@ public class ViewSwitcher {
 		view.start();
 	}
 	
+	/**
+	 * Set and starts the {@link SupplierPageView}.
+	 * @param user - the {@link User} that logged in.
+	 * @throws NavigationFailedException - if the navigation failed.
+	 */
 	private static void startSupplier(User user) throws NavigationFailedException {
 		
 		SupplierView view = new SupplierPageView(user);
@@ -119,7 +124,7 @@ public class ViewSwitcher {
 			throw new NavigationFailedException("File missing or corrupted");
 		}
 		
-		SupplierController controller = new SupplierPageController(view, model);
+		SupplierController controller = new SupplierPageController(model);
 		
 		view.setController(controller);
 		

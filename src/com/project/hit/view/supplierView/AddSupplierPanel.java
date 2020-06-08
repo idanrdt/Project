@@ -22,7 +22,7 @@ import com.project.hit.model.supplierSystem.SupplierBuilder;
 
 public class AddSupplierPanel extends JPanel {
 	
-	private static final long serialVersionUID = 30L;
+	private static final long serialVersionUID = 100L;
 	private JButton addButton;
 	private JButton resetButton;
 	private JLabel welcomeTitle;
@@ -45,6 +45,7 @@ public class AddSupplierPanel extends JPanel {
 	private JTextField accountNumberField;
 	private JLabel branchLabel;
 	private JTextField branchField;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -231,8 +232,9 @@ public class AddSupplierPanel extends JPanel {
 		gbc_branchField.gridy = 7;
 		panel.add(branchField, gbc_branchField);
 		
-		
+		//Upper Panel
 		//<----------------------------------------------------->
+		//Lower Panel
 		
 		addButton = new JButton("Add");
 		GridBagConstraints gbc_addButton = new GridBagConstraints();
@@ -259,14 +261,25 @@ public class AddSupplierPanel extends JPanel {
 		add(supplierNumber, gbc_supplierNumber);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the add button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addAddButtonListener(ActionListener al) {
 		addButton.addActionListener(al);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the reset button.
+	 * @param al- the {@link ActionListener}.
+	 */
 	public void addResetButtonListener(ActionListener al) {
 		resetButton.addActionListener(al);
 	}
 	
+	/**
+	 * Reset all of the fields to empty.
+	 */
 	public void resetFields() {
 		companyField.setText("");
 		supplierNumberField.setText("");
@@ -279,6 +292,11 @@ public class AddSupplierPanel extends JPanel {
 		supplierNumber.setVisible(false);
 	}
 	
+	/**
+	 * Create new {@link Supplier} from the user details.
+	 * @return a new {@link Supplier}.
+	 * @throws NullArgumentException if one of the fields empty.
+	 */
 	public Supplier getNewSupplier() throws NullArgumentException {
 		if(companyField.getText().isEmpty() ||	addressField.getText().isEmpty() ||
 				phoneField.getText().isEmpty() || emailField.getText().isEmpty() ||

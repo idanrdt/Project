@@ -25,7 +25,7 @@ import javax.swing.SwingConstants;
 
 public class EditSearchSupplierPanel extends JPanel {
 	
-	private static final long serialVersionUID = 20L;
+	private static final long serialVersionUID = 103L;
 	private JTextField supplierIDField;
 	private JTextField companyField;
 	private JTextField addressField;
@@ -101,7 +101,9 @@ public class EditSearchSupplierPanel extends JPanel {
 		gbc_findButton.gridy = 2;
 		add(findButton, gbc_findButton);
 		
+		//Upper Panel
 		//<----------------------------------------------------->
+		//Middle Panel
 		
 		JPanel innerDetailsPanel = new JPanel();
 		innerDetailsPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -262,8 +264,9 @@ public class EditSearchSupplierPanel extends JPanel {
 		innerDetailsPanel.add(expencesField, gbc_expencesField);
 		expencesField.setColumns(10);
 		
-		
+		//Middle Panel
 		//<----------------------------------------------------->
+		//Lower Panel
 		
 		saveButton = new JButton("Save");
 		saveButton.setEnabled(false);
@@ -282,22 +285,34 @@ public class EditSearchSupplierPanel extends JPanel {
 		add(resetButton, gbc_resetButton);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the find button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addFindButtonListener(ActionListener al) {
 		findButton.addActionListener(al);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the save button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addSaveButtonListener(ActionListener al) {
 		saveButton.addActionListener(al);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the reset button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addResetButtonListener(ActionListener al) {
 		resetButton.addActionListener(al);
 	}
 	
-	public void addSupplierNumberTextFieldKeyListener(KeyListener e) {
-		supplierIDField.addKeyListener(e);
-	}
-	
+	/**
+	 * Sets all the text fields to the {@link Supplier} values.
+	 * @param supplier - the {@link Supplier} that contain the values.
+	 */
 	public void setTextToFileds(Supplier supplier) {
 		if(supplier != null) {
 			companyField.setText(supplier.getCompanyName());
@@ -312,6 +327,9 @@ public class EditSearchSupplierPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Reset all the text fields to empty.
+	 */
 	public void resetFields() {
 		supplierIDField.setText("");
 		companyField.setText("");
@@ -326,10 +344,18 @@ public class EditSearchSupplierPanel extends JPanel {
 		setEditFieldPanelEnable(false);
 	}
 	
+	/**
+	 * Gets the {@link Supplier} id from the user.
+	 * @return the {@link Supplier} id recived from the user.
+	 */
 	public String getSupplierNumberFromUser() {
 		return supplierIDField.getText();
 	}
 	
+	/**
+	 * Create new {@link Supplier} from the user values.
+	 * @return a new {@link Supplier} object.
+	 */
 	public Supplier getUpdatedSupplier() {
 		return new SupplierBuilder()
 				.SupplierAddress(addressField.getText())
@@ -339,6 +365,10 @@ public class EditSearchSupplierPanel extends JPanel {
 				.build();
 	}
 	
+	/**
+	 * Enable or disable the text fields.
+	 * @param enable - the parameter to enable or disable.
+	 */
 	private void setEditFieldPanelEnable(Boolean enable) {
 		addressField.setEnabled(enable);
 		phoneField.setEnabled(enable);
