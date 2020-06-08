@@ -269,6 +269,7 @@ public class AddSupplierPanel extends JPanel {
 	
 	public void resetFields() {
 		companyField.setText("");
+		supplierNumberField.setText("");
 		addressField.setText("");
 		phoneField.setText("");
 		emailField.setText("");
@@ -292,6 +293,7 @@ public class AddSupplierPanel extends JPanel {
 				.SupplierEmailAddress(emailField.getText())
 				.BankAccount(new BankAccount(bankField.getText(), accountNumberField.getText(), branchField.getText()))
 				.build();
+		resetFields();
 		supplierNumber.setText("Supplier ID: "+supplier.getSupplierId());
 		supplierNumber.setVisible(true);
 		return supplier;

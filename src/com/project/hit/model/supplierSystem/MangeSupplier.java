@@ -35,7 +35,11 @@ public class MangeSupplier  {
 
     public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
         if(suppliers.add(supplier)) {
-        	throw new SupplierAlreadyExsistException();
+        	/*
+        	 * how verify supplier exist? which fields?
+        	 * if exist, need to tell the user
+        	 * throw new SupplierAlreadyExsitException();
+        	 */
         }
 
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);

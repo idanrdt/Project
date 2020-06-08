@@ -1,6 +1,7 @@
 package com.project.hit.controller.supplierController;
 
 import java.io.IOException;
+import java.util.Set;
 
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.supplierSystem.Supplier;
@@ -13,5 +14,8 @@ public interface SupplierController {
 	public void updateSupplier(Supplier supplier) throws SupplierNotFoundException;
 	
 	public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException;
-
+	
+	public void removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException;
+	
+	public Set<Supplier> getSupplierSet();
 }

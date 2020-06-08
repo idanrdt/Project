@@ -23,6 +23,7 @@ public class SupplierPageView implements SupplierView {
 	private SupplierController controller;
 	private EditSearchSupplierPanel editPanel;
 	private AddSupplierPanel addPanel;
+	private DeleteSupplierPanel deletePanel;
 	private JFrame mainFrame;
 	private User user;
 	
@@ -58,19 +59,22 @@ public class SupplierPageView implements SupplierView {
 		
         addPanel = new AddSupplierPanel();
 		editPanel = new EditSearchSupplierPanel();
+		deletePanel = new DeleteSupplierPanel(controller.getSupplierSet());
 		
 		addEditListeners(editPanel);
 		addAddSupplierListeners(addPanel);
+		addDeleteSupplierListeners(deletePanel);
+		
 		JTabbedPane mainPanel = new JTabbedPane(JTabbedPane.TOP);
 		mainPanel.addTab("Edit Supplier", null, editPanel, null);
 		mainPanel.addTab("Add Supplier", null, addPanel, null);
+		mainPanel.addTab("Delete Supplier", null, deletePanel, null);
 		
 		mainFrame.add(mainPanel);
 		mainFrame.pack();
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);		
 	}		
-
 	private void addEditListeners(EditSearchSupplierPanel edit) {
 		edit.addFindButtonListener(new ActionListener() {
 			
@@ -107,6 +111,7 @@ public class SupplierPageView implements SupplierView {
 		});
 	}
 	
+
 	private void addAddSupplierListeners(AddSupplierPanel add) {
 		add.addAddButtonListener(new ActionListener() {
 			
@@ -132,6 +137,29 @@ public class SupplierPageView implements SupplierView {
 		});
 	}
 	
+	private void addDeleteSupplierListeners(DeleteSupplierPanel delete) {
+		delete.addRemoveActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controller.removeSupplier(delete.removeSupplier());
+					delete.setValues(controller.getSupplierSet());
+					JOptionPane.showMessageDialog(new JFrame(),"Supplier Deleted!","Succsess",JOptionPane.INFORMATION_MESSAGE);
+				} catch (IOException | EnumNameNotFoundException | SupplierNotFoundException e1) {
+					setError(e1.getMessage());
+				}
+			}
+		});
+		
+		delete.addRefreshActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				delete.setValues(controller.getSupplierSet());
+			}
+		});
+	}
 	/**
 	 * Creates and display an Error message to the user.
 	 * @param msg - {@link String} Message to display.

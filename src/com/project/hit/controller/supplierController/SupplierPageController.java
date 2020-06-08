@@ -1,6 +1,7 @@
 package com.project.hit.controller.supplierController;
 
 import java.io.IOException;
+import java.util.Set;
 
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.supplierSystem.MangeSupplier;
@@ -39,5 +40,14 @@ public class SupplierPageController implements SupplierController {
 	public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
 		model.addSupplier(supplier);
 	}
-	
+
+	@Override
+	public void removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
+		model.removeSupplier(supplier);
+	}
+
+	@Override
+	public Set<Supplier> getSupplierSet() {
+		return model.getSuppliers();
+	}
 }
