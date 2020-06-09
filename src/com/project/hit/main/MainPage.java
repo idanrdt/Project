@@ -9,6 +9,7 @@ import com.project.hit.model.supplierSystem.SupplierExistsException;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainPage {
 
@@ -19,19 +20,21 @@ public class MainPage {
 
 
 		Supplier supplier = Supplier.builder().CompanyName("test").SupplierNumber("test").build();
-		Order order = new Order(supplier,500,"new order");
+		Order order = new Order(supplier,500,"test");
 
 		try {
 			MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
 			OrderSystem orderSystem = OrderSystem.getOrderSystem();
+
+			mangeSupplier.addSupplier(supplier);
 			orderSystem.createOrder(order);
-			orderSystem.deleteOrder(order);
-			mangeSupplier.removeSupplier(supplier);
 		} catch (EnumNameNotFoundException | IOException | ClassNotFoundException | SupplierNotFoundException  e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+
 
 		/*try {
 			ViewSwitcher.changeView(ViewSelect.LOGIN_VIEW);

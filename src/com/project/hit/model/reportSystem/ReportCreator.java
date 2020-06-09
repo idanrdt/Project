@@ -7,6 +7,7 @@ import com.project.hit.model.orderSystem.Order;
 import com.project.hit.model.orderSystem.OrderSystem;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 public class ReportCreator extends Report {
@@ -64,24 +65,21 @@ public class ReportCreator extends Report {
      * @throws ClassNotFoundException
      */
     public Set<Order> createReport() throws ReportEmptyExcption, EnumNameNotFoundException, IOException, ClassNotFoundException {
-        Set<Order> orders = OrderSystem.getOrderSystem().getOrders();
-
+        Set<Order> orders = new HashSet<>();
+        OrderSystem orderSystem = OrderSystem.getOrderSystem();
         if(this.getSupplierId() == 0){
-            this.report.addAll(orders);
+            orders.addAll(OrderSystem.getOrderSystem().getOrders());
         } else{
-            for (Order i : orders){
+            for (Order i : orderSystem.getOrders()){
                 if(i.getSupplier().getSupplierId() == this.supplierId){
-                    this.report.add(i);
+                    orders.add(i);
                 }
             }
         }
 
-        for (Order i : this.report){
-            if(i.getDate().getTime() > this.endDate.getTime())
-                this.report.remove(i);
-            if(i.getDate().getTime() < this.startDate.getTime()){
-                this.report.remove(i);
-            }
+        for (Order i : orders){
+            if(i.getDate().compareTo(this.startDate) >= 0 && i.getDate().compareTo(this.endDate) <= 0)
+                this.report.add(i);
         }
 
         if(this.report.isEmpty())

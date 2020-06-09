@@ -56,7 +56,6 @@ public class OrderSystem implements OrderSystemRepository {
                 mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price).update();
         }
 
-        order.setOrderNumber(this.orders.size()+1000);
         this.orders.add(order);
         this.orderFileManger.saveToFile(this.orders,FileNameSelect.ORDERFILE);
 
@@ -92,7 +91,7 @@ public class OrderSystem implements OrderSystemRepository {
             MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
             for (Supplier supplier : mangeSupplier.getSuppliers()){
                 if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
-                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(-price).update();
+                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()-price).update();
             }
 
             this.orderFileManger.saveToFile(this.orders, FileNameSelect.ORDERFILE);
@@ -118,17 +117,17 @@ public class OrderSystem implements OrderSystemRepository {
 
     /**
      * find order function by order name
-     * @param orderName
+     * @param supplierName
      * @return order object if exists
      * @throws OrderNotFoundExcption if the order does not exist
      */
     @Override
-    public Order findOrder(String orderName) throws OrderNotFoundExcption {
+    public Order findOrder(String supplierName) throws OrderNotFoundExcption {
         for (Order i: this.orders) {
-            if (i.getSupplier().getCompanyName().equals(orderName))
+            if (i.getSupplier().getCompanyName().equals(supplierName))
                 return i;
         }
-        throw new OrderNotFoundExcption("the order: " + orderName + " does not exist");
+        throw new OrderNotFoundExcption("the order: " + supplierName + " does not exist");
     }
 
     /**
