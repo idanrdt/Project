@@ -10,7 +10,6 @@ public class MainPage {
 	 * Launch the application - main function.
 	 */
 	public static void main(String[] args) {
-		
 		try {
 			ViewSwitcher.changeView(ViewSelect.LOGIN_VIEW);
 		}

@@ -1,17 +1,25 @@
 package com.project.hit.viewSwitcher;
 
+import java.io.IOException;
+
 import com.project.hit.controller.loginController.LoginController;
 import com.project.hit.controller.loginController.LoginPageController;
 import com.project.hit.controller.mainController.MainController;
 import com.project.hit.controller.mainController.MainPageController;
 import com.project.hit.controller.mainController.NavigationFailedException;
+import com.project.hit.controller.supplierController.SupplierController;
+import com.project.hit.controller.supplierController.SupplierPageController;
+import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.authenticationSystem.AuthenticationSystem;
 import com.project.hit.model.managerSystem.details.User;
+import com.project.hit.model.supplierSystem.MangeSupplier;
 import com.project.hit.view.loginPage.LoginPageView;
 import com.project.hit.view.loginPage.LoginView;
 import com.project.hit.view.*;
 import com.project.hit.view.mainView.MainPageView;
 import com.project.hit.view.mainView.MainView;
+import com.project.hit.view.supplierView.SupplierPageView;
+import com.project.hit.view.supplierView.SupplierView;
 
 
 public class ViewSwitcher {
@@ -55,8 +63,10 @@ public class ViewSwitcher {
 		case MAIN_VIEW:
 			startMain(user);
 			break;
-		case ORDER_VIEW:
 		case SUPPLIER_VIEW:
+			startSupplier(user);
+			break;
+		case ORDER_VIEW:
 		case REPORT_VIEW:
 		case SETTINGS_VIEW:
 		default:
@@ -89,6 +99,32 @@ public class ViewSwitcher {
 		MainView view = new MainPageView(user);
 		
 		MainController controller = new MainPageController(view);
+		
+		view.setController(controller);
+		
+		view.start();
+	}
+	
+	/**
+	 * Set and starts the {@link SupplierPageView}.
+	 * @param user - the {@link User} that logged in.
+	 * @throws NavigationFailedException - if the navigation failed.
+	 */
+	private static void startSupplier(User user) throws NavigationFailedException {
+		
+		SupplierView view = new SupplierPageView(user);
+		MangeSupplier model = null;
+		
+		try {
+			model = MangeSupplier.getMangeSupplierSinglton();
+		} catch (EnumNameNotFoundException | IOException e) {
+			throw new NavigationFailedException("Faild to navigate");
+			//TODO: add log.
+		} catch (ClassNotFoundException e) {
+			throw new NavigationFailedException("File missing or corrupted");
+		}
+		
+		SupplierController controller = new SupplierPageController(model);
 		
 		view.setController(controller);
 		
