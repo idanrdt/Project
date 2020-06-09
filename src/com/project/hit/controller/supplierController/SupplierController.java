@@ -18,11 +18,11 @@ public interface SupplierController {
 	public Supplier findSupplier(int number) throws SupplierNotFoundException;
 	
 	/**
-	 * Updates the {@link Supplier} values.
-	 * @param supplier - the requested {@link Supplier} to update.
-	 * @throws SupplierNotFoundException - if the requested {@link Supplier} not found.
+	 * Update the requested {@link Supplier}.
+	 * @param updateArray - {@link String} array that represent the updated fields.
+	 * @throws SupplierNotFoundException - if the requested {@link Supplier} not found. 
 	 */
-	public void updateSupplier(Supplier supplier) throws SupplierNotFoundException;
+	public void updateSupplier(String[] updateArray) throws SupplierNotFoundException;
 	
 	/**
 	 * Adds new {@link Supplier} to the Database.

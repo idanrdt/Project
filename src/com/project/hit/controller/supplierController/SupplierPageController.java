@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import com.project.hit.fileManager.EnumNameNotFoundException;
+import com.project.hit.model.supplierSystem.BankAccount;
 import com.project.hit.model.supplierSystem.MangeSupplier;
 import com.project.hit.model.supplierSystem.Supplier;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
@@ -26,11 +27,16 @@ public class SupplierPageController implements SupplierController {
 	}
 
 	@Override
-	public void updateSupplier(Supplier supplier) throws SupplierNotFoundException {
+	public void updateSupplier(String[] updateArray) throws SupplierNotFoundException {
 		try {
-			model.UpdateSupplier(supplier);
-		} catch (IOException | EnumNameNotFoundException e) {
-			throw new SupplierNotFoundException("Cant save supplier.\nPlease contect your administrator!");
+			model.updater(Integer.parseInt(updateArray[0]))
+			.supplierAddress(updateArray[1])
+			.supplierPhoneNumber(updateArray[2])
+			.supplierEmailAddress(updateArray[3])
+			.bankAccount(new BankAccount(updateArray[4], updateArray[5], updateArray[6]))
+			.update();
+		} catch (IOException | EnumNameNotFoundException | NumberFormatException e) {
+			throw new SupplierNotFoundException("Can't save supplier.\nPlease contect your administrator!");
 		}
 	}
 

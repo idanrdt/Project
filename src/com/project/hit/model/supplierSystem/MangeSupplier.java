@@ -18,7 +18,14 @@ public class MangeSupplier  {
         suppliers = fileManger.loadFromFile(FileNameSelect.SUPPLIERFILE);
 
     }
-
+    
+    /**
+     * Gets an instance of {@link MangeSupplier}.
+     * @return {@link MangeSupplier} instance.
+     * @throws EnumNameNotFoundException if the enum parameter does not exists.
+     * @throws IOException if the file can't open.
+     * @throws ClassNotFoundException if  an object does not exist
+     */
     public static MangeSupplier getMangeSupplierSinglton() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
         if (mangeSupplierSinglton == null){
             mangeSupplierSinglton = new MangeSupplier();
@@ -32,7 +39,6 @@ public class MangeSupplier  {
      * @throws IOException if the file can't open.
      * @throws EnumNameNotFoundException if the enum does not exists.
      */
-
     public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
     	suppliers.add(supplier);
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
@@ -75,23 +81,6 @@ public class MangeSupplier  {
      */
     public SupplierUpdater updater(int supplierNumber) throws SupplierNotFoundException {
         return new SupplierUpdater(findSupplier(supplierNumber), this.suppliers);
-    }
-    
-    /**
-     * Update the requested {@link Supplier}.
-     * @param supplier the {@link Supplier} to update.
-     * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
-     * @throws IOException if the file can't open.
-     * @throws EnumNameNotFoundException if the enum does not exists.
-     */
-    public void UpdateSupplier(Supplier supplier) throws SupplierNotFoundException, IOException, EnumNameNotFoundException {
-    	SupplierUpdater updater = updater(supplier.getSupplierId());
-    	updater.bankAccount(supplier.getBankAccount())
-    	.supplierAddress(supplier.getSupplierAddress())
-    	.supplierEmailAddress(supplier.getSupplierEmailAddress())
-    	.supplierNumber(supplier.getSupplierNumber())
-    	.supplierPhoneNumber(supplier.getSupplierPhoneNumber())
-    	.update();
     }
 
     /**
