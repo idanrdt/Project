@@ -4,6 +4,7 @@ import com.project.hit.controller.mainController.NavigationFailedException;
 import com.project.hit.viewSwitcher.ViewSelect;
 import com.project.hit.viewSwitcher.ViewSwitcher;
 
+
 public class MainPage {
 
 	/**

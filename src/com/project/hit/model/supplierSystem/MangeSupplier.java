@@ -14,7 +14,7 @@ public class MangeSupplier  {
     static MangeSupplier mangeSupplierSinglton;
 
     private MangeSupplier() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
-        fileManger = new FileManger<Supplier>();
+        fileManger = new FileManger<>();
         suppliers = fileManger.loadFromFile(FileNameSelect.SUPPLIERFILE);
 
     }
@@ -32,9 +32,11 @@ public class MangeSupplier  {
      * @throws IOException if the file can't open.
      * @throws EnumNameNotFoundException if the enum does not exists.
      */
+    public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierExistsException {
 
-    public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
-    	suppliers.add(supplier);
+        if(this.suppliers.contains(supplier))
+            throw new SupplierExistsException("The supplier number: " + supplier.getSupplierNumber() + "is exists on the system");
+        suppliers.add(supplier);
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
 
@@ -45,8 +47,8 @@ public class MangeSupplier  {
      * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
      */
     public Supplier findSupplier(int supplierNum) throws SupplierNotFoundException {
-        for (Supplier i:this.suppliers) {
-            if(i.getSupplierId()==supplierNum)
+        for (Supplier i : this.suppliers){
+            if(i.getSupplierId() == supplierNum)
                 return i;
         }
         throw new SupplierNotFoundException("");
@@ -101,14 +103,13 @@ public class MangeSupplier  {
      * @throws IOException if the file can't open.
      * @throws EnumNameNotFoundException if the enum param that not exists.
      */
-    public boolean removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
-        if (this.suppliers.contains(supplier)) {
-            this.suppliers.remove(supplier);
+    public void removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierNotFoundException {
+        if (suppliers.contains(supplier)) {
+            suppliers.remove(supplier);
             fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
-
-            return true;
         }
-        return false;
+        else
+            throw new SupplierNotFoundException("The supplier number: " + supplier.getSupplierNumber() + "is not exists on the system");
     }
     
     /**
