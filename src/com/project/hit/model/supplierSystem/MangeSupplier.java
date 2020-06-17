@@ -14,18 +14,11 @@ public class MangeSupplier  {
     static MangeSupplier mangeSupplierSinglton;
 
     private MangeSupplier() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
-        fileManger = new FileManger<Supplier>();
+        fileManger = new FileManger<>();
         suppliers = fileManger.loadFromFile(FileNameSelect.SUPPLIERFILE);
 
     }
-    
-    /**
-     * Gets an instance of {@link MangeSupplier}.
-     * @return {@link MangeSupplier} instance.
-     * @throws EnumNameNotFoundException if the enum parameter does not exists.
-     * @throws IOException if the file can't open.
-     * @throws ClassNotFoundException if  an object does not exist
-     */
+
     public static MangeSupplier getMangeSupplierSinglton() throws EnumNameNotFoundException, IOException, ClassNotFoundException {
         if (mangeSupplierSinglton == null){
             mangeSupplierSinglton = new MangeSupplier();
@@ -39,8 +32,11 @@ public class MangeSupplier  {
      * @throws IOException if the file can't open.
      * @throws EnumNameNotFoundException if the enum does not exists.
      */
-    public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
-    	suppliers.add(supplier);
+    public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierExistsException {
+
+        if(this.suppliers.contains(supplier))
+            throw new SupplierExistsException("The supplier number: " + supplier.getSupplierNumber() + "is exists on the system");
+        suppliers.add(supplier);
         fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
     }
 
@@ -51,8 +47,8 @@ public class MangeSupplier  {
      * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
      */
     public Supplier findSupplier(int supplierNum) throws SupplierNotFoundException {
-        for (Supplier i:this.suppliers) {
-            if(i.getSupplierId()==supplierNum)
+        for (Supplier i : this.suppliers){
+            if(i.getSupplierId() == supplierNum)
                 return i;
         }
         throw new SupplierNotFoundException("");
@@ -82,6 +78,23 @@ public class MangeSupplier  {
     public SupplierUpdater updater(int supplierNumber) throws SupplierNotFoundException {
         return new SupplierUpdater(findSupplier(supplierNumber), this.suppliers);
     }
+    
+    /**
+     * Update the requested {@link Supplier}.
+     * @param supplier the {@link Supplier} to update.
+     * @throws SupplierNotFoundException if the {@link Supplier} can't be found.
+     * @throws IOException if the file can't open.
+     * @throws EnumNameNotFoundException if the enum does not exists.
+     */
+    public void UpdateSupplier(Supplier supplier) throws SupplierNotFoundException, IOException, EnumNameNotFoundException {
+    	SupplierUpdater updater = updater(supplier.getSupplierId());
+    	updater.bankAccount(supplier.getBankAccount())
+    	.supplierAddress(supplier.getSupplierAddress())
+    	.supplierEmailAddress(supplier.getSupplierEmailAddress())
+    	.supplierNumber(supplier.getSupplierNumber())
+    	.supplierPhoneNumber(supplier.getSupplierPhoneNumber())
+    	.update();
+    }
 
     /**
      * Removes the requested {@link Supplier} from the Database.
@@ -90,14 +103,13 @@ public class MangeSupplier  {
      * @throws IOException if the file can't open.
      * @throws EnumNameNotFoundException if the enum param that not exists.
      */
-    public boolean removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
-        if (this.suppliers.contains(supplier)) {
-            this.suppliers.remove(supplier);
+    public void removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierNotFoundException {
+        if (suppliers.contains(supplier)) {
+            suppliers.remove(supplier);
             fileManger.saveToFile(suppliers,FileNameSelect.SUPPLIERFILE);
-
-            return true;
         }
-        return false;
+        else
+            throw new SupplierNotFoundException("The supplier number: " + supplier.getSupplierNumber() + "is not exists on the system");
     }
     
     /**

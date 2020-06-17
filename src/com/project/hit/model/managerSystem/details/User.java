@@ -2,6 +2,7 @@ package com.project.hit.model.managerSystem.details;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class User extends Person implements Serializable {
 	
@@ -116,5 +117,23 @@ public class User extends Person implements Serializable {
 	public String getPassword()
 	{
 		return this.password;
-	}	
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		User user = (User) o;
+		return Objects.equals(userName, user.userName) &&
+				Objects.equals(password, user.password) &&
+				Objects.equals(isManager, user.isManager) &&
+				Objects.equals(reportSystem, user.reportSystem) &&
+				Objects.equals(manageSupplierAccsess, user.manageSupplierAccsess) &&
+				Objects.equals(orderSystemAccsess, user.orderSystemAccsess);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userName, password, isManager, reportSystem, manageSupplierAccsess, orderSystemAccsess);
+	}
 }

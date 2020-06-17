@@ -44,8 +44,9 @@ public class ManagerProperties implements ManagerPropertiesRepository {
     @Override
     public User findUser(String userId) throws NoUserExistsException {
 
+
         for (User user : this.users){
-            if(user.getId().equals(userId))
+            if(user.getId() != null && user.getId().equals(userId))
                 return user;
         }
         throw new NoUserExistsException("User with ID: " + userId+ "does not exist in the system");

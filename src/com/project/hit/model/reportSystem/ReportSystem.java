@@ -35,7 +35,12 @@ public class ReportSystem extends Report implements ReportSystemRepository {
      */
     @Override
     public ReportCreator genarateReport() {
+        this.report = new HashSet<>();
         return new ReportCreator(this.report);
+    }
+
+    public Set<Order> getReport() {
+        return this.report;
     }
 
     /**
