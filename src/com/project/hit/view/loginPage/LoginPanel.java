@@ -3,10 +3,14 @@ package com.project.hit.view.loginPage;
 import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+
+import com.sun.glass.events.KeyEvent;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
@@ -62,10 +66,19 @@ public class LoginPanel extends JPanel {
 	
 	/**
 	 * Set action listener to the button.
-	 * @param al - The Action listener.
+	 * @param al - The {@link ActionListener}.
 	 */
 	public void addButtonListener(ActionListener al) {
 		loginButton.addActionListener(al);
+	}
+	
+	/**
+	 * Set key listener to the User Name and password {@link JTextFiled}.
+	 * @param e - the {@link KeyListener}.
+	 */
+	public void addLoginButtonKeyListener(KeyListener e) {
+		passwordField.addKeyListener(e);
+		userNameField.addKeyListener(e);
 	}
 	
 	/**

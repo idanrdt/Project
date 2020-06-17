@@ -36,8 +36,7 @@ public class MainPageController implements MainController {
 	 * @throws NavigationFailedException if the navigation fails.
 	 */
 	private void openOrderMenu(User user) throws NavigationFailedException {
-		//ViewSwitcher.changeView(ViewSelect.ORDER_VIEW);
-		throw new NavigationFailedException("The window requested not exist.");
+		ViewSwitcher.changeView(ViewSelect.ORDER_VIEW, user);
 	}
 	
 	/**
@@ -46,8 +45,7 @@ public class MainPageController implements MainController {
 	 * @throws NavigationFailedException if the navigation fails.
 	 */
 	private void openSupplierMenu(User user) throws NavigationFailedException {
-		//ViewSwitcher.changeView(ViewSelect.REPORT_VIEW);
-		throw new NavigationFailedException("The window requested not exist.");
+		ViewSwitcher.changeView(ViewSelect.SUPPLIER_VIEW, user);
 	}
 	
 	/**
@@ -56,8 +54,7 @@ public class MainPageController implements MainController {
 	 * @throws NavigationFailedException if the navigation fails.
 	 */
 	private void openRepordMenu(User user) throws NavigationFailedException {
-		//ViewSwitcher.changeView(ViewSelect.REPORT_VIEW);
-		throw new NavigationFailedException("The window requested not exist.");
+		ViewSwitcher.changeView(ViewSelect.REPORT_VIEW, user);
 	}
 }
 

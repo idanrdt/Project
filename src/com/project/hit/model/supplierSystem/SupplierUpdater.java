@@ -18,9 +18,9 @@ public class SupplierUpdater {
     }
 
     /**
-     *function to update company name
-     * @param companyName string of Company name
-     * @return obj of Supplier
+     * Updates the company name.
+     * @param companyName - The {@link Supplier} Company name.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater companyName(String companyName) {
         this.supplier.setCompanyName(companyName);
@@ -29,9 +29,9 @@ public class SupplierUpdater {
 
 
     /**
-     *function to update Supplier number
-     * @param supplierNumber string of Supplier number
-     * @return obj of Supplier
+     * Updates the {@link Supplier} number.
+     * @param supplierNumber - the {@link Supplier} number.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater supplierNumber(String supplierNumber) {
         this.supplier.setSupplierNumber(supplierNumber);
@@ -40,42 +40,39 @@ public class SupplierUpdater {
 
 
     /**
-     *function to update Supplier address
-     * @param supplierAddress string of Supplier name
-     * @return obj of Supplier
+     * Updates the {@link Supplier} address.
+     * @param supplierAddress - the {@link Supplier} address.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater supplierAddress(String supplierAddress) {
         this.supplier.setSupplierAddress(supplierAddress);
         return this;
     }
 
-
     /**
-     *function to update Supplier phone number
-     * @param supplierPhoneNumber string of Supplier phone number
-     * @return obj of Supplier
+     * Updates the {@link Supplier} phone number.
+     * @param supplierPhoneNumber - The {@link Supplier} phone number.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater supplierPhoneNumber(String supplierPhoneNumber) {
         this.supplier.setSupplierPhoneNumber(supplierPhoneNumber);
         return this;
     }
 
-
     /**
-     *function to update Supplier email address
-     * @param supplierEmailAddress string of Supplier email address
-     * @return obj of Supplier
+     * Updates the {@link Supplier} email address.
+     * @param supplierEmailAddress - the {@link Supplier} email address.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater supplierEmailAddress(String supplierEmailAddress) {
         this.supplier.setSupplierEmailAddress(supplierEmailAddress);
         return this;
     }
 
-
     /**
-     *function to update total expenses
-     * @param totalExpenses double of total expenses
-     * @return obj of Supplier
+      * Updates the {@link Supplier} total expenses.
+     * @param totalExpenses - the {@link Supplier} total expenses.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater totalExpenses(double totalExpenses) {
         this.supplier.setTotalExpenses(totalExpenses);
@@ -84,20 +81,19 @@ public class SupplierUpdater {
 
 
     /**
-     *function to update if this supplier is disable
-     * @param disable boolean of disable
-     * @return obj of Supplier
+     * Enable or disable the {@link Supplier}
+     * @param disable parameter to enable or disable the {@link Supplier}.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater disable(boolean disable) {
         this.supplier.setDisable(disable);
         return this;
     }
 
-
     /**
-     *function to update bank account
-     * @param bankAccount obj of BankAccount
-     * @return obj of Supplier
+     * Updates the {@link SUpplier} {@link BankAccount}.
+     * @param bankAccount - the {@link BankAccount} of the {@link Supplier}.
+     * @return {@link SupplierUpdater}.
      */
     public SupplierUpdater bankAccount(BankAccount bankAccount) {
         this.supplier.setBankAccount(bankAccount);
@@ -106,9 +102,9 @@ public class SupplierUpdater {
 
 
     /**
-     *function to exit from the updater and save the changes
-     * @throws IOException if the file can't open
-     * @throws EnumNameNotFoundException if the enum param that not exists
+     * Update and save the saves to the Database.
+     * @throws IOException if the file can't open.
+     * @throws EnumNameNotFoundException if the enum param that not exists.
      */
     public Supplier update() throws IOException, EnumNameNotFoundException {
         FileManger<Supplier> save = new FileManger<>();
