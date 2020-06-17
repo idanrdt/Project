@@ -30,7 +30,7 @@ public interface SupplierController {
 	 * @param supplier - the {@link Supplier} to add.
 	 * @throws IOException if the addition fails.
 	 * @throws EnumNameNotFoundException if the addition fails.
-	 * @throws SupplierExistsException if the {@link Supplier} already exsist.
+	 * @throws SupplierExistsException if the {@link Supplier} already exist.
 	 */
 	public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierExistsException;
 	

@@ -66,9 +66,10 @@ public class ViewSwitcher {
 		case SUPPLIER_VIEW:
 			startSupplier(user);
 			break;
+		case SETTINGS_VIEW:
+			break;
 		case ORDER_VIEW:
 		case REPORT_VIEW:
-		case SETTINGS_VIEW:
 		default:
 			throw new NavigationFailedException("Failed to navigate to the requested page.");
 		}

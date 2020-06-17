@@ -23,5 +23,13 @@
 	<classpathentry kind="lib" path="lib/poi-scratchpad-4.1.2.jar"/>
 	<classpathentry kind="lib" path="lib/SparseBitSet-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="lib/apiguardian-api-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-5.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-api-5.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-engine-5.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-params-5.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-platform-commons-1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-platform-engine-1.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/opentest4j-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
