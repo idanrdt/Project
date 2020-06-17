@@ -7,6 +7,7 @@ import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.supplierSystem.BankAccount;
 import com.project.hit.model.supplierSystem.MangeSupplier;
 import com.project.hit.model.supplierSystem.Supplier;
+import com.project.hit.model.supplierSystem.SupplierExistsException;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 import com.project.hit.model.supplierSystem.SupplierUpdater;
 import com.project.hit.view.supplierView.SupplierView;
@@ -41,12 +42,12 @@ public class SupplierPageController implements SupplierController {
 	}
 
 	@Override
-	public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
+	public void addSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierExistsException {
 		model.addSupplier(supplier);
 	}
 
 	@Override
-	public void removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException {
+	public void removeSupplier(Supplier supplier) throws IOException, EnumNameNotFoundException, SupplierNotFoundException {
 		model.removeSupplier(supplier);
 	}
 
