@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 
 public class AddUserPanel extends JPanel {
+	
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private JTextField nameField;
@@ -139,10 +140,19 @@ public class AddUserPanel extends JPanel {
 		add(createNewUserButton, gbc_createNewUserButton);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the create button.
+	 * @param al- the {@link ActionListener}.
+	 */
 	public void addCreateActionListener(ActionListener al) {
 		createNewUserButton.addActionListener(al);
 	}
 	
+	/**
+	 * Gets the user created.
+	 * @return {@link User} with the corresponding details.
+	 * @throws NullArgumentException if any of the fields is empty.
+	 */
 	public User getUser() throws NullArgumentException {
 		if((usernameField.getText().isEmpty() || idField.getText().isEmpty()) ||
 		addressField.getText().isEmpty() || nameField.getText().isEmpty() ||
@@ -157,6 +167,9 @@ public class AddUserPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Resets all the fields to empty.
+	 */
 	public void resetFields() {
 		usernameField.setText("");
 		passwordField.setText("");

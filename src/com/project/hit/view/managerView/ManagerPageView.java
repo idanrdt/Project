@@ -48,6 +48,9 @@ public class ManagerPageView implements ManagerView {
 		this.controller = controller;
 	}
 	
+	/**
+	 * Show the UI.
+	 */
 	private void createAndShowGUI() {
 		mainFrame = new JFrame();
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -67,6 +70,9 @@ public class ManagerPageView implements ManagerView {
 		mainFrame.setVisible(true);
 	}
 	
+	/**
+	 * add {@link ActionListener} to the {@link UserTablePanel} buttons.
+	 */
 	private void addButtonsToTablePanel() {
 		userTable.addAddActionListener(new ActionListener() {
 			
@@ -122,6 +128,9 @@ public class ManagerPageView implements ManagerView {
 		});
 	}
 	
+	/**
+	 * add {@link ActionListener} to the {@link AddUserPanel} buttons.
+	 */
 	private void addButtonsToAddPanel() {
 		addUser.addCreateActionListener(new ActionListener() {
 			
@@ -140,6 +149,9 @@ public class ManagerPageView implements ManagerView {
 		});
 	}
 	
+	/**
+	 * add {@link ActionListener} to the {@link EditUserPanel} buttons.
+	 */
 	private void addButtonsToEditPanel() {
 		editPanel.addSaveActionListener(new ActionListener() {
 			

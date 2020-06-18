@@ -58,7 +58,7 @@ public class UserTablePanel extends JPanel {
         table.setFillsViewportHeight(true);
         table.setDefaultEditor(Object.class, null);
 		
-		setLayout(new BorderLayout(0, 0));	
+		setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane);

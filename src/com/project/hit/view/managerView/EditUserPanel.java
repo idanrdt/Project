@@ -118,10 +118,23 @@ public class EditUserPanel extends JPanel {
 		add(saveUserButton, gbc_saveUserButton);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the save button.
+	 * @param al- the {@link ActionListener}.
+	 */
 	public void addSaveActionListener(ActionListener al) {
 		saveUserButton.addActionListener(al);
 	}
 	
+	/**
+	 * Gets the updated {@link User} details.
+	 * @return {@link String} array with the details:
+	 * <li> [0] - id.
+	 * <li> [1] - username.
+	 * <li> [2] - name.
+	 * <li> [3] - address.
+	 * <li> [4] - is manager
+	 */
 	public String[] getUpdatedUser() {
 		if((usernameField.getText().isEmpty() || addressField.getText().isEmpty()
 				|| nameField.getText().isEmpty())) {
@@ -138,6 +151,9 @@ public class EditUserPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Resets all the fields to empty.
+	 */
 	public void resetFields() {
 		usernameField.setText("");
 		nameField.setText("");
@@ -145,6 +161,10 @@ public class EditUserPanel extends JPanel {
 		isManagerCheckBox.setSelected(false);
 	}
 	
+	/**
+	 * Put in the fields the {@link User} details.
+	 * @param user - the {@link User} to recive the details from.
+	 */
 	public void updateUserDetails(User user) {
 		userID.setText(user.getId());
 		usernameField.setText(user.getUserName());
