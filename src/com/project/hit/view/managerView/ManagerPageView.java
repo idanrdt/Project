@@ -11,8 +11,7 @@ public class ManagerPageView implements ManagerView {
 	private AddUserPanel addUser;
 	private EditUserPanel editPanel;
 	
-	public ManagerPageView(ManagerController controller) {
-		this.controller = controller;
+	public ManagerPageView() {
 	}
 	
 	@Override

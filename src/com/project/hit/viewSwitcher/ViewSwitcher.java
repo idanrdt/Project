@@ -7,10 +7,14 @@ import com.project.hit.controller.loginController.LoginPageController;
 import com.project.hit.controller.mainController.MainController;
 import com.project.hit.controller.mainController.MainPageController;
 import com.project.hit.controller.mainController.NavigationFailedException;
+import com.project.hit.controller.managerController.ManagerController;
+import com.project.hit.controller.managerController.ManagerPageController;
 import com.project.hit.controller.supplierController.SupplierController;
 import com.project.hit.controller.supplierController.SupplierPageController;
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.authenticationSystem.AuthenticationSystem;
+import com.project.hit.model.managerSystem.ManagerProperties;
+import com.project.hit.model.managerSystem.ManagerPropertiesRepository;
 import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.model.supplierSystem.MangeSupplier;
 import com.project.hit.view.loginPage.LoginPageView;
@@ -18,6 +22,8 @@ import com.project.hit.view.loginPage.LoginView;
 import com.project.hit.view.*;
 import com.project.hit.view.mainView.MainPageView;
 import com.project.hit.view.mainView.MainView;
+import com.project.hit.view.managerView.ManagerPageView;
+import com.project.hit.view.managerView.ManagerView;
 import com.project.hit.view.supplierView.SupplierPageView;
 import com.project.hit.view.supplierView.SupplierView;
 
@@ -67,6 +73,7 @@ public class ViewSwitcher {
 			startSupplier(user);
 			break;
 		case SETTINGS_VIEW:
+			startSettings();
 			break;
 		case ORDER_VIEW:
 		case REPORT_VIEW:
@@ -126,6 +133,32 @@ public class ViewSwitcher {
 		}
 		
 		SupplierController controller = new SupplierPageController(model);
+		
+		view.setController(controller);
+		
+		view.start();
+	}
+	
+	/**
+	 * Set and starts the {@link ManagerPageView}.
+	 * @param user - the {@link User} that logged in.
+	 * @throws NavigationFailedException - if the navigation failed.
+	 */
+	private static void startSettings() throws NavigationFailedException {
+		
+		ManagerView view = new ManagerPageView();
+		ManagerPropertiesRepository model = null;
+		
+		try {
+			model = ManagerProperties.getManagerProperties();
+		} catch (EnumNameNotFoundException | IOException e) {
+			throw new NavigationFailedException("Faild to navigate");
+			//TODO: add log.
+		} catch (ClassNotFoundException e) {
+			throw new NavigationFailedException("File missing or corrupted");
+		}
+		
+		ManagerController controller = new ManagerPageController(model);
 		
 		view.setController(controller);
 		
