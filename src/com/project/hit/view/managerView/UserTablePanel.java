@@ -18,12 +18,14 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import com.project.hit.model.managerSystem.NoUserExistsException;
 import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.model.supplierSystem.Supplier;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 
 public class UserTablePanel extends JPanel {
 	
+	private static final long serialVersionUID = 10L;
 	private JTable table;
 	private JButton refreshTableButton;
 	private JButton deleteUserButton;
@@ -40,7 +42,7 @@ public class UserTablePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public UserTablePanel() {
+	public UserTablePanel(Set<User> set) {
 		
 		setValues(set);
     	
@@ -53,18 +55,14 @@ public class UserTablePanel extends JPanel {
         
         table.setDefaultRenderer(String.class, centerRenderer);        
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
         table.setFillsViewportHeight(true);
         table.setDefaultEditor(Object.class, null);
 		
-		setLayout(new BorderLayout(0, 0));		
+		setLayout(new BorderLayout(0, 0));	
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane);
-		
-		table = new JTable();
-		add(table, BorderLayout.NORTH);
-		
+				
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.SOUTH);
 		
@@ -135,17 +133,21 @@ public class UserTablePanel extends JPanel {
 	}
 	
     /**
-     * Remove the selected row from the {@link JTable}
+     * Returns the selected row from the {@link JTable}
      * @return the {@link User} to remove.
      * @throws SupplierNotFoundException if the {@link Supplier} not found.
      */
-    public User removeSupplier() throws SupplierNotFoundException {
+    public User getSelectedUser() throws NoUserExistsException{
     	for(User user : this.set) {
-    		if(String.valueOf(user.getUserName()).equals(userData[table.getSelectedRow()][0])) {
+    		int row = table.getSelectedRow();
+    		if(row < 0) {
+    			break;
+    		}
+    		if(String.valueOf(user.getUserName()).equals(userData[row][0])) {
     			return user;
     		}
     	}
-    	throw new SupplierNotFoundException("Delete not possiable");
+    	throw new NoUserExistsException("Selected failes");
     }
 	
 	/**
@@ -158,7 +160,7 @@ public class UserTablePanel extends JPanel {
         int i = 0;
         for(User user : set) {
         	userData[i][0] = new String(user.getUserName());
-        	userData[i][1] = new String(user.getName());		        	
+        	userData[i][1] = new String(user.getName());
         	userData[i][2] = new String(String.valueOf(user.getManager()));
         	i++;
         }
@@ -169,6 +171,7 @@ public class UserTablePanel extends JPanel {
         	setTableCellToMiddle();
         }
     }
+   
 	
 	/**
      * Sets the cell data to the center.

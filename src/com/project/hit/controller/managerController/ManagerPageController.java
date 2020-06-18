@@ -28,15 +28,15 @@ public class ManagerPageController implements ManagerController {
 	public void deleteUser(User user) throws NoUserExistsException, IOException, EnumNameNotFoundException {
 		model.deleteUser(user);
 	}
-
+	
 	@Override
 	public void editUser(String[] updateArray) throws NoUserExistsException{
 		try {
-			model.updater(updateArray[0])
-			.editAddress(updateArray[1])
-			.editIsManager(Boolean.valueOf(updateArray[2]))
-			.editName(updateArray[3])
-			.editUserName(updateArray[4])
+			model.updater("")
+			.editUserName(updateArray[1])
+			.editName(updateArray[2])
+			.editAddress(updateArray[3])
+			.editIsManager(Boolean.valueOf(updateArray[4]))
 			.update();
 		} catch (IOException | EnumNameNotFoundException e) {
 			throw new NoUserExistsException("Can't save User.\nPlease contact your administrator");
