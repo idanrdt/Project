@@ -21,7 +21,7 @@ public class ManagerPageController implements ManagerController {
 
 	@Override
 	public void addUser(User user) throws UserExistException, IOException, EnumNameNotFoundException {
-		model.createNewUser(user);
+		model.createNewUse(user);
 	}
 
 	@Override

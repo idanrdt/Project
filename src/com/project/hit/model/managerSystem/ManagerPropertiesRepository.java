@@ -16,7 +16,7 @@ public interface ManagerPropertiesRepository {
      * @throws IOException Any exception thrown by the underlying OutputStream.
      * @throws EnumNameNotFoundException if Enum value does not exist
      */
-    public void createNewUser(User user) throws UserExistException, IOException, EnumNameNotFoundException, EnumNameNotFoundException;
+    public void createNewUse(User user) throws UserExistException, IOException, EnumNameNotFoundException, EnumNameNotFoundException;
 
 
     /**

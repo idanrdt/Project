@@ -24,7 +24,7 @@ public class ManagerProperties implements ManagerPropertiesRepository {
     }
 
     @Override
-    public void createNewUser(User user) throws UserExistException, IOException, EnumNameNotFoundException {
+    public void createNewUse(User user) throws UserExistException, IOException, EnumNameNotFoundException {
         if(this.users.contains(user)){
             throw new UserExistException("User with ID: " + user.getId() + "already exists in the system ");
         }
