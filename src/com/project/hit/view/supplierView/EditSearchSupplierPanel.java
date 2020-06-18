@@ -317,7 +317,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		if(supplier != null) {
 			companyField.setText(supplier.getCompanyName());
 			addressField.setText(supplier.getSupplierAddress());
-			phoneField.setText(supplier.getSupplierNumber());
+			phoneField.setText(supplier.getSupplierPhoneNumber());
 			emailField.setText(supplier.getSupplierEmailAddress());
 			bankField.setText(supplier.getBankAccount().getBankNumber());
 			accoundnumberField.setText(supplier.getBankAccount().getAccount());
@@ -356,13 +356,21 @@ public class EditSearchSupplierPanel extends JPanel {
 	 * Create new {@link Supplier} from the user values.
 	 * @return a new {@link Supplier} object.
 	 */
-	public Supplier getUpdatedSupplier() {
-		return new SupplierBuilder()
-				.SupplierAddress(addressField.getText())
-				.SupplierNumber(phoneField.getText())
-				.SupplierEmailAddress(emailField.getText())
-				.BankAccount(new BankAccount(bankField.getText(), accoundnumberField.getText(), branchField.getText()))
-				.build();
+	
+	/**
+	 * Create {@link String} array that contains all details inserted by the user.
+	 * @return {@link String} array.
+	 */
+	public String[] getUpdatedSupplier() {
+		return new String[] {
+				supplierIDField.getText(),
+				addressField.getText(), 
+				phoneField.getText(),
+				emailField.getText(), 
+				bankField.getText(), 
+				accoundnumberField.getText(), 
+				branchField.getText()
+				};
 	}
 	
 	/**

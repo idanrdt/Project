@@ -13,6 +13,7 @@ import org.apache.commons.math3.exception.NullArgumentException;
 import com.project.hit.controller.supplierController.SupplierController;
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.managerSystem.details.User;
+import com.project.hit.model.supplierSystem.SupplierExistsException;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 
 public class SupplierPageView implements SupplierView {
@@ -133,6 +134,8 @@ public class SupplierPageView implements SupplierView {
 					setError("There was a problem saving your supplier.\nPlease try again later.");
 				} catch (NullArgumentException e1) {
 					setError("One or more fields are empty.\nPlease fill all of the fields.");
+				} catch (SupplierExistsException e1) {
+					setError("Supplier already exist!");
 				}
 			}
 		});

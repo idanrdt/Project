@@ -25,6 +25,9 @@ public class MainPageController implements MainController {
 		case SUPPLIER_VIEW:
 			openSupplierMenu(user);
 			break;
+		case SETTINGS_VIEW:
+			openSettingsMenu(user);
+			break;			
 		default:
 			throw new NavigationFailedException("The window requested does not exist.");
 		}
@@ -55,6 +58,15 @@ public class MainPageController implements MainController {
 	 */
 	private void openRepordMenu(User user) throws NavigationFailedException {
 		ViewSwitcher.changeView(ViewSelect.REPORT_VIEW, user);
+	}
+	
+	/**
+	 * Opens the settings window.
+	 * @param user - The {@link User} that just logged in.
+	 * @throws NavigationFailedException if the navigation fails.
+	 */
+	private void openSettingsMenu(User user) throws NavigationFailedException {
+		ViewSwitcher.changeView(ViewSelect.SETTINGS_VIEW, user);
 	}
 }
 
