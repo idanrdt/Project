@@ -15,6 +15,6 @@ This project created by:
 - [x] Create Requirements Document(link)
 - [x] Create Architecture design document(link)
 - [ ] Build the application
-- [ ] Test the application
+- [x] Test the application
 - [ ] Create video about the Project
 - [ ] Submit the Project
