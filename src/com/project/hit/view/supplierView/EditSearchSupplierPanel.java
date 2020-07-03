@@ -346,16 +346,11 @@ public class EditSearchSupplierPanel extends JPanel {
 	
 	/**
 	 * Gets the {@link Supplier} id from the user.
-	 * @return the {@link Supplier} id recived from the user.
+	 * @return the {@link Supplier} id received from the user.
 	 */
 	public String getSupplierNumberFromUser() {
 		return supplierIDField.getText();
 	}
-	
-	/**
-	 * Create new {@link Supplier} from the user values.
-	 * @return a new {@link Supplier} object.
-	 */
 	
 	/**
 	 * Create {@link String} array that contains all details inserted by the user.

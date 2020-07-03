@@ -1,6 +1,7 @@
 package com.project.hit.view.ReportView;
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import org.jdatepicker.JDateComponentFactory;
 import org.jdatepicker.JDatePicker;
@@ -17,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import javax.swing.JTextField;
+
+import java.awt.ComponentOrientation;
 import java.awt.Font;
 
 public class CreateReportPanel extends JPanel {
@@ -26,7 +29,7 @@ public class CreateReportPanel extends JPanel {
 	private JTextField supplierTextField;
 	private JDatePicker startDatePicker;
 	private JDatePicker endDatePicker;
-	private JLabel saveLocationLabel;
+	private JTextArea saveLocationLabel;
 	private String saveLocation;
 	/**
 	 * Create the panel.
@@ -69,14 +72,14 @@ public class CreateReportPanel extends JPanel {
 		GridBagConstraints gbc_createButton = new GridBagConstraints();
 		gbc_createButton.insets = new Insets(5, 5, 5, 5);
 		gbc_createButton.gridx = 0;
-		gbc_createButton.gridy = 4;
+		gbc_createButton.gridy = 5;
 		add(createButton, gbc_createButton);
 		
 		changeLocationButton = new JButton("Change Save Location");
 		GridBagConstraints gbc_changeLocationButton = new GridBagConstraints();
 		gbc_changeLocationButton.insets = new Insets(5, 5, 5, 5);
 		gbc_changeLocationButton.gridx = 2;
-		gbc_changeLocationButton.gridy = 4;
+		gbc_changeLocationButton.gridy = 5;
 		add(changeLocationButton, gbc_changeLocationButton);
 		
 		startDatePicker = new JDateComponentFactory().createJDatePicker();
@@ -100,11 +103,15 @@ public class CreateReportPanel extends JPanel {
 		add((JComponent)endDatePicker, gbc_endDatePicker);
 		
 		saveLocation = "C:\\temp";
-		saveLocationLabel = new JLabel("Saving Location: " + saveLocation);
-		saveLocationLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		saveLocationLabel = new JTextArea("Saving Location:\n" + saveLocation+"");
+		saveLocationLabel.setLineWrap(true);
+		saveLocationLabel.setEditable(false);
+		saveLocationLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		GridBagConstraints gbc_saveLocationLabel = new GridBagConstraints();
-		gbc_saveLocationLabel.insets = new Insets(5, 0, 5, 5);
-		gbc_saveLocationLabel.gridx = 1;
+		gbc_saveLocationLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_saveLocationLabel.insets = new Insets(5, 5, 5, 5);
+		gbc_saveLocationLabel.gridwidth = this.getWidth();
+		gbc_saveLocationLabel.gridx = 0;
 		gbc_saveLocationLabel.gridy = 3;
 		add(saveLocationLabel, gbc_saveLocationLabel);
 	}
@@ -118,8 +125,14 @@ public class CreateReportPanel extends JPanel {
 	}
 	
 	public void changeSaveLocation(String location) {
-		saveLocation = location;
-		saveLocationLabel.setText("Saving location:" + saveLocation);
+		if(location != null) {
+			saveLocation = location;
+			saveLocationLabel.setText("Saving location:\n" + saveLocation);
+		}
+	}
+	
+	public String getSaveLocation() {
+		return saveLocation;
 	}
 	
 	public String getSupplierNumber() {

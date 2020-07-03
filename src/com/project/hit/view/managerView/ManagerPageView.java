@@ -175,6 +175,4 @@ public class ManagerPageView implements ManagerView {
 	private void setError(String msg) {
 		JOptionPane.showMessageDialog(new JFrame(),msg,"Error",JOptionPane.ERROR_MESSAGE);
 	}
-	
-
 }

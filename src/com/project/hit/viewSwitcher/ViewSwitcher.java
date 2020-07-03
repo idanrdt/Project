@@ -9,6 +9,8 @@ import com.project.hit.controller.mainController.MainPageController;
 import com.project.hit.controller.mainController.NavigationFailedException;
 import com.project.hit.controller.managerController.ManagerController;
 import com.project.hit.controller.managerController.ManagerPageController;
+import com.project.hit.controller.reportController.ReportController;
+import com.project.hit.controller.reportController.ReportPageController;
 import com.project.hit.controller.supplierController.SupplierController;
 import com.project.hit.controller.supplierController.SupplierPageController;
 import com.project.hit.fileManager.EnumNameNotFoundException;
@@ -16,6 +18,8 @@ import com.project.hit.model.authenticationSystem.AuthenticationSystem;
 import com.project.hit.model.managerSystem.ManagerProperties;
 import com.project.hit.model.managerSystem.ManagerPropertiesRepository;
 import com.project.hit.model.managerSystem.details.User;
+import com.project.hit.model.reportSystem.ReportSystem;
+import com.project.hit.model.reportSystem.ReportSystemRepository;
 import com.project.hit.model.supplierSystem.MangeSupplier;
 import com.project.hit.view.ReportView.ReportPageView;
 import com.project.hit.view.ReportView.ReportView;
@@ -125,23 +129,21 @@ public class ViewSwitcher {
 	 */
 	private static void startSupplier(User user) throws NavigationFailedException {
 		
-		SupplierView view = new SupplierPageView(user);
-		MangeSupplier model = null;
-		
+		SupplierView view = new SupplierPageView(user);		
 		try {
-			model = MangeSupplier.getMangeSupplierSinglton();
+			MangeSupplier model = MangeSupplier.getMangeSupplierSinglton();
+			
+			SupplierController controller = new SupplierPageController(model);
+			
+			view.setController(controller);
+			
+			view.start();
 		} catch (EnumNameNotFoundException | IOException e) {
 			throw new NavigationFailedException("Faild to navigate");
 			//TODO: add log.
 		} catch (ClassNotFoundException e) {
 			throw new NavigationFailedException("File missing or corrupted");
 		}
-		
-		SupplierController controller = new SupplierPageController(model);
-		
-		view.setController(controller);
-		
-		view.start();
 	}
 	
 	/**
@@ -151,23 +153,22 @@ public class ViewSwitcher {
 	 */
 	private static void startSettings() throws NavigationFailedException {
 		
-		ManagerView view = new ManagerPageView();
-		ManagerPropertiesRepository model = null;
-		
+		ManagerView view = new ManagerPageView();		
 		try {
-			model = ManagerProperties.getManagerProperties();
+			ManagerPropertiesRepository model = ManagerProperties.getManagerProperties();
+			
+			ManagerController controller = new ManagerPageController(model);
+			
+			view.setController(controller);
+			
+			view.start();
 		} catch (EnumNameNotFoundException | IOException e) {
 			throw new NavigationFailedException("Faild to navigate");
-			//TODO: add log.
 		} catch (ClassNotFoundException e) {
 			throw new NavigationFailedException("File missing or corrupted");
 		}
 		
-		ManagerController controller = new ManagerPageController(model);
-		
-		view.setController(controller);
-		
-		view.start();
+
 	}
 	
 	private static void startOrder(User user) throws NavigationFailedException {
@@ -176,6 +177,18 @@ public class ViewSwitcher {
 	
 	private static void startReport(User user) throws NavigationFailedException{
 		ReportView view = new ReportPageView();
-		view.start();
+		try {
+			ReportSystemRepository model = new ReportSystem();
+			
+			ReportController controller = new ReportPageController(model);
+			
+			view.setController(controller);
+			
+			view.start();
+		} catch ( IOException e) {
+			throw new NavigationFailedException("Faild to navigate");
+		} catch (ClassNotFoundException e) {
+			throw new NavigationFailedException("File missing or corrupted");
+		}
 	}
 }
