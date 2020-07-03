@@ -17,9 +17,10 @@ import com.project.hit.model.managerSystem.ManagerProperties;
 import com.project.hit.model.managerSystem.ManagerPropertiesRepository;
 import com.project.hit.model.managerSystem.details.User;
 import com.project.hit.model.supplierSystem.MangeSupplier;
+import com.project.hit.view.ReportView.ReportPageView;
+import com.project.hit.view.ReportView.ReportView;
 import com.project.hit.view.loginPage.LoginPageView;
 import com.project.hit.view.loginPage.LoginView;
-import com.project.hit.view.*;
 import com.project.hit.view.mainView.MainPageView;
 import com.project.hit.view.mainView.MainView;
 import com.project.hit.view.managerView.ManagerPageView;
@@ -76,7 +77,11 @@ public class ViewSwitcher {
 			startSettings();
 			break;
 		case ORDER_VIEW:
+			startOrder(user);
+			break;
 		case REPORT_VIEW:
+			startReport(user);
+			break;
 		default:
 			throw new NavigationFailedException("Failed to navigate to the requested page.");
 		}
@@ -162,6 +167,15 @@ public class ViewSwitcher {
 		
 		view.setController(controller);
 		
+		view.start();
+	}
+	
+	private static void startOrder(User user) throws NavigationFailedException {
+
+	}
+	
+	private static void startReport(User user) throws NavigationFailedException{
+		ReportView view = new ReportPageView();
 		view.start();
 	}
 }

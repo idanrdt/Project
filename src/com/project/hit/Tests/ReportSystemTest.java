@@ -49,7 +49,6 @@ class ReportSystemTest {
         orderSystem.createOrder(order2);
 
         reportSystem = new ReportSystem();
-
     }
 
     @Test
@@ -58,6 +57,7 @@ class ReportSystemTest {
          assertSame(new HashSet<Order>().getClass(), assertDoesNotThrow(()->reportSystem.genarateReport().createReport()).getClass());
 
          assertEquals(reportSystem.getReport(),orderSystem.getOrders());
+         
          assertTrue(reportSystem.getReport().contains(order));
     }
 
@@ -69,8 +69,6 @@ class ReportSystemTest {
         assertTrue(reportSystem.getReport().contains(order));
 
         assertThrows(ReportEmptyExcption.class,()->reportSystem.genarateReport().supplierId(123456).createReport());
-
-
     }
 
     @Test

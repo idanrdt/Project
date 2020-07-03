@@ -62,7 +62,7 @@ public class ReportSystem extends Report implements ReportSystemRepository {
         // Creating a row at specific position
         // using predefined class provided by Apache POI
         String title[] = {"Order number", "Supplier name", "Supplier id", "Price", "Date", "Details"};
-        int rowIndex =0;
+        int rowIndex = 0;
 
         Row row = sheet.createRow(rowIndex++);
         for (int i = 0; i <title.length ; i++) {
