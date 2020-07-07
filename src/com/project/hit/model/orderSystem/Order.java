@@ -5,8 +5,6 @@ import com.project.hit.model.supplierSystem.Supplier;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class Order implements Serializable {
@@ -40,8 +38,6 @@ public class Order implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 

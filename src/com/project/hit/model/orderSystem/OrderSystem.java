@@ -97,8 +97,10 @@ public class OrderSystem implements OrderSystemRepository {
             double price = order.getPrice();
             MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
             for (Supplier supplier : mangeSupplier.getSuppliers()){
-                if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
+                if(supplier.getSupplierId() == order.getSupplier().getSupplierId()) {
                     mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()-price).update();
+                    break;
+                }
             }
 
             this.orderFileManger.saveToFile(this.orders, FileNameSelect.ORDERFILE);

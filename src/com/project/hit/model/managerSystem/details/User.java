@@ -126,14 +126,13 @@ public class User extends Person implements Serializable {
 		User user = (User) o;
 		return Objects.equals(userName, user.userName) &&
 				Objects.equals(password, user.password) &&
-				Objects.equals(isManager, user.isManager) &&
-				Objects.equals(reportSystem, user.reportSystem) &&
-				Objects.equals(manageSupplierAccsess, user.manageSupplierAccsess) &&
-				Objects.equals(orderSystemAccsess, user.orderSystemAccsess);
+				Objects.equals(isManager, user.isManager);
 	}
-
+	
+	/*
 	@Override
 	public int hashCode() {
-		return Objects.hash(userName, password, isManager, reportSystem, manageSupplierAccsess, orderSystemAccsess);
+		return Objects.hash(userName, password);
 	}
+	*/
 }

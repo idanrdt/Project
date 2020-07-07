@@ -79,7 +79,7 @@ class ReportSystemTest {
 
         assertFalse(reportSystem.getReport().contains(order1));
 
-        assertDoesNotThrow(()->reportSystem.genarateReport().startDate(1,0,2020).createReport());
+        assertDoesNotThrow(()->reportSystem.genarateReport().startDate(1,1,2020).createReport());
 
         assertTrue(reportSystem.getReport().contains(order1));
         assertTrue(reportSystem.getReport().contains(order2));
