@@ -16,6 +16,7 @@ public interface ManagerController {
 	 * @throws IOException if the addition fails.
 	 * @throws EnumNameNotFoundException if the addition fails.
 	 * @throws UserExistException if the {@link User} already exist.
+	 * @throws NoUserExistsException 
 	 */
 	public void addUser(User user) throws UserExistException, IOException, EnumNameNotFoundException;
 	

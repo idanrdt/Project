@@ -37,7 +37,8 @@ public class UserTablePanel extends JPanel {
 	private DefaultTableCellRenderer centerRenderer;
 	private String[] columnNames = {"User Name",
             						"Name",
-									"is Manager"};
+									"is Manager",
+									"User ID"};
 	
 	/**
 	 * Create the panel.
@@ -156,12 +157,13 @@ public class UserTablePanel extends JPanel {
      */
     public void setValues(Set<User> set) {
     	this.set = set;
-    	userData = new String[set.size()][3];
+    	userData = new String[set.size()][4];
         int i = 0;
         for(User user : set) {
         	userData[i][0] = new String(user.getUserName());
         	userData[i][1] = new String(user.getName());
         	userData[i][2] = new String(String.valueOf(user.getManager()));
+        	userData[i][3] = new String(user.getId());
         	i++;
         }
         
@@ -177,7 +179,7 @@ public class UserTablePanel extends JPanel {
      * Sets the cell data to the center.
      */
     private void setTableCellToMiddle() {
-        for(int i = 0;i<columnNames.length;i++) {
+        for(int i = 0; i < columnNames.length; i++) {
         	table.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
     }

@@ -60,7 +60,7 @@ public class DeleteOrderPanel extends JPanel {
         add(panel, BorderLayout.SOUTH);
         panel.setLayout(new BorderLayout(0, 0));
         
-        removeButton = new JButton("Remove Supplier");
+        removeButton = new JButton("Remove Order");
         panel.add(removeButton);
         
         refreshButton = new JButton("Refresh");
