@@ -141,14 +141,14 @@ public class CreateReportPanel extends JPanel {
 	
 	public LocalDate getStartDate() {
 		if(startDatePicker.getModel().getValue() != null) {
-			return LocalDate.of(startDatePicker.getModel().getYear(), startDatePicker.getModel().getMonth(), startDatePicker.getModel().getDay());
+			return LocalDate.of(startDatePicker.getModel().getYear(), startDatePicker.getModel().getMonth() + 1, startDatePicker.getModel().getDay());
 		}
 		return null;
 	}
 	
 	public LocalDate getEndDate() {
 		if(endDatePicker.getModel().getValue() != null) {
-			return LocalDate.of(endDatePicker.getModel().getYear(), endDatePicker.getModel().getMonth(), endDatePicker.getModel().getDay());
+			return LocalDate.of(endDatePicker.getModel().getYear(), endDatePicker.getModel().getMonth() + 1, endDatePicker.getModel().getDay());
 		}
 		return null;
 	}

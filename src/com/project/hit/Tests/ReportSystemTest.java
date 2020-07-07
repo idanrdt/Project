@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,8 +37,8 @@ class ReportSystemTest {
         order1 = new Order(supplier,300,"test1");
         order2 = new Order(supplier,100,"test2");
 
-        order1.setDate(new GregorianCalendar(2020,1,1).getTime());
-        order2.setDate(new GregorianCalendar(2020,5,1).getTime());
+        order1.setDate(LocalDate.of(2020,1,1));
+        order2.setDate(LocalDate.of(2020,5,1));
 
         mangeSupplier =  MangeSupplier.getMangeSupplierSinglton();
         orderSystem = OrderSystem.getOrderSystem();

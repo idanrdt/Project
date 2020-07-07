@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -47,6 +48,8 @@ public class EditSearchOrderPanel extends JPanel {
 		
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		setLayout(gridBagLayout);
 		
 		welcomeTitle = new JLabel("Edit order details");
@@ -55,7 +58,6 @@ public class EditSearchOrderPanel extends JPanel {
 		GridBagConstraints gbc_welcomeTitle = new GridBagConstraints();
 		gbc_welcomeTitle.gridwidth = 3;
 		gbc_welcomeTitle.insets = new Insets(0, 0, 5, 0);
-		gbc_welcomeTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_welcomeTitle.gridx = 0;
 		gbc_welcomeTitle.gridy = 0;
 		add(welcomeTitle, gbc_welcomeTitle);
@@ -66,7 +68,6 @@ public class EditSearchOrderPanel extends JPanel {
 		GridBagConstraints gbc_welcomeSubTitle = new GridBagConstraints();
 		gbc_welcomeSubTitle.insets = new Insets(0, 5, 5, 5);
 		gbc_welcomeSubTitle.gridwidth = 3;
-		gbc_welcomeSubTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_welcomeSubTitle.gridx = 0;
 		gbc_welcomeSubTitle.gridy = 1;
 		add(welcomeSubTitle, gbc_welcomeSubTitle);
@@ -82,7 +83,6 @@ public class EditSearchOrderPanel extends JPanel {
 		((AbstractDocument)orderNumberField.getDocument()).setDocumentFilter(up8NumbersFilter);
 		GridBagConstraints gbc_orderNumberField = new GridBagConstraints();
 		gbc_orderNumberField.insets = new Insets(0, 0, 5, 5);
-		gbc_orderNumberField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_orderNumberField.gridx = 1;
 		gbc_orderNumberField.gridy = 2;
 		add(orderNumberField, gbc_orderNumberField);
@@ -106,7 +106,7 @@ public class EditSearchOrderPanel extends JPanel {
 		gbc_innerDetailsPanel.gridwidth = 3;
 		gbc_innerDetailsPanel.gridheight = 2;
 		gbc_innerDetailsPanel.insets = new Insets(0, 0, 5, 0);
-		gbc_innerDetailsPanel.fill = GridBagConstraints.BOTH;
+		gbc_innerDetailsPanel.fill = GridBagConstraints.VERTICAL;
 		gbc_innerDetailsPanel.gridx = 0;
 		gbc_innerDetailsPanel.gridy = 3;
 		add(innerDetailsPanel, gbc_innerDetailsPanel);
@@ -124,7 +124,7 @@ public class EditSearchOrderPanel extends JPanel {
 		innerDetailsPanel.add(supplierCompanyNameLabel, gbc_supplierCompanyNameLabel);
 		
 		supplierCompanyNameField = new JTextField();
-		supplierCompanyNameField.setEnabled(false);
+		supplierCompanyNameField.setEditable(false);
 		GridBagConstraints gbc_supplierCompanyNameField = new GridBagConstraints();
 		gbc_supplierCompanyNameField.insets = new Insets(5, 0, 5, 5);
 		gbc_supplierCompanyNameField.fill = GridBagConstraints.HORIZONTAL;
@@ -178,7 +178,7 @@ public class EditSearchOrderPanel extends JPanel {
 		innerDetailsPanel.add(dateLabel, gbc_dateLabel);
 		
 		dateField = new JTextField();
-		dateField.setEnabled(false);
+		dateField.setEditable(false);
 		GridBagConstraints gbc_dateField = new GridBagConstraints();
 		gbc_dateField.insets = new Insets(0, 0, 5, 5);
 		gbc_dateField.fill = GridBagConstraints.HORIZONTAL;
@@ -254,7 +254,7 @@ public class EditSearchOrderPanel extends JPanel {
 			supplierCompanyNameField.setText(order.getSupplier().getCompanyName());
 			priceField.setText(String.valueOf(order.getPrice()));
 			descriptionField.setText(order.getDetails());
-			dateField.setText(order.getDate().toString());
+			dateField.setText(order.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 			setEditFieldPanelEnable(true);
 		}
 	}

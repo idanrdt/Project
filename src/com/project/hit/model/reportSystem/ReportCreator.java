@@ -79,7 +79,7 @@ public class ReportCreator extends Report {
 
         for (Order i : orders){
             if(i.getDate().compareTo(this.startDate) >= 0 && i.getDate().compareTo(this.endDate) <= 0)
-                this.report.add(i);
+            	this.report.add(i);
         }
 
         if(this.report.isEmpty())

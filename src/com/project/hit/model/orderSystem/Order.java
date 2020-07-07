@@ -4,6 +4,7 @@ package com.project.hit.model.orderSystem;
 import com.project.hit.model.supplierSystem.Supplier;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
@@ -15,14 +16,14 @@ public class Order implements Serializable {
     private Supplier supplier;
     private String details;
     private double price;
-    private Date date;
+    private LocalDate date;
     private final int orderNumber;
 
     public Order(Supplier supplier, double price, String details) {
         this.supplier = supplier;
         this.price = price;
         this.details = details;
-        this.date = Calendar.getInstance().getTime();
+        this.date = LocalDate.now();
 
         if(ORDER_NUMBER_COUNT == 1000 && ((new File("ORDER_NUMBER_COUNT")).exists())){
             try(DataInputStream dis = new DataInputStream(new FileInputStream("ORDER_NUMBER_COUNT"))) {
@@ -60,11 +61,11 @@ public class Order implements Serializable {
         this.price = price;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

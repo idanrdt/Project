@@ -3,6 +3,7 @@ package com.project.hit.view.orderView;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -107,7 +108,7 @@ public class DeleteOrderPanel extends JPanel {
         for(Order order : set) {
         	orderData[i][0] = new String(String.valueOf(order.getOrderNumber()));
         	orderData[i][1] = new String(String.valueOf(order.getPrice()));
-        	orderData[i][2] = new String(order.getDate().toString());
+        	orderData[i][2] = new String(order.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         	i++;
         }
         

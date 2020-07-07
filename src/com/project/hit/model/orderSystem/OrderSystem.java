@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class OrderSystem implements OrderSystemRepository {
             throw new NullArgumentException();
         }
         if (this.orders.contains(order)) {
-            throw new OrderExistException("Order number: " +order.getOrderNumber() +" Already exists!");
+            throw new OrderExistException("Order number: " + order.getOrderNumber() +" Already exists!");
         }
         //***update supplier and save***//
         double price = order.getPrice();
@@ -145,7 +146,6 @@ public class OrderSystem implements OrderSystemRepository {
     @Override
     public void createPdf(Order order, String Url) throws IOException, DocumentException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy\nHH:mm:ss");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
         Document document = new Document();
         Url = Url +"/" + order.getOrderNumber() +".pdf";
         PdfWriter.getInstance(document, new FileOutputStream(Url));
@@ -153,7 +153,7 @@ public class OrderSystem implements OrderSystemRepository {
 
         String nowDate = sdf.format(new Date());
         String title = "Order number: " + order.getOrderNumber();
-        String orderDate = "\nDate: " + sdf2.format(order.getDate());
+        String orderDate = "\nDate: " + order.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String supplier = "\n\nSupplier Details:" +
                 "\nSupplier name: " + order.getSupplier().getCompanyName() +
                 "\nSupplier ID: " + order.getSupplier().getSupplierId() +

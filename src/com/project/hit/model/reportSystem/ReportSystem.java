@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -83,7 +84,7 @@ public class ReportSystem extends Report implements ReportSystemRepository {
             cell = row.createCell(3);
             cell.setCellValue(i.getPrice());
             cell = row.createCell(4);
-            cell.setCellValue(sdf.format(i.getDate().getTime()));
+            cell.setCellValue(i.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             cell = row.createCell(5);
             cell.setCellValue(i.getDetails());
         }

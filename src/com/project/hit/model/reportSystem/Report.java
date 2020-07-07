@@ -1,33 +1,34 @@
 package com.project.hit.model.reportSystem;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Report {
-    protected Date startDate;
-    protected Date endDate;
+    protected LocalDate startDate;
+    protected LocalDate endDate;
     protected int supplierId;
 
     public Report(){
-       this.startDate = new GregorianCalendar(1,1,1900).getTime();
-       this.endDate = Calendar.getInstance().getTime();
+       this.startDate = LocalDate.of(1900,1,1);
+       this.endDate = LocalDate.now();
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
     public void setStartDate(int day, int month, int year) {
-        this.startDate = new GregorianCalendar(year,month-1,day).getTime();
+        this.startDate = LocalDate.of(year, month, day);
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
     public void setEndDate(int day, int month, int year) {
-        this.endDate = new GregorianCalendar(year,month-1,day).getTime();
+        this.endDate = LocalDate.of(year, month, day);
     }
 
     public int getSupplierId() {
