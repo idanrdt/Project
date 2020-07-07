@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
+import org.apache.commons.math3.exception.NullArgumentException;
+
 public class OrderSystem implements OrderSystemRepository {
 
     private Set<Order> orders;
@@ -37,15 +39,20 @@ public class OrderSystem implements OrderSystemRepository {
      * the function add a new order to a Set collection and automatic save
      * and update the supplier total expenses
      * @param order
+     * @throws SupplierNotFoundException 
+     * @throws EnumNameNotFoundException 
+     * @throws IOException 
+     * @throws ClassNotFoundException 
+     * @throws OrderExistException 
      * @throws Exception if there's a problem with the order object
      */
     @Override
-    public void createOrder(Order order) throws Exception {
+    public void createOrder(Order order) throws IOException, EnumNameNotFoundException, SupplierNotFoundException, ClassNotFoundException, OrderExistException {
         if (order == null) {
-            throw new Exception("Order cannot be NULL");
+            throw new NullArgumentException();
         }
         if (this.orders.contains(order)) {
-            throw new Exception("Order number: " +order.getOrderNumber() +" Already exists!");
+            throw new OrderExistException("Order number: " +order.getOrderNumber() +" Already exists!");
         }
         //***update supplier and save***//
         double price = order.getPrice();
@@ -76,7 +83,6 @@ public class OrderSystem implements OrderSystemRepository {
     /**
      * the function delete order from the list and update the supplier total expenses
      * @param order object
-     * @return true if everything was successful
      * @throws OrderNotFoundExcption if the order does not exist
      * @throws IOException if cant save the Set on file
      * @throws EnumNameNotFoundException if Enum value does not exist

@@ -9,6 +9,8 @@ import com.project.hit.controller.mainController.MainPageController;
 import com.project.hit.controller.mainController.NavigationFailedException;
 import com.project.hit.controller.managerController.ManagerController;
 import com.project.hit.controller.managerController.ManagerPageController;
+import com.project.hit.controller.orderController.OrderController;
+import com.project.hit.controller.orderController.OrderPageController;
 import com.project.hit.controller.reportController.ReportController;
 import com.project.hit.controller.reportController.ReportPageController;
 import com.project.hit.controller.supplierController.SupplierController;
@@ -18,6 +20,8 @@ import com.project.hit.model.authenticationSystem.AuthenticationSystem;
 import com.project.hit.model.managerSystem.ManagerProperties;
 import com.project.hit.model.managerSystem.ManagerPropertiesRepository;
 import com.project.hit.model.managerSystem.details.User;
+import com.project.hit.model.orderSystem.OrderSystem;
+import com.project.hit.model.orderSystem.OrderSystemRepository;
 import com.project.hit.model.reportSystem.ReportSystem;
 import com.project.hit.model.reportSystem.ReportSystemRepository;
 import com.project.hit.model.supplierSystem.MangeSupplier;
@@ -29,6 +33,8 @@ import com.project.hit.view.mainView.MainPageView;
 import com.project.hit.view.mainView.MainView;
 import com.project.hit.view.managerView.ManagerPageView;
 import com.project.hit.view.managerView.ManagerView;
+import com.project.hit.view.orderView.OrderPageView;
+import com.project.hit.view.orderView.OrderView;
 import com.project.hit.view.supplierView.SupplierPageView;
 import com.project.hit.view.supplierView.SupplierView;
 
@@ -172,6 +178,25 @@ public class ViewSwitcher {
 	}
 	
 	private static void startOrder(User user) throws NavigationFailedException {
+		
+		OrderView view = new OrderPageView();
+		try {
+			OrderSystemRepository orderModel = OrderSystem.getOrderSystem();
+			
+			MangeSupplier supplierModel = MangeSupplier.getMangeSupplierSinglton();
+			
+			SupplierController supplierController = new SupplierPageController(supplierModel);
+			
+			OrderController orderController = new OrderPageController(orderModel);
+						
+			view.setController(orderController, supplierController);
+			
+			view.start();
+		} catch (ClassNotFoundException | EnumNameNotFoundException e) {
+			throw new NavigationFailedException("File missing or corrupted");
+		} catch (IOException e) {
+			throw new NavigationFailedException("Faild to navigate");
+		}
 
 	}
 	
