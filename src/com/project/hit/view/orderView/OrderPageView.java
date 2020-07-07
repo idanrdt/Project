@@ -83,7 +83,7 @@ public class OrderPageView implements OrderView {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					orderController.createOrder(new Order(supplierController.findSupplier(Integer.parseInt(addPanel.GetSupplierNumber())),
-							Double.parseDouble(addPanel.GetSupplierNumber()),
+							Double.parseDouble(addPanel.getPrice()),
 							addPanel.getDescription()));
 				} catch (ClassNotFoundException | IOException e1) {
 					setError(e1.getMessage());

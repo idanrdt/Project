@@ -21,7 +21,7 @@ public class FileChooser extends JPanel {
 	    chooser.setAcceptAllFileFilterUsed(false);
 	    add(chooser);
 	    if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-	    	return chooser.getCurrentDirectory().toString();
+	    	return chooser.getSelectedFile().toString();
 	      } else {
 	    	  return null;
 	      }
