@@ -32,8 +32,11 @@ public class EditSearchOrderPanel extends JPanel {
 	private JButton findButton;
 	private JButton saveButton;
 	private JButton resetButton;
+	private JButton exportToPdfButton;
 	private JLabel welcomeTitle;
 	private JLabel welcomeSubTitle;
+	
+	private Order order;
 
 	/**
 	 * Create the panel.
@@ -203,6 +206,14 @@ public class EditSearchOrderPanel extends JPanel {
 		gbc_resetButton.gridx = 2;
 		gbc_resetButton.gridy = 5;
 		add(resetButton, gbc_resetButton);
+		
+		exportToPdfButton = new JButton("Export To PDF");
+		exportToPdfButton.setEnabled(false);
+		GridBagConstraints gbc_exportToPDFButton = new GridBagConstraints();
+		gbc_exportToPDFButton.anchor = GridBagConstraints.CENTER;
+		gbc_exportToPDFButton.gridx = 1;
+		gbc_exportToPDFButton.gridy = 5;
+		add(exportToPdfButton,gbc_exportToPDFButton);
 	}
 	
 	/**
@@ -229,12 +240,17 @@ public class EditSearchOrderPanel extends JPanel {
 		resetButton.addActionListener(al);
 	}
 	
+	public void addExportPDFButtonListener(ActionListener al) {
+		exportToPdfButton.addActionListener(al);
+	}
+	
 	/**
 	 * Sets all the text fields to the {@link Order} values.
 	 * @param order - the {@link Order} that contain the values.
 	 */
 	public void setTextToFileds(Order order) {
 		if(order != null) {
+			this.order = order;
 			supplierCompanyNameField.setText(order.getSupplier().getCompanyName());
 			priceField.setText(String.valueOf(order.getPrice()));
 			descriptionField.setText(order.getDetails());
@@ -275,6 +291,10 @@ public class EditSearchOrderPanel extends JPanel {
 				};
 	}
 	
+	public Order getCurrentOrder() {
+		return this.order;
+	}
+	
 	/**
 	 * Enable or disable the text fields.
 	 * @param enable - the parameter to enable or disable.
@@ -283,5 +303,6 @@ public class EditSearchOrderPanel extends JPanel {
 		priceField.setEnabled(enable);
 		descriptionField.setEnabled(enable);
 		saveButton.setEnabled(enable);
+		exportToPdfButton.setEnabled(enable);
 	}
 }

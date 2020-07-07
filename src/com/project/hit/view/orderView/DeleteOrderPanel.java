@@ -21,11 +21,11 @@ import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 public class DeleteOrderPanel extends JPanel {
 
 	private static final long serialVersionUID = 101L;
-	private JButton removeButton;
 	private JTable table;
 	private Set<Order> set;
 	private String[][] orderData;
 	private JButton refreshButton;
+	private JButton removeButton;
 	private DefaultTableModel tableModel;
 	private DefaultTableCellRenderer centerRenderer;
 	private String[] columnNames = {"Order Number",

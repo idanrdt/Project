@@ -9,12 +9,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.DimensionUIResource;
 
+import com.itextpdf.text.DocumentException;
 import com.project.hit.controller.orderController.OrderController;
 import com.project.hit.controller.supplierController.SupplierController;
 import com.project.hit.model.orderSystem.Order;
 import com.project.hit.model.orderSystem.OrderExistException;
 import com.project.hit.model.orderSystem.OrderNotFoundExcption;
 import com.project.hit.model.supplierSystem.SupplierNotFoundException;
+import com.project.hit.view.FileChooser;
 
 public class OrderPageView implements OrderView {
 	
@@ -24,6 +26,7 @@ public class OrderPageView implements OrderView {
 	private AddOrderPanel addPanel;
 	private EditSearchOrderPanel editPanel;
 	private DeleteOrderPanel deletePanel;
+	private FileChooser fileChooser;
 	
 	public OrderPageView() {
 	}
@@ -55,6 +58,8 @@ public class OrderPageView implements OrderView {
 		mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setPreferredSize(new DimensionUIResource(370, 350));
 		
+        fileChooser = new FileChooser();
+        
         addPanel = new AddOrderPanel();
 		editPanel = new EditSearchOrderPanel();
 		deletePanel = new DeleteOrderPanel(orderController.getOrders());
@@ -133,6 +138,18 @@ public class OrderPageView implements OrderView {
 					orderController.editOrder(editPanel.getOrderNumberFromUser(), editPanel.getUpdatedOrder());
 				} catch (NumberFormatException | ClassNotFoundException | IOException | OrderNotFoundExcption e1) {
 					setError("Error saving the order.\nPlease try again");
+				}
+			}
+		});
+		
+		editPanel.addExportPDFButtonListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					orderController.createOrderPDF(editPanel.getCurrentOrder(), fileChooser.getSselectedLocation());
+				} catch (IOException | DocumentException e1) {
+					setError(e1.getMessage());
 				}
 			}
 		});

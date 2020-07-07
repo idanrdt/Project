@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import com.project.hit.controller.reportController.ReportController;
 import com.project.hit.model.managerSystem.NoUserExistsException;
 import com.project.hit.model.reportSystem.ReportEmptyExcption;
+import com.project.hit.view.FileChooser;
 
 public class ReportPageView implements ReportView{
 	

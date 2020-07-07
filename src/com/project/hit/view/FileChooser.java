@@ -1,4 +1,4 @@
-package com.project.hit.view.ReportView;
+package com.project.hit.view;
 
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
