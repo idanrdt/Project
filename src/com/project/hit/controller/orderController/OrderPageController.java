@@ -32,7 +32,7 @@ public class OrderPageController implements OrderController{
 	@Override
 	public void editOrder(String orderNumber, String[] updateList) throws NumberFormatException, IOException, OrderNotFoundExcption, ClassNotFoundException {
 		try {
-			model.updateOrder(Integer.parseInt(orderNumber)).details(updateList[1]).price(Integer.parseInt(updateList[0])).update();
+			model.updateOrder(Integer.parseInt(orderNumber)).details(updateList[1]).price(Double.parseDouble(updateList[0])).update();
 		}
 		catch (ClassNotFoundException | EnumNameNotFoundException e1) {
 			throw new ClassNotFoundException();

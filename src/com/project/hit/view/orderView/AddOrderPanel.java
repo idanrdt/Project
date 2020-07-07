@@ -10,6 +10,8 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
 
+import org.apache.commons.math3.exception.NullArgumentException;
+
 import com.project.hit.view.supplierView.NumberFilter;
 
 import java.awt.Color;
@@ -159,14 +161,20 @@ public class AddOrderPanel extends JPanel {
 	}
 	
 	public String GetSupplierNumber() {
+		if(supplierNumberField.getText().isEmpty())
+			throw new NullArgumentException();
 		return supplierNumberField.getText();
 	}
 	
 	public String getPrice() {
+		if(priceField.getText().isEmpty())
+			throw new NullArgumentException();
 		return priceField.getText();
 	}
 	
 	public String getDescription() {
+		if(descriptionField.getText().isEmpty())
+			throw new NullArgumentException();
 		return descriptionField.getText();
 	}
 	

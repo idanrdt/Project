@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.DimensionUIResource;
 
+import org.apache.commons.math3.exception.NullArgumentException;
+
 import com.itextpdf.text.DocumentException;
 import com.project.hit.controller.orderController.OrderController;
 import com.project.hit.controller.supplierController.SupplierController;
@@ -90,6 +92,8 @@ public class OrderPageView implements OrderView {
 					orderController.createOrder(new Order(supplierController.findSupplier(Integer.parseInt(addPanel.GetSupplierNumber())),
 							Double.parseDouble(addPanel.getPrice()),
 							addPanel.getDescription()));
+					JOptionPane.showMessageDialog(new JFrame(),"Order Created!","Succsess",JOptionPane.INFORMATION_MESSAGE);
+					addPanel.resetFields();
 				} catch (ClassNotFoundException | IOException e1) {
 					setError(e1.getMessage());
 				} catch (SupplierNotFoundException e1) {
@@ -98,6 +102,8 @@ public class OrderPageView implements OrderView {
 					setError("Order already exist.\nPlease try again.");
 				} catch (NumberFormatException e1) {
 					setError("Price value is invalid.\nPlease user diffrent value.");
+				} catch (NullArgumentException e1) {
+					setError("One or more fields are empty.");
 				}
 			}
 		});
@@ -136,6 +142,8 @@ public class OrderPageView implements OrderView {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					orderController.editOrder(editPanel.getOrderNumberFromUser(), editPanel.getUpdatedOrder());
+					JOptionPane.showMessageDialog(new JFrame(),"Order Saved!","Succsess",JOptionPane.INFORMATION_MESSAGE);
+					editPanel.resetFields();
 				} catch (NumberFormatException | ClassNotFoundException | IOException | OrderNotFoundExcption e1) {
 					setError("Error saving the order.\nPlease try again");
 				}
