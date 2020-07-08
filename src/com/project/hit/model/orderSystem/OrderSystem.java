@@ -13,8 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Set;
+
+import org.apache.commons.math3.exception.NullArgumentException;
 
 public class OrderSystem implements OrderSystemRepository {
 
@@ -37,23 +40,27 @@ public class OrderSystem implements OrderSystemRepository {
      * the function add a new order to a Set collection and automatic save
      * and update the supplier total expenses
      * @param order
+     * @throws SupplierNotFoundException 
+     * @throws EnumNameNotFoundException 
+     * @throws IOException 
+     * @throws ClassNotFoundException 
+     * @throws OrderExistException 
      * @throws Exception if there's a problem with the order object
      */
     @Override
-    public void createOrder(Order order) throws Exception {
+    public void createOrder(Order order) throws IOException, EnumNameNotFoundException, SupplierNotFoundException, ClassNotFoundException, OrderExistException {
         if (order == null) {
-            throw new Exception("Order cannot be NULL");
+            throw new NullArgumentException();
         }
         if (this.orders.contains(order)) {
-            throw new Exception("Order number: " +order.getOrderNumber() +" Already exists!");
+            throw new OrderExistException("Order number: " + order.getOrderNumber() +" Already exists!");
         }
         //***update supplier and save***//
-        double price = order.getPrice();
 
         MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
         for (Supplier supplier : mangeSupplier.getSuppliers()){
             if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
-                mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price).update();
+                mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()+order.getPrice()).update();
         }
 
         this.orders.add(order);
@@ -76,7 +83,6 @@ public class OrderSystem implements OrderSystemRepository {
     /**
      * the function delete order from the list and update the supplier total expenses
      * @param order object
-     * @return true if everything was successful
      * @throws OrderNotFoundExcption if the order does not exist
      * @throws IOException if cant save the Set on file
      * @throws EnumNameNotFoundException if Enum value does not exist
@@ -87,11 +93,12 @@ public class OrderSystem implements OrderSystemRepository {
         if(this.orders.contains(order)) {
             this.orders.remove(order);
 
-            double price = order.getPrice();
             MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
             for (Supplier supplier : mangeSupplier.getSuppliers()){
-                if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
-                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()-price).update();
+                if(supplier.getSupplierId() == order.getSupplier().getSupplierId()) {
+                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()-order.getPrice()).update();
+                    break;
+                }
             }
 
             this.orderFileManger.saveToFile(this.orders, FileNameSelect.ORDERFILE);
@@ -139,7 +146,6 @@ public class OrderSystem implements OrderSystemRepository {
     @Override
     public void createPdf(Order order, String Url) throws IOException, DocumentException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy\nHH:mm:ss");
-        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
         Document document = new Document();
         Url = Url +"/" + order.getOrderNumber() +".pdf";
         PdfWriter.getInstance(document, new FileOutputStream(Url));
@@ -147,7 +153,7 @@ public class OrderSystem implements OrderSystemRepository {
 
         String nowDate = sdf.format(new Date());
         String title = "Order number: " + order.getOrderNumber();
-        String orderDate = "\nDate: " + sdf2.format(order.getDate());
+        String orderDate = "\nDate: " + order.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String supplier = "\n\nSupplier Details:" +
                 "\nSupplier name: " + order.getSupplier().getCompanyName() +
                 "\nSupplier ID: " + order.getSupplier().getSupplierId() +

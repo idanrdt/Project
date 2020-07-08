@@ -49,7 +49,7 @@ class OrderSystemTest {
         assertThrows(Exception.class, ()->orderSystem.createOrder(order));
         assertThrows(Exception.class, ()->orderSystem.createOrder(null));
         try {
-            assertEquals(500,mangeSupplier.findSupplier(orderId).getTotalExpenses());
+            assertEquals(500,mangeSupplier.findSupplier(supplier.getSupplierId()).getTotalExpenses());
         } catch (SupplierNotFoundException e) {
             e.printStackTrace();
         }

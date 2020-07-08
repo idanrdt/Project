@@ -16,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,8 +37,8 @@ class ReportSystemTest {
         order1 = new Order(supplier,300,"test1");
         order2 = new Order(supplier,100,"test2");
 
-        order1.setDate(new GregorianCalendar(2020,1,1).getTime());
-        order2.setDate(new GregorianCalendar(2020,5,1).getTime());
+        order1.setDate(LocalDate.of(2020,1,1));
+        order2.setDate(LocalDate.of(2020,5,1));
 
         mangeSupplier =  MangeSupplier.getMangeSupplierSinglton();
         orderSystem = OrderSystem.getOrderSystem();
@@ -49,7 +50,6 @@ class ReportSystemTest {
         orderSystem.createOrder(order2);
 
         reportSystem = new ReportSystem();
-
     }
 
     @Test
@@ -58,6 +58,7 @@ class ReportSystemTest {
          assertSame(new HashSet<Order>().getClass(), assertDoesNotThrow(()->reportSystem.genarateReport().createReport()).getClass());
 
          assertEquals(reportSystem.getReport(),orderSystem.getOrders());
+         
          assertTrue(reportSystem.getReport().contains(order));
     }
 
@@ -69,8 +70,6 @@ class ReportSystemTest {
         assertTrue(reportSystem.getReport().contains(order));
 
         assertThrows(ReportEmptyExcption.class,()->reportSystem.genarateReport().supplierId(123456).createReport());
-
-
     }
 
     @Test
@@ -80,7 +79,7 @@ class ReportSystemTest {
 
         assertFalse(reportSystem.getReport().contains(order1));
 
-        assertDoesNotThrow(()->reportSystem.genarateReport().startDate(1,0,2020).createReport());
+        assertDoesNotThrow(()->reportSystem.genarateReport().startDate(1,1,2020).createReport());
 
         assertTrue(reportSystem.getReport().contains(order1));
         assertTrue(reportSystem.getReport().contains(order2));

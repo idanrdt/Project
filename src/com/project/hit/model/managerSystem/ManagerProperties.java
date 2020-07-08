@@ -25,11 +25,17 @@ public class ManagerProperties implements ManagerPropertiesRepository {
 
     @Override
     public void createNewUse(User user) throws UserExistException, IOException, EnumNameNotFoundException {
-        if(this.users.contains(user)){
-            throw new UserExistException("User with ID: " + user.getId() + " already exists in the system ");
+        try {
+        	this.users.contains(managerProperties.findUser(user.getId()));
         }
-        this.users.add(user);
-        this.userFileManger.saveToFile(this.users,FileNameSelect.USERFILE);
+        catch(NoUserExistsException e) {
+        	if(!(this.users.contains(user))){
+        		this.users.add(user);
+            	this.userFileManger.saveToFile(this.users,FileNameSelect.USERFILE);
+            	return;
+        	}
+        }
+        throw new UserExistException("User with ID: " + user.getId() + " already exists in the system ");
     }
 
     @Override

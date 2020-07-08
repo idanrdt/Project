@@ -27,6 +27,10 @@ public class MainManagerPanel extends JPanel {
 					
 		}
 	
+	/**
+	 * Adds new {@link ActionListener} to the settings button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addSettingsListener(ActionListener al) {
 		settingsButton.addActionListener(al);
 	}

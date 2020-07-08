@@ -42,9 +42,9 @@ public class User extends Person implements Serializable {
 	 * @return-true if there is  access and false if there is no access
 	 */
 	public boolean getManager() {
-		return this.isManager;
-		
+		return this.isManager;	
 	}
+	
 	/**
 	 * Sets the access to the report system
 	 * @param access-true for allow access and false for remove access
@@ -52,6 +52,7 @@ public class User extends Person implements Serializable {
 	public void setReportSystem(Boolean access) {
 		this.reportSystem = access;
 	}
+	
 	/**
 	 * check if there is an access to the report system
 	 * @return-true if there is  access and false if there is no access
@@ -66,7 +67,6 @@ public class User extends Person implements Serializable {
 	 */
 	public void setManageSupplierAccsess(Boolean access) {
 		this.manageSupplierAccsess = access;
-		
 	}
 	
 	/**
@@ -77,6 +77,7 @@ public class User extends Person implements Serializable {
 		return this.manageSupplierAccsess;
 		
 	}
+	
 	/**
 	 * Sets the access order system
 	 * @param access-true for allow access and false for remove access
@@ -126,14 +127,6 @@ public class User extends Person implements Serializable {
 		User user = (User) o;
 		return Objects.equals(userName, user.userName) &&
 				Objects.equals(password, user.password) &&
-				Objects.equals(isManager, user.isManager) &&
-				Objects.equals(reportSystem, user.reportSystem) &&
-				Objects.equals(manageSupplierAccsess, user.manageSupplierAccsess) &&
-				Objects.equals(orderSystemAccsess, user.orderSystemAccsess);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(userName, password, isManager, reportSystem, manageSupplierAccsess, orderSystemAccsess);
+				Objects.equals(isManager, user.isManager);
 	}
 }

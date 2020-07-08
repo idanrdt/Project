@@ -7,7 +7,7 @@ public interface MainController {
 	
 	/**
 	 * Navigate to a different view.
-	 * @param select - The requested window to display.
+	 * @param select - The requested {@link ViewSelect} to display.
 	 * @param user - {@link User} Object that logged in.
 	 * @throws NavigationFailedException if the navigation fails.
 	 */

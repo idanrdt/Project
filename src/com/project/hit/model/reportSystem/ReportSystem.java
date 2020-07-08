@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,28 +27,17 @@ public class ReportSystem extends Report implements ReportSystemRepository {
         this.report = new HashSet<>();
     }
 
-    /**
-     * the function generate report the function is built like builder design pattern
-     * Generate the report dynamically.
-     * The related functions are: startDate, endDate, supplierId
-     * and for the generate the report the function createReport
-     * @return ReportSystem
-     */
     @Override
     public ReportCreator genarateReport() {
         this.report = new HashSet<>();
         return new ReportCreator(this.report);
     }
-
+    
+    @Override
     public Set<Order> getReport() {
         return this.report;
     }
 
-    /**
-     * the function save a excel file from the report Set
-     * @param Url path to save the file
-     * @throws IOException If there is a problem opening the file
-     */
     @Override
     public void exportToExcel(String Url) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
@@ -62,7 +52,7 @@ public class ReportSystem extends Report implements ReportSystemRepository {
         // Creating a row at specific position
         // using predefined class provided by Apache POI
         String title[] = {"Order number", "Supplier name", "Supplier id", "Price", "Date", "Details"};
-        int rowIndex =0;
+        int rowIndex = 0;
 
         Row row = sheet.createRow(rowIndex++);
         for (int i = 0; i <title.length ; i++) {
@@ -83,7 +73,7 @@ public class ReportSystem extends Report implements ReportSystemRepository {
             cell = row.createCell(3);
             cell.setCellValue(i.getPrice());
             cell = row.createCell(4);
-            cell.setCellValue(sdf.format(i.getDate().getTime()));
+            cell.setCellValue(i.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             cell = row.createCell(5);
             cell.setCellValue(i.getDetails());
         }

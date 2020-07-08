@@ -100,7 +100,6 @@ public class SupplierUpdater {
         return this;
     }
 
-
     /**
      * Update and save the saves to the Database.
      * @throws IOException if the file can't open.

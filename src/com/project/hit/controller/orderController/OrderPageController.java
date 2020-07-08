@@ -1,47 +1,77 @@
 package com.project.hit.controller.orderController;
 
-import com.project.hit.model.OrderSystem;
-import com.project.hit.view.orderView.OrderView;
+import java.io.IOException;
+import java.util.Set;
+
+import com.itextpdf.text.DocumentException;
+import com.project.hit.fileManager.EnumNameNotFoundException;
+import com.project.hit.model.orderSystem.Order;
+import com.project.hit.model.orderSystem.OrderExistException;
+import com.project.hit.model.orderSystem.OrderNotFoundExcption;
+import com.project.hit.model.orderSystem.OrderSystemRepository;
+import com.project.hit.model.supplierSystem.SupplierNotFoundException;
 
 public class OrderPageController implements OrderController{
 	
-	private OrderView view;
-	private OrderSystem model;
-	public OrderPageController(OrderView view, OrderSystem model) {
-		this.view = view;
+	private OrderSystemRepository model;
+	
+	/**
+	 * THe controller constructor.
+	 * @param model - The {@link OrderSystemRepository} model.
+	 */
+	public OrderPageController(OrderSystemRepository model) {
 		this.model = model;
 	}
-
+	
 	@Override
-	public void createOrder(/*Order order*/)/*throws OrderNotSavedException*/ {
-		/*
-		 * try {
-		 *   model.createOrder(order)
-		 * }
-		 * catch(Exception e) {
-		 *   throw new OrderNotFoundException();
-		 * }  
-		 */
+	public void createOrder(Order order) throws ClassNotFoundException, IOException, SupplierNotFoundException, OrderExistException {
+		try {
+			model.createOrder(order);
+		}
+		catch (EnumNameNotFoundException | ClassNotFoundException e) {
+			throw new ClassNotFoundException();
+		}
 	}
 
 	@Override
-	public void editOrder(/*Order order*/) /*throws OrderNotFoundException*/{
-		/*
-		 * model.editOrder(order);
-		 */
+	public void editOrder(String orderNumber, String[] updateList) throws NumberFormatException, IOException, OrderNotFoundExcption, ClassNotFoundException {
+		try {
+			model.updateOrder(Integer.parseInt(orderNumber)).details(updateList[1]).price(Double.parseDouble(updateList[0])).update();
+		}
+		catch (ClassNotFoundException | EnumNameNotFoundException e1) {
+			throw new ClassNotFoundException();
+		} catch (SupplierNotFoundException e1) {
+			throw new OrderNotFoundExcption("Wrong Supplier");
+		}
 	}
 
 	@Override
-	public void cancelOrder(/*String number, Date date, String supplier*/) /*throws OrderNotFoundException*/{
-		/*
-		 * model.deleteOrder(String number, Date date, String supplier);
-		 */
+	public Order searchOrderByNumber(int number) throws OrderNotFoundExcption {
+		return model.findOrder(number);
+	}
+	
+	@Override
+	public Order searchOrderByName(String name) throws OrderNotFoundExcption {
+		return model.findOrder(name);
 	}
 
 	@Override
-	public void/*Order*/ searchOrder(/*String number, Date date, String supplier*/) /*throws OrderNotFoundException*/{
-		/*
-		 * return mode.searchOrder(number, date, supplier);
-		 */
+	public void deleteOrder(Order order) throws ClassNotFoundException, OrderNotFoundExcption, IOException, SupplierNotFoundException {
+		try {
+			model.deleteOrder(order);
+		}
+		catch (ClassNotFoundException | EnumNameNotFoundException e) {
+			throw new ClassNotFoundException();
+		}
+	}
+	
+	@Override
+	public void createOrderPDF(Order order, String location) throws IOException, DocumentException {
+		model.createPdf(order, location);
+	}
+
+	@Override
+	public Set<Order> getOrders() {
+		return model.getOrders();
 	}
 }

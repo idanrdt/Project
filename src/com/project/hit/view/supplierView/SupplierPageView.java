@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.plaf.DimensionUIResource;
 import org.apache.commons.math3.exception.NullArgumentException;
@@ -70,7 +71,7 @@ public class SupplierPageView implements SupplierView {
 		JTabbedPane mainPanel = new JTabbedPane(JTabbedPane.TOP);
 		mainPanel.addTab("Edit Supplier", null, editPanel, null);
 		mainPanel.addTab("Add Supplier", null, addPanel, null);
-		mainPanel.addTab("Delete Supplier", null, deletePanel, null);
+		mainPanel.addTab("Delete Supplier", null, deletePanel, null);		
 		
 		mainFrame.add(mainPanel);
 		mainFrame.pack();

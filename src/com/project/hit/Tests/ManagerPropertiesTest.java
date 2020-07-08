@@ -52,7 +52,7 @@ class ManagerPropertiesTest {
     @Order(3)
     @DisplayName("updater")
     void updater() {
-            assertSame(user.getClass(),assertDoesNotThrow(() ->managerProperties.updater("1").editUserName("2").update() ).getClass());
+            assertSame(user.getClass(),assertDoesNotThrow(() ->managerProperties.updater("1").editUserName("2").update()).getClass());
             assertThrows(NoUserExistsException.class,() -> managerProperties.updater("2").editUserName("3").update());
     }
 
@@ -60,8 +60,8 @@ class ManagerPropertiesTest {
     @Order(4)
     @DisplayName("delete user")
     void deleteUser() {
-        assertDoesNotThrow(() -> managerProperties.deleteUser(user));
-        assertThrows(NoUserExistsException.class,() -> managerProperties.deleteUser(user));
+        assertDoesNotThrow(() -> managerProperties.deleteUser(managerProperties.findUser("1")));
+        assertThrows(NoUserExistsException.class,() -> managerProperties.deleteUser(managerProperties.findUser("1")));
     }
 
 }

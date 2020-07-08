@@ -33,17 +33,17 @@ public class FileManger<T> {
     }
 
     /**
-     * Generic function that load a collections set from file
-     * @param select is a enum object call FileNameSelect
-     *        USERFILE for save user object
-     *        SUPPLIERFILE for save supplier object
-     *        ORDERFILE for save order object
-     *        example: FileNameSelect.USERFILE
-     * @return new HashSet<T>() if no file exists
-     *         else return the saved set
-     * @throws EnumNameNotFoundException if the enum param that not exists
-     * @throws IOException if the file can't open
-     * @throws ClassNotFoundException if <T> an object does not exist
+     * Generic function that load a collections set from a file.
+     * @param select {@link FileNameSelect}.
+     * <li>USERFILE for save user object.
+     * <li>SUPPLIERFILE for save supplier object.
+     * <li>ORDERFILE for save order object.
+     * <li>example: FileNameSelect.USERFILE.
+     * @return new {@link HashSet<T>} if no file exists.
+     *         else return the saved set.
+     * @throws EnumNameNotFoundException if the enum parameter that not exists.
+     * @throws IOException if the file can't open.
+     * @throws ClassNotFoundException if <T> an object does not exist.
      */
     public Set<T> loadFromFile(FileNameSelect select) throws EnumNameNotFoundException, IOException, ClassNotFoundException {
 

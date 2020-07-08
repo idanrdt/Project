@@ -306,8 +306,9 @@ public class AddSupplierPanel extends JPanel {
 		}
 		Supplier supplier = new SupplierBuilder()
 				.CompanyName(companyField.getText())
+				.SupplierPhoneNumber(phoneField.getText())
 				.SupplierAddress(addressField.getText())
-				.SupplierNumber(phoneField.getText())
+				.SupplierNumber(supplierNumberField.getText())
 				.SupplierEmailAddress(emailField.getText())
 				.BankAccount(new BankAccount(bankField.getText(), accountNumberField.getText(), branchField.getText()))
 				.build();

@@ -32,7 +32,7 @@ public class ManagerPageController implements ManagerController {
 	@Override
 	public void editUser(String[] updateArray) throws NoUserExistsException{
 		try {
-			model.updater("")
+			model.updater(updateArray[0])
 			.editUserName(updateArray[1])
 			.editName(updateArray[2])
 			.editAddress(updateArray[3])

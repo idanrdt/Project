@@ -144,7 +144,7 @@ public class ManagerPageView implements ManagerView {
 					setError(e1.getMessage());
 				} catch (NullArgumentException e1) {
 					setError("One or more fields are empty");
-				}
+				} 
 			}
 		});
 	}
@@ -175,6 +175,4 @@ public class ManagerPageView implements ManagerView {
 	private void setError(String msg) {
 		JOptionPane.showMessageDialog(new JFrame(),msg,"Error",JOptionPane.ERROR_MESSAGE);
 	}
-	
-
 }

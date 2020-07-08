@@ -6,12 +6,7 @@ import com.project.hit.viewSwitcher.ViewSelect;
 import com.project.hit.viewSwitcher.ViewSwitcher;
 
 public class MainPageController implements MainController {
-	private MainView view;  //for future usage. Remove this line if not used (and in the c'tor also!).
 	ViewSwitcher viewSwitcher;
-	
-	public MainPageController(MainView view) {
-		this.view = view;
-	}
 	
 	@Override
 	public void navigateTo(ViewSelect select, User user) throws NavigationFailedException {

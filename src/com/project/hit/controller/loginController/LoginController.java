@@ -8,9 +8,9 @@ import com.project.hit.model.authenticationSystem.InvalidCredentialsException;
 public interface LoginController {
 	
 	/**
-	 * This functions verify that the user details are corresponding the database.
-	 * @param username - the user name of the current user.
-	 * @param password - the password of the current user.
+	 * verifies that the {@link User} credentials are corresponding the database.
+	 * @param username - the user name of the current {@link User}.
+	 * @param password - the password of the current {@link User}.
 	 * @throws InvalidCredentialsException if the credentials are wrong.
 	 * @throws IOException if the file can't open.
 	 * @throws ClassNotFoundException if the object does not exist.

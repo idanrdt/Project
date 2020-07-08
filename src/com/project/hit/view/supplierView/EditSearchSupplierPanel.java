@@ -129,7 +129,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		innerDetailsPanel.add(companyLabel, gbc_companyLabel);
 		
 		companyField = new JTextField();
-		companyField.setEnabled(false);
+		companyField.setEditable(false);
 		GridBagConstraints gbc_companyField = new GridBagConstraints();
 		gbc_companyField.insets = new Insets(5, 0, 5, 5);
 		gbc_companyField.fill = GridBagConstraints.HORIZONTAL;
@@ -255,7 +255,7 @@ public class EditSearchSupplierPanel extends JPanel {
 		innerDetailsPanel.add(expensesLabel, gbc_expensesLabel);
 		
 		expencesField = new JTextField();
-		expencesField.setEnabled(false);
+		expencesField.setEditable(false);
 		GridBagConstraints gbc_expencesField = new GridBagConstraints();
 		gbc_expencesField.insets = new Insets(0, 0, 5, 5);
 		gbc_expencesField.fill = GridBagConstraints.HORIZONTAL;
@@ -346,16 +346,11 @@ public class EditSearchSupplierPanel extends JPanel {
 	
 	/**
 	 * Gets the {@link Supplier} id from the user.
-	 * @return the {@link Supplier} id recived from the user.
+	 * @return the {@link Supplier} id received from the user.
 	 */
 	public String getSupplierNumberFromUser() {
 		return supplierIDField.getText();
 	}
-	
-	/**
-	 * Create new {@link Supplier} from the user values.
-	 * @return a new {@link Supplier} object.
-	 */
 	
 	/**
 	 * Create {@link String} array that contains all details inserted by the user.
