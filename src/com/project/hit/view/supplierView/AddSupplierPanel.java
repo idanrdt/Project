@@ -301,14 +301,14 @@ public class AddSupplierPanel extends JPanel {
 		if(companyField.getText().isEmpty() ||	addressField.getText().isEmpty() ||
 				phoneField.getText().isEmpty() || emailField.getText().isEmpty() ||
 				bankField.getText().isEmpty() || accountNumberField.getText().isEmpty() ||
-				branchField.getText().isEmpty() || phoneField.getText().isEmpty()) {
+				branchField.getText().isEmpty()) {
 			throw new NullArgumentException();
 		}
 		Supplier supplier = new SupplierBuilder()
 				.CompanyName(companyField.getText())
 				.SupplierPhoneNumber(phoneField.getText())
 				.SupplierAddress(addressField.getText())
-				.SupplierNumber(phoneField.getText())
+				.SupplierNumber(supplierNumberField.getText())
 				.SupplierEmailAddress(emailField.getText())
 				.BankAccount(new BankAccount(bankField.getText(), accountNumberField.getText(), branchField.getText()))
 				.build();
