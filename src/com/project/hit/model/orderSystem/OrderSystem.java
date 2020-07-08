@@ -56,12 +56,11 @@ public class OrderSystem implements OrderSystemRepository {
             throw new OrderExistException("Order number: " + order.getOrderNumber() +" Already exists!");
         }
         //***update supplier and save***//
-        double price = order.getPrice();
 
         MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
         for (Supplier supplier : mangeSupplier.getSuppliers()){
             if(supplier.getSupplierId() == order.getSupplier().getSupplierId())
-                mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(price).update();
+                mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()+order.getPrice()).update();
         }
 
         this.orders.add(order);
@@ -94,11 +93,10 @@ public class OrderSystem implements OrderSystemRepository {
         if(this.orders.contains(order)) {
             this.orders.remove(order);
 
-            double price = order.getPrice();
             MangeSupplier mangeSupplier = MangeSupplier.getMangeSupplierSinglton();
             for (Supplier supplier : mangeSupplier.getSuppliers()){
                 if(supplier.getSupplierId() == order.getSupplier().getSupplierId()) {
-                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()-price).update();
+                    mangeSupplier.updater(supplier.getSupplierId()).totalExpenses(supplier.getTotalExpenses()-order.getPrice()).update();
                     break;
                 }
             }
