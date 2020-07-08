@@ -27,28 +27,17 @@ public class ReportSystem extends Report implements ReportSystemRepository {
         this.report = new HashSet<>();
     }
 
-    /**
-     * the function generate report the function is built like builder design pattern
-     * Generate the report dynamically.
-     * The related functions are: startDate, endDate, supplierId
-     * and for the generate the report the function createReport
-     * @return ReportSystem
-     */
     @Override
     public ReportCreator genarateReport() {
         this.report = new HashSet<>();
         return new ReportCreator(this.report);
     }
-
+    
+    @Override
     public Set<Order> getReport() {
         return this.report;
     }
 
-    /**
-     * the function save a excel file from the report Set
-     * @param Url path to save the file
-     * @throws IOException If there is a problem opening the file
-     */
     @Override
     public void exportToExcel(String Url) throws IOException {
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");

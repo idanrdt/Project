@@ -291,6 +291,10 @@ public class EditSearchOrderPanel extends JPanel {
 				};
 	}
 	
+	/**
+	 * Gets the presented {@link Order}.
+	 * @return The presented {@link Order}.
+	 */
 	public Order getCurrentOrder() {
 		return this.order;
 	}

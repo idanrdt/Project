@@ -20,17 +20,33 @@ public interface ManagerPropertiesRepository {
 
 
     /**
-     * the function delete user from the system
-     * @param user 
-     * @throws NoUserExistsException
-     * @throws IOException
-     * @throws EnumNameNotFoundException
+     * Deletes {@link User} from the DataBase.
+     * @param user - The {@link User} to delete.
+     * @throws NoUserExistsException If the {@link User} not exist.
+     * @throws IOException If the {@link User} fails to save in the DataBase.
+     * @throws EnumNameNotFoundException If the {@link User} fails to save.
      */
     public void deleteUser(User user) throws NoUserExistsException, IOException, EnumNameNotFoundException;
 
+    /**
+     * Find the requested {@link User} by {@link User} ID.
+     * @param userId - The {@link User} ID.
+     * @return The requested {@link User}.
+     * @throws NoUserExistsException If no {@link User} exist.
+     */
     public User findUser(String userId) throws NoUserExistsException;
-
+    
+    /**
+     * Get {@link UserUpdater} instance for update {@link User} by {@link User} ID.
+     * @param userId - the {@link User} ID.
+     * @return{@link UserUpdater} instance.
+     * @throws NoUserExistsException If no {@link User} exist.
+     */
     public UserUpdater updater(String userId) throws NoUserExistsException;
-
+    
+    /**
+     * Gets the current {@link User} {@link Set}.
+     * @return {@link Set} of {@link User}.
+     */
     public Set<User> getUsers();
     }

@@ -44,8 +44,7 @@ public class OrderPageView implements OrderView {
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
-		
+		mainFrame.dispose();
 	}
 
 	@Override
@@ -82,6 +81,9 @@ public class OrderPageView implements OrderView {
 		mainFrame.setVisible(true);
 	}
 	
+	/**
+	 * Adds {@link ActionListener} to the {@link AddOrderPanel}.
+	 */
 	public void addAddPanelListeners() {
 		
 		addPanel.AddAddButtonListener(new ActionListener() {
@@ -117,6 +119,9 @@ public class OrderPageView implements OrderView {
 		});
 	}
 	
+	/**
+	 * Adds {@link ActionListener} to the {@link EditSearchOrderPanel}.
+	 */
 	public void addEditPanelListeners() {
 		editPanel.addFindButtonListener(new ActionListener() {
 			
@@ -163,6 +168,9 @@ public class OrderPageView implements OrderView {
 		});
 	}
 	
+	/**
+	 * Adds {@link ActionListener} to the {@link DeleteOrderPanel}.
+	 */
 	public void addDeletePanelListeners() {
 		deletePanel.addRemoveActionListener(new ActionListener() {
 			

@@ -16,6 +16,10 @@ public class SupplierPageController implements SupplierController {
 	
 	private MangeSupplier model;
 	
+	/**
+	 * The controller constructor.
+	 * @param model - The {@link ManageSupplier} model.
+	 */
 	public SupplierPageController(MangeSupplier model) {
 		this.model = model;
 	}

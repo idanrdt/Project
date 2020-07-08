@@ -41,14 +41,27 @@ public class MainPanel extends JPanel {
 		add(reportButton, gbc_btnNewButton_2);
 					
 		}
+	
+	/**
+	 * Adds new {@link ActionListener} to the add {@link Order} button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addOrderListener(ActionListener al) {
 		ordersButton.addActionListener(al);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the add {@link Report} button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addReportListener(ActionListener al) {
 		reportButton.addActionListener(al);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the add {@link Supplier} button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void addSupplierListener(ActionListener al) {
 		supplierButton.addActionListener(al);
 	}

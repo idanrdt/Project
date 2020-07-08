@@ -14,6 +14,10 @@ public class FileChooser extends JPanel {
 
 	}
 	
+	/**
+	 * Return the selected path.
+	 * @return The selected saving path.
+	 */
 	public String getSselectedLocation() {
 	    chooser.setCurrentDirectory(new java.io.File("."));
 	    chooser.setDialogTitle("Choose diffrent save location");

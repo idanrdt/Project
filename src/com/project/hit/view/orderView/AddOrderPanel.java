@@ -152,32 +152,55 @@ public class AddOrderPanel extends JPanel {
 		add(resetButton, gbc_resetButton);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the add button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void AddAddButtonListener(ActionListener al) {
 		addButton.addActionListener(al);
 	}
 	
+	/**
+	 * Adds new {@link ActionListener} to the reset button. 
+	 * @param al - the {@link ActionListener}.
+	 */
 	public void AddResetButtonListener(ActionListener al) {
 		resetButton.addActionListener(al);
 	}
 	
+	/**
+	 * Gets the {@link Supplier} number.
+	 * @return The {@link Supplier} number.
+	 */
 	public String GetSupplierNumber() {
 		if(supplierNumberField.getText().isEmpty())
 			throw new NullArgumentException();
 		return supplierNumberField.getText();
 	}
 	
+	/**
+	 * Gets the {@link Order} price.
+	 * @return The {@link Order} price.
+	 */
 	public String getPrice() {
 		if(priceField.getText().isEmpty())
 			throw new NullArgumentException();
 		return priceField.getText();
 	}
 	
+	/**
+	 * Gets the {@link Order} description.
+	 * @return The {@link Order} description.
+	 */
 	public String getDescription() {
 		if(descriptionField.getText().isEmpty())
 			throw new NullArgumentException();
 		return descriptionField.getText();
 	}
 	
+	/**
+	 * Reset the {@link JTxtFiled} of this {@link JPanel}.
+	 */
 	public void resetFields() {
 		priceField.setText("");
 		supplierNumberField.setText("");

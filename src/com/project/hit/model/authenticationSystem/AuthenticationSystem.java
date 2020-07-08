@@ -11,13 +11,18 @@ public class AuthenticationSystem {
 	private Set<User> userSet;
 	private FileManger<User> files;
 	static AuthenticationSystem authenticationSystem;
+	
 	/**
 	 * The {@link AuthenticationSystem} Constructor.
 	 */
 	private AuthenticationSystem() {
 		files = new FileManger<>();
 	}
-
+	
+	/**
+	 * Gets the instance of {@link AuthenticationSystem}.
+	 * @return instance of {@link AuthenticationSystem}.
+	 */
 	public static AuthenticationSystem getAuthenticationSystem() {
 		if(authenticationSystem == null)
 			authenticationSystem = new AuthenticationSystem();

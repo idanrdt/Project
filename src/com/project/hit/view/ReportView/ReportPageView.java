@@ -32,8 +32,7 @@ public class ReportPageView implements ReportView{
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
-		
+		mainFrame.dispose();
 	}
 
 	@Override

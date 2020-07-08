@@ -19,7 +19,7 @@ public class ReportCreator extends Report {
     }
 
     /**
-     * The function is related to genarateReport
+     * Sets the start date. This function is related to genarateReport.
      * The function gets the start date you want to start to build the report (Optional)
      * @param day
      * @param month
@@ -32,7 +32,7 @@ public class ReportCreator extends Report {
     }
 
     /**
-     * The function is related to genarateReport
+     * Sets the end date. This function is related to genarateReport.
      * The function gets the end date you want to build the report (Optional)
      * @param day
      * @param month
@@ -45,7 +45,7 @@ public class ReportCreator extends Report {
     }
 
     /**
-     * The function is related to genarateReport
+     * Sets the {@link Supplier} ID. This function is related to genarateReport.
      * The function gets the supplier you want to build a report for him (Optional)
      * @param supplierId
      * @return
@@ -56,13 +56,12 @@ public class ReportCreator extends Report {
     }
 
     /**
-     * The function is related to genarateReport
-     * To end the function genarateReport process, the function createReport must be activated (Required)
-     * @return
-     * @throws ReportEmptyExcption
-     * @throws EnumNameNotFoundException
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * To end the function genarateReport process, this function must be called (Required)
+     * @return {@link Set} of orders that in the report.
+     * @throws ReportEmptyExcption If the {@link Report} is empty.
+     * @throws EnumNameNotFoundException If the {@link Report} fails to save.
+     * @throws IOException If the {@link Report} fails to Save in the DataBase.
+     * @throws ClassNotFoundException If the {@link Report} fails to save.
      */
     public Set<Order> createReport() throws ReportEmptyExcption, EnumNameNotFoundException, IOException, ClassNotFoundException {
         Set<Order> orders = new HashSet<>();
