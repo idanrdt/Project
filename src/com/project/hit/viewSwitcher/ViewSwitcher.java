@@ -38,7 +38,9 @@ import com.project.hit.view.orderView.OrderView;
 import com.project.hit.view.supplierView.SupplierPageView;
 import com.project.hit.view.supplierView.SupplierView;
 
-
+/**
+ * Switches the current {@link View}.
+ */
 public class ViewSwitcher {
 	
 	private static int loginCounter = 0;
@@ -121,7 +123,7 @@ public class ViewSwitcher {
 		
 		MainView view = new MainPageView(user);
 		
-		MainController controller = new MainPageController(view);
+		MainController controller = new MainPageController();
 		
 		view.setController(controller);
 		
@@ -173,10 +175,13 @@ public class ViewSwitcher {
 		} catch (ClassNotFoundException e) {
 			throw new NavigationFailedException("File missing or corrupted");
 		}
-		
-
 	}
 	
+	/**
+	 * Set and starts the {@link OrderPageView}.
+	 * @param user - the {@link User} that logged in.
+	 * @throws NavigationFailedException - if the navigation failed.
+	 */
 	private static void startOrder(User user) throws NavigationFailedException {
 		
 		OrderView view = new OrderPageView();
@@ -197,9 +202,13 @@ public class ViewSwitcher {
 		} catch (IOException e) {
 			throw new NavigationFailedException("Faild to navigate");
 		}
-
 	}
 	
+	/**
+	 * Set and starts the {@link ReportPageView}.
+	 * @param user - the {@link User} that logged in.
+	 * @throws NavigationFailedException - if the navigation failed.
+	 */
 	private static void startReport(User user) throws NavigationFailedException{
 		ReportView view = new ReportPageView();
 		try {

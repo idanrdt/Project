@@ -13,17 +13,17 @@ public interface ManagerController {
 	/**
 	 * Adds the {@link User} to the database.
 	 * @param user - the {@link User} to add.
-	 * @throws IOException if the addition fails.
+	 * @throws IOException if the addition fails to save.
 	 * @throws EnumNameNotFoundException if the addition fails.
 	 * @throws UserExistException if the {@link User} already exist.
-	 * @throws NoUserExistsException 
+	 * @throws NoUserExistsException if the {@link User} not exist.
 	 */
 	public void addUser(User user) throws UserExistException, IOException, EnumNameNotFoundException;
 	
 	/**
 	 * Delete the {@link User} from the database.
 	 * @param user - the {@link User} to delete.
-	 * @throws IOException if the remove fails.
+	 * @throws IOException if the remove fails to save.
 	 * @throws EnumNameNotFoundException if the remove fails.
 	 * @throws NoUserExistsException if the {@link User} not found.
 	 */

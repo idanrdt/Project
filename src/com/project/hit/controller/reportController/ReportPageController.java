@@ -12,6 +12,10 @@ public class ReportPageController implements ReportController{
 
 	private ReportSystemRepository model;
 	
+	/**
+	 * The controller constructor.
+	 * @param model - The {@link ReportSystemRepository} model.
+	 */
 	public ReportPageController(ReportSystemRepository model) {
 		this.model = model;
 	}

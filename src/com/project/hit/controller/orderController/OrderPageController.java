@@ -3,6 +3,8 @@ package com.project.hit.controller.orderController;
 import java.io.IOException;
 import java.util.Set;
 
+import org.junit.internal.requests.OrderingRequest;
+
 import com.itextpdf.text.DocumentException;
 import com.project.hit.fileManager.EnumNameNotFoundException;
 import com.project.hit.model.orderSystem.Order;
@@ -15,6 +17,10 @@ public class OrderPageController implements OrderController{
 	
 	private OrderSystemRepository model;
 	
+	/**
+	 * THe controller constructor.
+	 * @param model - The {@link OrderSystemRepository} model.
+	 */
 	public OrderPageController(OrderSystemRepository model) {
 		this.model = model;
 	}

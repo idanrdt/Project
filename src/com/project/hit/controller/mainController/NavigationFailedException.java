@@ -7,6 +7,10 @@ public class NavigationFailedException extends Exception {
 	
 	private String msg;
 	
+	/**
+	 * Creates new {@link NavigationFailedException} and adds a message to it.
+	 * @param msg - the message of the {@link Exception}.
+	 */
 	public NavigationFailedException(String msg) {
 		this.msg = msg;
 	}

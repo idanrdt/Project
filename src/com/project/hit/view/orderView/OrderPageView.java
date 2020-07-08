@@ -168,12 +168,16 @@ public class OrderPageView implements OrderView {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					orderController.deleteOrder(deletePanel.removeOrder());
-					deletePanel.setValues(orderController.getOrders());
-					JOptionPane.showMessageDialog(new JFrame(),"Order Deleted!","Succsess",JOptionPane.INFORMATION_MESSAGE);
-				} catch (Exception e1) {
-					setError(e1.getMessage());}
+					try {
+						orderController.deleteOrder(deletePanel.removeOrder());
+						deletePanel.setValues(orderController.getOrders());
+						JOptionPane.showMessageDialog(new JFrame(),"Order Deleted!","Succsess",JOptionPane.INFORMATION_MESSAGE);
+					} catch (ClassNotFoundException | IOException  e1) {
+						setError(e1.getMessage());
+					} catch(OrderNotFoundExcption | SupplierNotFoundException e1) {
+						setError("Order not found.\nPlease try again");
+					}
+
 			}
 		});
 		deletePanel.addRefreshActionListener(new ActionListener() {

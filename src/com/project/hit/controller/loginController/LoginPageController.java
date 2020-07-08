@@ -18,8 +18,8 @@ public class LoginPageController implements LoginController {
 	
 	/**
 	 * The controller constructor.
-	 * @param view - The view of the Login page.
-	 * @param model - the model usage of the Login page.
+	 * @param view - The {@link LoginView} of the Login page.
+	 * @param model - the {@link AuthenticationSystem} model usage of the Login page.
 	 */
 	public LoginPageController(LoginView view, AuthenticationSystem model) {
 		this.view = view;
