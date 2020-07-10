@@ -13,6 +13,8 @@ This project created by:
 
 **Description**: The purpose of the system is to provide a suitable environment for order management and procurement all in one product.
 
+**Video description**: [link](https://www.youtube.com/watch?v=eF1q89QGqt4&feature=youtu.be)
+
 
 **Tasks**:
 - [x] Create Requirements Document(link)
